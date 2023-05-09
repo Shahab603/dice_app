@@ -2,287 +2,237 @@
 
 A new Flutter project.
 
-## Understanding Functions 
+## Importing Features from packages
 
-So now it's really time
+So the code editor
 
-to get our hands dirty,
+doesn't find the runApp function.
 
-write some code and learn some Dart and Flutter.
+It doesn't know where runApp comes from.
 
-For that here I'm in a new project,
+Now, of course, I showed you that runApp is defined
 
-but you can also stick to the existing project
+in the Flutter framework.
 
-that you have.
+It's coming from Flutter.
 
-But you should make sure that in the lib folder,
+But when writing code, you have to be very explicit.
 
-in this main Dart file you delete all the content
+You have to tell your program
 
-that's inside of it.
+that runApp is coming from Flutter.
 
-So that main.dart is an empty file.
+It's not guessing that this could be the case.
 
-Because we're going to write this app,
+There are hundreds and thousands of libraries
 
-which we're building in this core section here
+and packages out there in the world
 
-from the ground up,
+written by other developers, and therefore, of course,
 
-step by step, all from scratch so that we can really dive
+your code and your code editor
 
-into all these core Flutter and Dart features.
+doesn't guess from which of these many packages
 
-So how do we start in this empty main.dart file?
+this runApp function might be coming from.
 
-How do we give Flutter and Dart some instructions
+Instead, you have to tell your code.
 
-to show something on the screen?
+And for that, the first important step in a Dart program
 
-Well, it all starts with one key instruction
+is to go to the pubspec.yaml file,
 
-that you must have in every Flutter app you are building.
+because in that file you can manage the dependencies,
 
-And that's the runApp instruction.
+the third party dependencies of your project.
 
-Which is written like this runApp
+You can reference other libraries or frameworks
 
-and then followed by parenthesis and the semicolon.
+from which you want to use code in your project.
 
-This is a so-called function
+And in there, under dependencies,
 
-and functions are a core concept in Dart
+you have to add all third party packages
 
-and actually in many programming languages.
+which you want to use as dependencies in your code.
 
-Functions are simply instructions that
+So from which you want to use features.
 
-can be executed in your code
+Now here, Flutter is actually already added as a dependency
 
-and you will soon learn how you can write your
+so we don't need to change anything there,
 
-own custom instructions your own custom functions
+but it is important to understand that this entry must exist
 
-therefore as well.
+in order to use features from that package.
 
-Now runApp is a function
+Of course, here we're still getting an error
 
-and instruction that is provided by Flutter,
+despite having added this package in the pubspec.yaml file.
 
-so not written by you not built
+And the reason for that is that,
 
-into Dart the programming language but provided
+even though we added this dependency,
 
-by the Flutter framework.
+our code still doesn't magically look into
 
-And this instruction, as its name suggests,
+those dependencies which we added,
 
-is all about getting that app up and running
+and then check if there is some runApp function anywhere
 
-or to be more precise.
+in that third party code.
 
-Its main job is actually to show some user interface
+Instead, we have to add a so-called import statement
 
-on the screen.
+at the top of the file.
 
-And that in the end is a vital task
+And we do this by using a special keyword:
 
-for any app you're building.
+The import keyword, which is built into Dart.
 
-Now, as you can see in this code editor,
+The import keyword tells Dart
 
-I'm getting an error here,
+that we wanna kind of connect our code file here,
 
-though I do have this red squiggly line here
+our main.dart code file here with another code file,
 
-which indicates an error, a problem with the code.
+or to be more precise, that we want to use certain features,
 
-And if you hover over such an error,
+certain functions for example,
 
-you get a more detailed description
+that are defined in some other code file
 
-of what's the problem here.
+in this code file here.
 
-In this case that a function body must be provided.
+And for that, we have to add a so-called import path
 
-Now what's that?
+after the import keyword,
 
-Now in Dart,
+where we specify from which file we wanna import something.
 
-it's actually not allowed to run functions like this,
+You define such a path by adding opening and closing quotes,
 
-just like that in the main.dart file.
+double quotes, or single quotes.
 
-Instead, you must wrap instructions like this,
+That is up to you,
 
-code like this, into other functions.
+but single quotes are more common in Dart projects.
 
-And for that we must create a custom function,
+And then since we wanna import some code
 
-a custom instruction.
+from a package here,
 
-And that's done like this.
+we start by writing package followed by a colon,
 
-You type void,
+and then followed by the package name.
 
-and I'll explain what this void thing means soon,
+Now you see I'm getting some auto suggestions here
 
-but you type void followed by the name
+by my code editor, which is a very useful feature
 
-of your custom command of your custom function.
+because it can speed up development and it also
 
-Which in this case should be main.
+reduces the danger of introducing typos,
 
-It must be main.
+since we can use these suggestions to autocomplete our code
 
-And I'll explain why it must be main
+as I'll show you in a second.
 
-in a second as well.
+But here at the moment,
 
-Followed by parentheses and then opening
+I don't have any suggestion that I need.
 
-and closing curly braces.
+Instead, I need some functionality from the Flutter package.
 
-That's how you define a custom function,
+Hence, after the colon, we type Flutter,
 
-a custom instruction,
+and you see that my suggestions are changing now,
 
-if you want to call it like this, in Dart.
+and then we want to get access to some code
 
-This here main is the so-called function name.
+that's defined in some specific file
 
-This here is the so-called return type.
+in that Flutter package.
 
-And I'll get back to what that is soon.
+And hence we create a path to that file
 
-And then this part here between
+by adding a forward slash,
 
-the opening and closing curly braces
+and then for us it's the material.dart file
 
-is the so-called function body.
+from which we want to get code.
 
-The code that should be executed
+If I type ma here,
 
-when this function is executed.
+the suggestions are narrowed down even more.
 
-And that's another core programming and Dart concept.
+And now as I mentioned,
 
-Functions as mentioned are in the end instructions
+it's this material.dart file I'm interested in,
 
-and you can create your own instructions as you see here.
+so we can select this with the arrow keys
 
-But those instructions,
+and hit tap to auto-complete this path here.
 
-those functions are not executed by the mobile device,
+And that's the part that can speed up development
 
-by the computer on which the code runs.
+and also avoid typos.
 
-Unless you tell that device,
+Now we must end this with a semicolon,
 
-that computer to run that instruction.
+because basically all your statements
 
-And you do tell a computer to execute an instruction
+must end with a semicolon.
 
-by using that instruction name,
+Function definitions are an exception.
 
-followed by opening and closing parentheses.
+You don't add semicolons here
 
-So in the end, what we're doing here in line six,
+after the opening or closing curly braces.
 
-here we are executing a function.
+But Visual Studio Code also tells us
 
-We're calling a function as it's also called.
+that this semicolon here is unexpected,
 
-Now, I did mention that runApp is a function provided
+so you can't really get this wrong.
 
-by Flutter, so not written by you but provided
+It also tells you if you forget a semicolon,
 
-by the Flutter framework.
+here if I scroll down,
 
-And since Flutter is a open source project,
+the error messages are always at the bottom.
 
-you can actually inspect its code.
+I also get an error that a semicolon would've been expected.
 
-And attached you find a link to a file
+And with that, we have a valid import statement,
 
-that includes this runApp function definition.
+and now the runApp error went away.
 
-Which is exactly that function
+And you also might have noticed
 
-that we're trying to call in our code,
+that the color changed from white,
 
-so that we're trying to execute in our code.
+which is always a good indicator
 
-And only if you use code like this,
+that some identifier wasn't found,
 
-you are actually executing a function.
+to a light yellow color.
 
-So this main function, for example,
+I still have an error here,
 
-is at the moment only being defined,
+but that's now a different error, which we'll tackle next.
 
-but it's never executed because we never have code
+But now runApp is found because material.dart in the end,
 
-where we would call main like this.
+gives us access to the runApp function
 
-If we would call it like this,
+defined by Flutter in their code.
 
-if we would add this piece of code,
+And that, of course was a lot of talking about this
 
-we would execute this function.
+but understanding functions,
 
-That's why I also like to call functions code on demand.
+calling functions and function definitions,
 
-You define them and then somewhere else
-
-in your code you can use them as often
-
-as you want by calling them as I just explained it,
-
-by repeating that function name followed by opening
-
-and closing parentheses.
-
-And of course, it's not just you who can define functions,
-
-but also other developers like the Flutter team did here
-
-with the runApp function.
-
-They define for us as part of the flatter framework.
-
-And this runApp function must be executed,
-
-but as we saw in this error description
-
-it must be executed inside of a function body.
-
-So we should actually move it
-
-into this main function body here, like this.
-
-In here this function can now theoretically be executed,
-
-but now we're getting a new error.
-
-We're getting the error,
-
-that the function runApp isn't defined.
-
-So in the end, Visual Studio Code is telling us
-
-that it understands that we want
-
-to execute a function called runApp,
-
-but it doesn't find this function anywhere.
-
-And where would it find it?
-
-In our code file
-
-we only have the main function, nothing else.
-
-Where should runApp come from?
+and how Flutter apps start is of course very important.
 

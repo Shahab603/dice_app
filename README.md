@@ -2,237 +2,138 @@
 
 A new Flutter project.
 
-## Importing Features from packages
+## Understanding Widgets
 
-So the code editor
+So what are arguments?
 
-doesn't find the runApp function.
+Well, functions can be defined
 
-It doesn't know where runApp comes from.
+like the main function to take no input values,
 
-Now, of course, I showed you that runApp is defined
+but as you can see in the Flutter source code,
 
-in the Flutter framework.
+they can also be defined such
 
-It's coming from Flutter.
+that they do expect some input values,
 
-But when writing code, you have to be very explicit.
+and that's the part between those parentheses.
 
-You have to tell your program
+Here you can specify a list of input values that are needed
 
-that runApp is coming from Flutter.
+by the function to work correctly.
 
-It's not guessing that this could be the case.
+Some functions don't need any input, like main,
 
-There are hundreds and thousands of libraries
+other functions do.
 
-and packages out there in the world
+And these input values are called parameters or arguments.
 
-written by other developers, and therefore, of course,
+Technically, they're called parameters
 
-your code and your code editor
+when we talk about them
 
-doesn't guess from which of these many packages
+when defining a function
 
-this runApp function might be coming from.
+and arguments when we talk about them
 
-Instead, you have to tell your code.
+when calling a function,
 
-And for that, the first important step in a Dart program
+but I will simply use these terms interchangeably
 
-is to go to the pubspec.yaml file,
+in this course.
 
-because in that file you can manage the dependencies,
+So runApp needs one argument, one input value,
 
-the third party dependencies of your project.
+to display something on the screen.
 
-You can reference other libraries or frameworks
+And this should make a lot of sense
 
-from which you want to use code in your project.
+because like this, at the moment,
 
-And in there, under dependencies,
+how would runApp know what to display on the screen?
 
-you have to add all third party packages
+Well, the input value it needs
 
-which you want to use as dependencies in your code.
+is the content that should be shown on the screen.
 
-So from which you want to use features.
+So the user interface,
 
-Now here, Flutter is actually already added as a dependency
+it should show on the screen.
 
-so we don't need to change anything there,
+And for that, runApp needs a so-called widget
 
-but it is important to understand that this entry must exist
+or widget tree as a value
 
-in order to use features from that package.
+because Flutter user interfaces are built with widgets.
 
-Of course, here we're still getting an error
+When building a Flutter app,
 
-despite having added this package in the pubspec.yaml file.
+you don't use some visual drag-and-drop editor.
 
-And the reason for that is that,
+Instead, you build your user interface in code
 
-even though we added this dependency,
+by using so-called widgets.
 
-our code still doesn't magically look into
+You typically combine many widgets with each other.
 
-those dependencies which we added,
+You nest those widgets into each other,
 
-and then check if there is some runApp function anywhere
+as you will see over the next lectures,
 
-in that third party code.
+to build a user interface.
 
-Instead, we have to add a so-called import statement
+And since you end up nesting widgets into each other,
 
-at the top of the file.
+you will actually end up with a so-called widget tree
 
-And we do this by using a special keyword:
+where you have some root widget at the top,
 
-The import keyword, which is built into Dart.
+then maybe a child widget with another child widget,
 
-The import keyword tells Dart
+which then may hold multiple child widgets simply depending
 
-that we wanna kind of connect our code file here,
+on which kind of user interface you're building.
 
-our main.dart code file here with another code file,
+And of course, all these words here,
 
-or to be more precise, that we want to use certain features,
+all these widgets on this slide
 
-certain functions for example,
+don't tell you anything just yet,
 
-that are defined in some other code file
+but that will of course change
 
-in this code file here.
+over the next lectures and sections.
 
-And for that, we have to add a so-called import path
+So Flutter user interfaces are created
 
-after the import keyword,
+by combining and nesting widgets.
 
-where we specify from which file we wanna import something.
+For example, by adding a text widget,
 
-You define such a path by adding opening and closing quotes,
+which is something Flutter gives you
 
-double quotes, or single quotes.
+to display text on the screen
 
-That is up to you,
+inside of a button widget to have a button with some text.
 
-but single quotes are more common in Dart projects.
+And Flutter provides many built-in widgets,
 
-And then since we wanna import some code
+which you can use in your code,
 
-from a package here,
+like buttons, form inputs, layout widgets,
 
-we start by writing package followed by a colon,
+but you can also build custom widgets.
 
-and then followed by the package name.
+And of course, we will also do that actually quite a lot
 
-Now you see I'm getting some auto suggestions here
+throughout this course as well.
 
-by my code editor, which is a very useful feature
+So runApp needs a widget
 
-because it can speed up development and it also
+or a combination of widget,
 
-reduces the danger of introducing typos,
+a widget tree, as I mentioned.
 
-since we can use these suggestions to autocomplete our code
+So of course, the question is which widget,
 
-as I'll show you in a second.
-
-But here at the moment,
-
-I don't have any suggestion that I need.
-
-Instead, I need some functionality from the Flutter package.
-
-Hence, after the colon, we type Flutter,
-
-and you see that my suggestions are changing now,
-
-and then we want to get access to some code
-
-that's defined in some specific file
-
-in that Flutter package.
-
-And hence we create a path to that file
-
-by adding a forward slash,
-
-and then for us it's the material.dart file
-
-from which we want to get code.
-
-If I type ma here,
-
-the suggestions are narrowed down even more.
-
-And now as I mentioned,
-
-it's this material.dart file I'm interested in,
-
-so we can select this with the arrow keys
-
-and hit tap to auto-complete this path here.
-
-And that's the part that can speed up development
-
-and also avoid typos.
-
-Now we must end this with a semicolon,
-
-because basically all your statements
-
-must end with a semicolon.
-
-Function definitions are an exception.
-
-You don't add semicolons here
-
-after the opening or closing curly braces.
-
-But Visual Studio Code also tells us
-
-that this semicolon here is unexpected,
-
-so you can't really get this wrong.
-
-It also tells you if you forget a semicolon,
-
-here if I scroll down,
-
-the error messages are always at the bottom.
-
-I also get an error that a semicolon would've been expected.
-
-And with that, we have a valid import statement,
-
-and now the runApp error went away.
-
-And you also might have noticed
-
-that the color changed from white,
-
-which is always a good indicator
-
-that some identifier wasn't found,
-
-to a light yellow color.
-
-I still have an error here,
-
-but that's now a different error, which we'll tackle next.
-
-But now runApp is found because material.dart in the end,
-
-gives us access to the runApp function
-
-defined by Flutter in their code.
-
-And that, of course was a lot of talking about this
-
-but understanding functions,
-
-calling functions and function definitions,
-
-and how Flutter apps start is of course very important.
-
+and how do we add a widget in code?

@@ -2,288 +2,308 @@
 
 A new Flutter project.
 
-## 10 - Understanding Value Types
+## 11 - COnfiguring Widgets & Understanding Objects
 
-So we built our first basic widget app
+So now that we know about types,
 
-that leads to this user interface.
+it's time to come back to our application code here
 
-And before we'll dive deeper into that
+and continue working on this application.
 
-and make it a bit more pretty
+And I would say one next step that makes a lot of sense
 
-and of course work towards our final application goal.
+is to make this look a bit nicer here,
 
-For this section, I wanna dive
+because, to be honest, right now,
 
-into another crucial Dart feature
+this application is really boring.
 
-which is extremely important in which you must understand
+And for that, I'd like to change the background color
 
-in order to work with Flutter and Dart.
+from white to a nice gradient,
 
-Because of course this section is not
+and also change how this texture looks like
 
-about building the final app as quickly as possible,
+so that it looks a bit nicer, a bit more fancy.
 
-but about learning all these important Flutter
+Now let's start with the background color.
 
-and Dart fundamentals.
+For this, we can go to this Scaffold widget.
 
-And one important fundamental Dart concept
+And besides setting the body argument there to the widget
 
-that you must understand is the concept of types.
+that should be displayed inside of the Scaffold,
 
-Because Dart is a so-called type-safe language,
+we can also set one of the many other arguments
 
-which in the end means
+supported by Scaffold,
 
-that all values you are working with are of certain types.
+because most widgets allow you
 
-For example, this hello world text is a so-called string.
+to pass values to different arguments.
 
-If we had a number like 29 in our code,
+You'll almost always have at least one argument,
 
-it would be of type int.
+like body or child, that wants another widget,
 
-MaterialApp is of type MaterialApp.
+which then is included in the wrapping widget,
 
-And actually there's not just one type per value
+in the outer widget.
 
-but instead, values are typically of multiple types.
+But you also often have other arguments
 
-For example, this hello world text is not just
+that don't want widgets,
 
-of type string, but also of type object.
+but that instead allow you to configure
 
-The number is not just of type int
+and/or style this widget.
 
-but also of type num int of type object.
+And for example, Scaffold, if you add a new line in there
 
-And MaterialApp for example, would be of type MaterialApp,
+and press Control Space,
 
-but also widget and also object.
+it supports a broad variety of arguments.
 
-So values can be of multiple types.
+For example, the backgroundColor argument.
 
-As you see, for example
+And as you might guess, the backgroundColor argument
 
-all values are at least of type object,
+allows you to set the background color of this screen
 
-and then they also have more specific types
+that's created by Scaffold.
 
-and I'll get back to objects
+Now, backgroundColor wants a value of type color.
 
-and what's that all about a little bit later.
+Now that you learn about types,
 
-And those types are either built into Dart,
+you know that that thing in front of the parameter name
 
-or provided by a third party package,
+is the type definition.
 
-or provided by you when creating your own types,
+And this wants a color,
 
-which you typically do implicitly.
+or actually, it wants a color, question mark.
 
-And in our application here, we're also working
+Well, this question mark simply means
 
-with types in a lot of different places.
+that we can either set a value of type color or nothing,
 
-But why does this type feature even exist?
+so that this may be null, as it's called.
 
-Why does it matter that this text is technically
+We can set this to null, which is a special kind of value
 
-of type string?
+and type supported by Dart,
 
-Which you by the way can also see if you hover over it
+which in this case is pretty much the same
 
-because then the code editor shows you some information
+as not setting background color at all.
 
-about the thing you hovered over,
+But if we do want to set it to some non null value,
 
-and that always also includes the type of that value.
+so to a value that has some visual effect,
 
-For example, here string for a MaterialApp
+it must be a value of type color.
 
-it's a bit harder to see
+Now, such a color value can be created
 
-but here the type annotation would be this thing
+with the built-in color, class, or constructor function.
 
-in front of this MaterialApp function argument information.
+Now, keep in mind that I mentioned before
 
-But why does this type feature exist?
+that MaterialApp, Scaffold, Center and Text
 
-It exists and it's enforced by Dart to make sure
+are of course, widgets,
 
-that you're never accidentally using the wrong type
+but that technically what we're calling here,
 
-in the wrong place.
+like functions in our code
 
-For example, you might want to display a number
+are so-called constructor functions.
 
-on the screen and therefore you could replace hello world
+And I'll get back to the concept of constructor function
 
-with that number.
+and related to that classes a little bit later.
 
-But you would see that here in my code editor
+Here, we can use the Color constructor function
 
-I'm now getting an error.
+to create a color thing.
 
-And when I hover over this, I learn that here in the end
+Though, if you are just getting started
 
-I can't provide a value of type int
+with colors in Flutter projects,
 
-which is that number type
+it's typically easier to use the special Colors thing,
 
-which you just saw a couple of seconds ago on the slide
+and then there, you don't add parenthesis,
 
-to a parameter that actually wants a string
+but instead you use a dot
 
-so that wants some text.
+to access a list of predefined colors.
 
-Put in other terms, the text widget internally
+And here, you see a long list of predefined colors
 
-as it was defined by the Flutter team only knows how to work
+which you can use, like for example, deep purple, like that.
 
-with string input values, with text input values.
+And if you save that and force a reload,
 
-It does not know how to work with numbers.
+you will see that color here
 
-Of course, you could argue that displaying a number
+as a background for this screen.
 
-on the screen should be possible, and it is
+And this already looks nicer
 
-if you convert this to a string by wrapping it with quotes
+than the white background we had before,
 
-which in the end is what those quotes really do,
+at least in my opinion,
 
-they create a so-called string text.
+but it's not the final styling I wanna have here.
 
-But of course numbers are a special case.
+But what is this thing here now?
 
-What if it would pass a MaterialApp widget here?
+Well, if you hover over deepPurple,
 
-Now, it might make more sense that text can't output this
+you for one get a color picker,
 
-because how should this MaterialApp widget,
+which you could use to pick a color more conveniently,
 
-which is all about creating the frame
+which is pretty nice.
 
-for an application user interface,
+You will see that if you do that though,
 
-how should that be output on the screen, right?
+it changes from colors.something to color dot,
 
-How should that be treated as text?
+and then some function that's being executed here
 
-And to make sure that the text widget doesn't have to guess
+to which some values are passed.
 
-what it should do with its input values
+In the end, this here is a function
 
-and how it should output those values as text,
+provided by this color thing here,
 
-the Flutter team built the text widget
+which is provided by Flutter in the end,
 
-simply such that it only accepts text,
+which simply allows you to create a color
 
-that it only accepts strings to be precise.
+by mixing red, green, and blue colors and an alpha channel
 
-And you can also see that if you hover over it
+that controls the transparency of the color.
 
-to get more information about it,
+So that's simply a way of creating a color
 
-here you see that first argument
+by mixing three different colors.
 
-the only positional argument,
+Though of course, the easiest way of using this
 
-positional parameter wanted by the text widget
+and doing this is to use this color picker,
 
-which is the parameter we're setting with that first value.
+which opens here in Visual Studio Code if you hover over it.
 
-We're passing between those parentheses.
+But of course, that doesn't answer the question
 
-And here you see this annotation in front of data.
+what this here is in the end.
 
-Data is simply the parameter name, but the annotation
+Well, if you scroll down from that color picker,
 
-in front of it is the type that's expected
+you in the end see that this from a,r,g,b function here,
 
-for this parameter.
+which it is, gives you a value of type color,
 
-And if you would create a custom function
+which makes sense, because background color wanted a value
 
-which you wanna use somewhere else in your application,
+of type color, of course.
 
-you could also add such type annotations
+So we got another type here, not a type built into Dart,
 
-to make sure that you for example, only accept numbers
+but instead a type provided by Flutter.
 
-so-called integers if you use the int value here.
+And what this in the end is,
 
-So that for example, if you would pass some text here
+like all values as you learned before, is an object.
 
-to this function, you would get an error
+Widgets in Flutter are also just objects in the end.
 
-because your function might not know what to do with text.
+They are objects,
 
-It wants numbers, to add them as numbers,
+and objects are the base value in Dart,
 
-not to combine them as text.
+all other values are also objects in the end,
 
-That's why this type feature exists.
+and objects are simply data structures in memory.
 
-It's there to ensure that you as a developer can be clear
+So that's simply how Dart saves your values in memory
 
-about which kind of values you wanna accept,
+on the device on which your application is running.
 
-and which kind of values you don't want to accept.
+Now, objects are a core concept in Dart,
 
-For example, the runApp function,
+because as mentioned,
 
-which we're using in our code,
+all your values are objects in the end.
 
-wants a widget as its first and only argument.
+And there are a simpler objects
 
-So a value of type widget.
+like this text, this Hello World text,
 
-And it turns out that MaterialApp, which is in the end,
+but also more complex objects like this Color object
 
-the value we are passing to runApp is such a widget.
+or your widget objects, like MaterialApp or Scaffold.
 
-And here for the text widget
+But in the end, all these are simply data structures
 
-we should of course go back to a real text.
+in memory that are managed by Dart,
 
-So that's the idea behind types.
+and these data structures can also work together.
 
-And in Dart types are everywhere,
+And for example, backgroundColor wants a Color object,
 
-not just in the parameter lists of functions.
+so that behind the scenes,
 
-For example, this thing in front of main,
+the Scaffold widget object
 
-this white thing is also type.
+is able to reach out to that Color object
 
-It's the so-called return value type of the main function.
+and use that color information
 
-But that is something we'll get back to later
+that's stored in that color object
 
-in the course once we actually have functions
+to make the background color of this user interface purple.
 
-that do return something.
+So it's all objects.
 
-Now, as mentioned, you can build your own types,
+Widgets are also just objects,
 
-and you also get many types by third party packages,
+just special kinds of objects in the world of Flutter,
 
-but Dart also ships with many built-in core types.
+if you wanna call it like this,
 
-Of course, you might not understand all of them just yet.
+but all these objects are working together
 
-You will see all of those
+to bring the final user interface onto the screen.
 
-and many more inaction throughout this course though.
+And I'm really emphasizing this,
 
-For the moment, the most important takeaway
+because when building apps with Flutter,
 
-is that this types feature exists so that you can't work
+you will always have many objects work together.
 
-with the wrong types in the wrong places.
+You, for example, have widgets
+
+that are nested inside of other widgets,
+
+but you also have configuration objects,
+
+like this Color object,
+
+which then, for example, could be used by your widgets.
+
+And that's how we could add a background color.
+
+Though, it's of course not the final background color
+
+I wanna have here.
+
+But using this helped us get started
+
+and become aware of the important concept
+
+of objects in Dart applications.

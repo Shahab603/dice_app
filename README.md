@@ -2,431 +2,278 @@
 
 A new Flutter project.
 
-## 24 - Instance Variables (Propoerties) & Configurable Widgets
-So now that we learned about variables
+## 25 -Reusable Widgets & Constructor Functions
+So now that we adjusted this class
 
-let's use this variables feature to make some
+to be more reusable by dynamically accepting input values,
 
-of our code more reusable.
+you can do the same for the gradient container
 
-Like for example, the StyledText widget.
+as a little exercise here.
 
-We created a custom widget here,
+At the moment here we got some hard-coded colors,
 
-so that we have this reusable StyledText.
+and whilst this of course works here,
 
-But at the moment,
+and is absolutely what we need for this demo app,
 
-this is only partially reusable if we're honest,
+if this would be a bigger project,
 
-because Hello World! is hard-coded
+a bigger app potentially with multiple screens,
 
-in this code snippet here.
+we might want to be able to reuse this gradient container
 
-So whenever we use StyledText anywhere in our application,
+in different parts of the app with different colors.
 
-it will always output Hello World!.
+And at the moment that would not be possible,
 
-Now the idea behind this custom widget,
+because the colors are locked in here.
 
-is probably that we want to be able to reuse
+Therefore, as an exercise,
 
-this configuration for this text,
+you should use the new knowledge you gained
 
-so the color and the fontSize,
+in the previous lecture
 
-but the text itself should be dynamic.
+and make gradient container more flexible,
 
-Put in other words, it would be better
+by basically ensuring that when we use gradient container,
 
-if in gradient_container where we use StyledText,
+we can pass our colors here as arguments,
 
-we could pass the text to StyledText
+in whichever way you want to gradient container,
 
-so that this can still be set
+so that inside of gradient container
 
-in the place where we want to use our custom widget,
+those color inputs are accepted, stored,
 
-instead of having it locked into our custom widget.
+and then used down there.
 
-And that's of course a super common use case,
+There will be different ways of solving this
 
-because most of your widgets should be reusable,
+and I'll give you a short break here to pause the video
 
-and should be flexible, and should be able to receive data
+and try this on your own before then thereafter
 
-from outside like here, where we pass data
+we'll solve this together.
 
-into StyledText from inside the gradient_container widget.
+So, did you succeed?
 
-So how can we make our own custom widget reusable then?
+Let's now solve this together.
 
-With help of the constructor function.
+As mentioned, there will be different ways of solving this.
 
-Because I mentioned before that here when you use a class,
+For example, you could accept a colors argument here,
 
-your own one or one provided by Flutter doesn't matter,
+a positional one, or a named one,
 
-with parenthesis like this, which is how you have to use it
+doesn't matter it's up to you.
 
-in order to turn it into an object,
+And here I'll go for a named one
 
-you're calling the constructor function of that class.
+to show you both approaches.
 
-You get one automatically if your class doesn't have one.
+And this colors argument of course
 
-Otherwise, your own constructor function is called.
+should be of the same type as the colors down there.
 
-And since this is just a constructor function
+So it should be a list of colors.
 
-being called here, if we want to be able to pass input
+We can simply copy this type here
 
-values to that constructor function,
+to set this as a type.
 
-we have to accept them here.
+Though as you learned we can even switch to different syntax
 
-We are actually already accepting this named key argument
+since we'll need to store this in a variable anyways,
 
-because we had to, to forward it to StatelessWidget,
+and add our variable here or better our final variable,
 
-but we can accept more than just that key.
+our final data container of type list color
 
-Either more named arguments by adding commas here,
+which could be named colors,
 
-and adding all the named arguments that we want to accept
+and assign the value that's received
 
-between these curly braces,
+on this named argument here to this parameter
 
-or, in addition to these named arguments,
+by using this dot colors here.
 
-all the positional arguments before those curly braces.
+Now, if you tried to solve this with a named argument
 
-So for example, here we could accept the text.
+you likely encountered this error here,
 
-We then should also add a type annotation here,
+which in the end tells you that the problem now is
 
-to make it clear which type of value this should be.
+that this is optional where it actually shouldn't be.
 
-Otherwise, it's dynamic,
+The reason for that is that named arguments
 
-and we typically wanna avoid that as you learned.
+by default are optional with Dart.
 
-And here it would be some string, which we want some text.
+You can solve this by adding required in front of this.
 
-And with that, we now are able to pass
+Now most likely you simply went for a positional argument
 
-some text to StyledText.
+because that's easier to use and that's what we used before
 
-This works.
+and that's of course totally fine.
 
-However, with that, we are not using this text in here.
+I just also want to show you this alternative
 
-We are accepting the text here, we're passing some text
+that if you want to use a named argument
 
-to StyledText, but this text argument
+you can do this as well
 
-which we are accepting in our constructor function,
+but you have to add required in front of this.
 
-is now not being used here.
+And here I'm keeping this approach
 
-Instead, we still have the hard-coded
+so that you now know also about this alternative
 
-Hello World! down there.
+and how you can use named arguments
 
-So how can we use this argument?
+that are actually not optional
 
-Not by using its name here.
+because by default as mentioned
 
-If we try to do that, and we use the name text down here,
+named arguments are optional.
 
-we get an error.
+So now with that we got our colors input,
 
-We get an error because this argument,
+we're storing it here in this variable
 
-which we accept in the constructor function,
+and we set this to exactly the type we need.
 
-is not magically available in some other method
+And then of course we could use the down there
 
-of the class.
+as a value like this.
 
-These two things are detached from each other,
+Now, I have to get rid of cons here
 
-even though they're in the same class.
+because colors here actually is a list.
 
-This is just how that works.
+Even though it's final
 
-Instead, what we have to do,
+it's still a list and lists by default and Dart
 
-is we have to add a so-called class variable,
+can be edited,
 
-a so-called property to this class.
+they can be mutated even if they're final,
 
-So a variable just like the variables we added before,
+which is a bit more advanced
 
-but now not outside of a class,
+and not too important right now.
 
-but instead inside of the class to which they should belong.
+But for that reason, you can't have cons down there.
 
-So here for example, a variable called outputText,
+And you can see this if you hover over colors down there
 
-or just text, it can be the same name as this argument.
+you in the end get that hint
 
-That's no problem.
+that you should remove the cons keyword.
 
-So we can add this and if we don't set it to a value,
+So that's what we have to do here then.
 
-as you learned, you should instead define
+That's one way of solving this.
 
-the value type here instead of using var.
+Now, I'll copy this entire widget and comment it out
 
-So here, I'm just writing String text.
+so that we can still see the code
 
-And with that we added a variable to this class,
+but it's not active anymore.
 
-and this variable is now available in all the methods.
+And I'll paste it in again above the commented out widget
 
-Of course, I'm still getting an error down here,
+to show you an alternative approach.
 
-but here, the error is now actually
+Because of course instead of accepting
 
-a different one than before.
+such a list of colors
 
-If I remove this text variable,
+you can also accept two individual colors.
 
-and we take a look at this error,
+You could, for example, accept two positional arguments
 
-we see that now it doesn't even find anything called text,
+or two named arguments totally up to you.
 
-which makes sense because as mentioned,
+Color one and color two, that could be the names.
 
-there is nothing named text.
+And both should be of type color of course.
 
-This argument here doesn't count,
+Then we would need our variables,
 
-because the constructor function,
+or again better our final values here
 
-and this method is not connected.
+which should be of type color, color one and color two.
 
-If I add this variable here,
+And now we can use these shortcuts
 
-I get a different error.
+with the this dot notation here
 
-It's no longer saying that "Text is not known."
+just as you learned it before.
 
-Instead it's complaining about some other things here.
+Again, this would accept some input values
 
-The reason for that is that now we do have this variable,
+and store them in some variables.
 
-but in the end, this variable is still not set
+Now, the differences that we don't accept a list
 
-to the value we receive as a argument here.
+of any kind of values and any amount of colors
 
-To do this, we got two main ways.
+but instead exactly two colors,
 
-We can again add this colon here,
+which are both required because positional arguments
 
-after our argument list,
+by default are always required.
 
-and then, here, we could refer
+And now we can use these colors
 
-to this text variable by its name,
+color one and color two down there in this list.
 
-and set it equal to this text argument we're getting here.
+And with that in main Dart
 
-So text = text might look a bit strange,
+you can then pass your colors to gradient container.
 
-but the first text here refers to the text variable.
+If you took the first solution with that list of colors
 
-The second text here refers to the text argument.
+you would pass your list of colors here,
 
-So if I use different names here,
+if you took the second solution instead,
 
-like outputText here and here, this becomes clearer,
+you would pass your two colors here.
 
-and I would also have to use it down here.
+So again, here, I'll just quickly use deep purple
 
-So now we would be setting our text
+as a starting point,
 
-to this argument which we receive.
+and then use this color picker
 
-However, just as before with super,
+to pick some dark blue, purple-ish color,
 
-this is unnecessarily verbose,
+and then copy that, add a comma
 
-and therefore Dart gives us a shortcut,
+and set my second argument here, which is also a color
 
-because this is a very common pattern
+which is a lighter purple color like this maybe.
 
-that you receive a value on an argument,
+And with that, I'm applying these new colors
 
-and you wanna store that in a variable
+to this application here
 
-that belongs to the class,
+now with my reusable gradient container component.
 
-you can replace this string part here
+And again, this component here is reusable
 
-with this dot, so that this says this.text.
+because I'm accepting these color values dynamically
 
-Now, you just must make sure that your variable
+as arguments, I'm storing them
 
-is also called text.
+and then I'm using them in my build method.
 
-And also down here of course.
+And this is a pattern as mentioned,
 
-This is simply a shortcut,
+which you'll see a lot throughout
 
-which looks for a variable called text.
+this course that you're building reusable widget classes.
 
-So this variable here, and sets it equal
-
-to the argument value that is received here.
-
-So in this case, the first argument that's received
-
-by this constructor function.
-
-This keyword is another keyword provided by Dart,
-
-and this is a keyword that's used inside of classes,
-
-to refer to the class itself or to refer to the object
-
-that will be built based on the class.
-
-And we can use it here to basically tell Dart,
-
-"That we want to access the text variable
-
-that is defined in this class", so to say.
-
-Now, typically in Dart, you don't need to use this.
-
-If you just use the name of a class variable,
-
-as we're doing it down here in build,
-
-Dart automatically looks for a class variable
-
-with that name, but here for this shortcut
-
-in the constructor function, it is required
-
-because if this would not be added here,
-
-you would just be telling Dart,
-
-"That you want to accept some positional argument,
-
-which you name text here in this constructor function,
-
-but it wouldn't automatically look for an equally named
-
-variable in the class.
-
-And by adding this dot in front of it,
-
-you instead tell Dart,
-
-"That you don't just wanna accept this positional argument,
-
-but that instead, it should also automatically be mapped
-
-to a class variable with the same name."
-
-Now, I'm just getting an error
-
-because we have to remove const,
-
-because now that we received some text here
-
-which is stored in a variable called text,
-
-this can no longer be marked
-
-as a potentially constant object,
-
-because the text might be changed thereafter,
-
-because this is a variable,
-
-and we also have to get rid of const down there,
-
-for that same reason.
-
-We could still turn this configuration object here
-
-into a constant though,
-
-because this is still all hard-coded.
-
-But that is how we could accept such a argument,
-
-store it and then use it.
-
-However, here we also have a great example for using final,
-
-instead of setting this to be a variable,
-
-because this variable here only exists
-
-to store that value which we receive on this argument.
-
-We never plan to reassigning it inside of this class then.
-
-And, therefore, you can actually also add final
-
-in front of the type here,
-
-not instead of the type,
-
-because we still wanna be clear
-
-about which type of value will be stored here.
-
-But, you can add it in front of the type
-
-to make it clear that this will only be set once
-
-by this argument that is received,
-
-and will not be changed thereafter.
-
-And with this done, you can readd const here,
-
-because now this class can be optimized again,
-
-because since this will never change internally,
-
-this is guaranteed to always be the same object
-
-once it has been initialized.
-
-Hence, it can be cached and reused by Dart.
-
-But that's how you can accept arguments,
-
-and store them in instance variables.
-
-So in variables that belong to these classes,
-
-and the objects that are based on these classes,
-
-and that allows you to reuse StyledText
-
-with potentially different text values,
-
-so that the text itself is no longer hard-coded
-
-inside of this class.
-
-And again, that were a lot of new concepts,
-
-lot of talking about that,
-
-but it is never a crucial feature,
-
-because being able to accept, and store, and use values
-
-in your own classes, no matter if they are widgets or not,
-
-allows you to build highly reusable classes and widgets.

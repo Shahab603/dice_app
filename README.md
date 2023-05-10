@@ -2,308 +2,227 @@
 
 A new Flutter project.
 
-## 11 - COnfiguring Widgets & Understanding Objects
+## 12 - Working with "Configuration Objects" (Non-Widget Objects)
 
-So now that we know about types,
+So knowing about this object's concept
 
-it's time to come back to our application code here
+is crucial because all values are objects
 
-and continue working on this application.
+in the end as you learned.
 
-And I would say one next step that makes a lot of sense
+But here, my goal is not to set this just
 
-is to make this look a bit nicer here,
+to some purple background color.
 
-because, to be honest, right now,
+Instead, I wanted to have a nice gradient.
 
-this application is really boring.
+Now, this can't be achieved with background color
 
-And for that, I'd like to change the background color
+because that wants a single color
 
-from white to a nice gradient,
+and Scaffold also has no other argument
 
-and also change how this texture looks like
+that we could set that would allow us
 
-so that it looks a bit nicer, a bit more fancy.
+to add a gradient background.
 
-Now let's start with the background color.
+Instead, what we can do here
 
-For this, we can go to this Scaffold widget.
+is we can add another new widget
 
-And besides setting the body argument there to the widget
+between Scaffold and Center
 
-that should be displayed inside of the Scaffold,
+so that it wraps center and therefore, implicitly also text
 
-we can also set one of the many other arguments
+by right clicking on Center and refactoring this.
 
-supported by Scaffold,
+And here we wanna wrap this with a container,
 
-because most widgets allow you
+which is another widget provided by Flutter.
 
-to pass values to different arguments.
+And container is a widget that's very useful
 
-You'll almost always have at least one argument,
+for configuring styling and layout settings.
 
-like body or child, that wants another widget,
+Now here, after adding container,
 
-which then is included in the wrapping widget,
+I get some reds squiggly lines.
 
-in the outer widget.
+And if we hover over that, we learned
 
-But you also often have other arguments
+that we should remove const
 
-that don't want widgets,
+because that seems to be responsible
 
-but that instead allow you to configure
+for these red squiggly lines.
 
-and/or style this widget.
+And indeed, if you remove consy here in front
 
-And for example, Scaffold, if you add a new line in there
+of MaterialApp, they go away and you can now re-add const
 
-and press Control Space,
+in front of center.
 
-it supports a broad variety of arguments.
+Container is simply a widget provided
 
-For example, the backgroundColor argument.
+by Flutter that doesn't support setting it to const
 
-And as you might guess, the backgroundColor argument
+and therefore, you also can't set some parent widget
 
-allows you to set the background color of this screen
+that's higher up in this widget tree to const.
 
-that's created by Scaffold.
+It is what it is
 
-Now, backgroundColor wants a value of type color.
+but your IDE clearly tells you where you can
 
-Now that you learn about types,
+and can't add cons.
 
-you know that that thing in front of the parameter name
+So that's pretty good.
 
-is the type definition.
+But of course, we got more blue squiggly lines here now.
 
-And this wants a color,
+But the reason for that simply is that at the moment,
 
-or actually, it wants a color, question mark.
+Dart and our code editor thinks
 
-Well, this question mark simply means
+that we're unnecessarily using container and we do.
 
-that we can either set a value of type color or nothing,
+If we don't configure anything, it's a useless wrapper
 
-so that this may be null, as it's called.
+because if you save this and you reload,
 
-We can set this to null, which is a special kind of value
+you will see that nothing changes
 
-and type supported by Dart,
+about the app except for the background color
 
-which in this case is pretty much the same
+since I removed the background color on Scaffold
 
-as not setting background color at all.
+but nothing else changes.
 
-But if we do want to set it to some non null value,
+But of course, our plan is not to do nothing here.
 
-so to a value that has some visual effect,
+Instead, container now also gives you many useful arguments
 
-it must be a value of type color.
+that you can set.
 
-Now, such a color value can be created
+For example, it provides a decoration argument
 
-with the built-in color, class, or constructor function.
+and this allows you to add various kinds of well, decoration
 
-Now, keep in mind that I mentioned before
+to the container and therefore also to the child elements
 
-that MaterialApp, Scaffold, Center and Text
+inside of that container.
 
-are of course, widgets,
+Now, decoration wants a decoration argument, so a argument
 
-but that technically what we're calling here,
+of type decoration and such a value can be created,
 
-like functions in our code
+for example, with the built-in
 
-are so-called constructor functions.
+BoxDecoration constructor function.
 
-And I'll get back to the concept of constructor function
+There actually also is a decoration option here
 
-and related to that classes a little bit later.
+in this suggestions menu,
 
-Here, we can use the Color constructor function
+but this is actually not the right thing to use here.
 
-to create a color thing.
+Indeed, you can't use it if you try to use it
 
-Though, if you are just getting started
+because it's a so-called abstract class.
 
-with colors in Flutter projects,
+And we'll learn more about classes later.
 
-it's typically easier to use the special Colors thing,
+For the moment, it's enough to know that you can't use that
 
-and then there, you don't add parenthesis,
+but you can use this BoxDecoration constructor function
 
-but instead you use a dot
+and this will then also give you such a decoration object.
 
-to access a list of predefined colors.
+Of course, it will give you a BoxDecoration object
 
-And here, you see a long list of predefined colors
+but as you learned, values can be of multiple types
 
-which you can use, like for example, deep purple, like that.
+and BoxDecoration objects are also of type decoration,
 
-And if you save that and force a reload,
+just as material app is not just of type material app
 
-you will see that color here
+but also of type widget.
 
-as a background for this screen.
+This might all sound confusing
 
-And this already looks nicer
+but you're just learning it here.
 
-than the white background we had before,
+You're just getting started with it.
 
-at least in my opinion,
+You will get a lot of experience
 
-but it's not the final styling I wanna have here.
+with that over time as you're using all these features.
 
-But what is this thing here now?
+Now, this BoxDecoration Constructor function,
 
-Well, if you hover over deepPurple,
+which we're calling here
 
-you for one get a color picker,
+to build such a BoxDecoration object,
 
-which you could use to pick a color more conveniently,
+then also supports various arguments that can be set.
 
-which is pretty nice.
+For example, the gradient argument,
 
-You will see that if you do that though,
+which sounds just about right for what we're planning to do
 
-it changes from colors.something to color dot,
+because our goal is to add a gradient here.
 
-and then some function that's being executed here
+So the gradient argument can be set here
 
-to which some values are passed.
+and that then wants a value of type gradient.
 
-In the end, this here is a function
+Now, there are different ways of creating gradients.
 
-provided by this color thing here,
+For example, a radial gradient
 
-which is provided by Flutter in the end,
+or what I wanna do here, a linear gradient.
 
-which simply allows you to create a color
+This is another constructor function
 
-by mixing red, green, and blue colors and an alpha channel
+that creates a linear gradient, which is also
 
-that controls the transparency of the color.
+of type gradient and which therefore is a value we can set
 
-So that's simply a way of creating a color
+for this gradient argument.
 
-by mixing three different colors.
+And this linear gradient constructor function
 
-Though of course, the easiest way of using this
+wants even more arguments.
 
-and doing this is to use this color picker,
+And what we're doing here is quite typical
 
-which opens here in Visual Studio Code if you hover over it.
+for Flutter development.
 
-But of course, that doesn't answer the question
+You often end up nesting widgets
 
-what this here is in the end.
+and/or configuration objects into each other
 
-Well, if you scroll down from that color picker,
+so that they can work together
 
-you in the end see that this from a,r,g,b function here,
+and give you the overall desired user interface.
 
-which it is, gives you a value of type color,
+Don't forget to add those commas
 
-which makes sense, because background color wanted a value
+after all the closing parentheses to make sure
 
-of type color, of course.
+that your code is styled in a readable way
 
-So we got another type here, not a type built into Dart,
+so that you never lose track
 
-but instead a type provided by Flutter.
+of how these things are related.
 
-And what this in the end is,
+And here for a linear gradient, there are again,
 
-like all values as you learned before, is an object.
+more things we can set.
 
-Widgets in Flutter are also just objects in the end.
+Most importantly, this colors thing here,
 
-They are objects,
+this colors argument
 
-and objects are the base value in Dart,
+and this colors argument now wants a special kind of value.
 
-all other values are also objects in the end,
-
-and objects are simply data structures in memory.
-
-So that's simply how Dart saves your values in memory
-
-on the device on which your application is running.
-
-Now, objects are a core concept in Dart,
-
-because as mentioned,
-
-all your values are objects in the end.
-
-And there are a simpler objects
-
-like this text, this Hello World text,
-
-but also more complex objects like this Color object
-
-or your widget objects, like MaterialApp or Scaffold.
-
-But in the end, all these are simply data structures
-
-in memory that are managed by Dart,
-
-and these data structures can also work together.
-
-And for example, backgroundColor wants a Color object,
-
-so that behind the scenes,
-
-the Scaffold widget object
-
-is able to reach out to that Color object
-
-and use that color information
-
-that's stored in that color object
-
-to make the background color of this user interface purple.
-
-So it's all objects.
-
-Widgets are also just objects,
-
-just special kinds of objects in the world of Flutter,
-
-if you wanna call it like this,
-
-but all these objects are working together
-
-to bring the final user interface onto the screen.
-
-And I'm really emphasizing this,
-
-because when building apps with Flutter,
-
-you will always have many objects work together.
-
-You, for example, have widgets
-
-that are nested inside of other widgets,
-
-but you also have configuration objects,
-
-like this Color object,
-
-which then, for example, could be used by your widgets.
-
-And that's how we could add a background color.
-
-Though, it's of course not the final background color
-
-I wanna have here.
-
-But using this helped us get started
-
-and become aware of the important concept
-
-of objects in Dart applications.

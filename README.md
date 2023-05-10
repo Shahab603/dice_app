@@ -2,227 +2,112 @@
 
 A new Flutter project.
 
-## 12 - Working with "Configuration Objects" (Non-Widget Objects)
+## 13 - Generics, Lists & Adding Gradient Colors
 
-So knowing about this object's concept
+So therefore, here we now can pass such a list
 
-is crucial because all values are objects
+of colors and a list value is created
 
-in the end as you learned.
+in Dart by using square brackets, opening and closing.
 
-But here, my goal is not to set this just
+And between those square brackets
 
-to some purple background color.
+you can now add all your values.
 
-Instead, I wanted to have a nice gradient.
+Now, for example, your strings, but
 
-Now, this can't be achieved with background color
+of course here we don't want strings, we want colors.
 
-because that wants a single color
+So we can create them with the color function
 
-and Scaffold also has no other argument
+or with color from ARGB or with the colors object,
 
-that we could set that would allow us
+which simply give us some redefined colors to choose from.
 
-to add a gradient background.
+So for example, again, deep purple here.
 
-Instead, what we can do here
+Though here, I actually don't want that.
 
-is we can add another new widget
+Instead, I'll use the color picker again to
 
-between Scaffold and Center
+select a nice dark purple, and you can of course
 
-so that it wraps center and therefore, implicitly also text
+choose any color of your choice.
 
-by right clicking on Center and refactoring this.
+And then in this list, we can add a comma to
 
-And here we wanna wrap this with a container,
+add a second value to that list because in lists
 
-which is another widget provided by Flutter.
+values must be comma separated.
 
-And container is a widget that's very useful
+And we can copy the first color as a second value
 
-for configuring styling and layout settings.
+in that list and then pick a slightly
 
-Now here, after adding container,
+slightly different color, maybe more purple ish,
 
-I get some reds squiggly lines.
+a little bit lighter, whatever you want.
 
-And if we hover over that, we learned
+I'll pick this color and also add a comma
 
-that we should remove const
+after the closing square brackets.
 
-because that seems to be responsible
+That's another place where you should add commas
 
-for these red squiggly lines.
+for proper code formatting.
 
-And indeed, if you remove consy here in front
+And if I now auto-format this
 
-of MaterialApp, they go away and you can now re-add const
+that's a bit more readable, though it would also be
 
-in front of center.
+nice to get rid of these blue squiggly lines.
 
-Container is simply a widget provided
+And here, if you hover over them
 
-by Flutter that doesn't support setting it to const
+and you scroll down from that color picker
 
-and therefore, you also can't set some parent widget
+you again see that it's about const again.
 
-that's higher up in this widget tree to const.
+And we want to add const at the highest possible place
 
-It is what it is
+which in this case is in front of box decoration.
 
-but your IDE clearly tells you where you can
+So in the end, these are all, again
 
-and can't add cons.
+objects that support being set to const so
 
-So that's pretty good.
+that Dart can possibly cache store these values
 
-But of course, we got more blue squiggly lines here now.
+and reuse them if we would use them somewhere else
 
-But the reason for that simply is that at the moment,
+in our code to take advantage
 
-Dart and our code editor thinks
+of this memory usage optimization
 
-that we're unnecessarily using container and we do.
+and potentially improve our application performance.
 
-If we don't configure anything, it's a useless wrapper
+And with all of that
 
-because if you save this and you reload,
+we're using a bunch of objects in conjunction.
 
-you will see that nothing changes
+And we learned about this special new list value type
 
-about the app except for the background color
+which is a generic type that is able to work together
 
-since I removed the background color on Scaffold
+with other value types.
 
-but nothing else changes.
+Though here it's really a list of colors that's needed.
 
-But of course, our plan is not to do nothing here.
+And with all that, if you save that
 
-Instead, container now also gives you many useful arguments
+and make sure that these changes get applied
 
-that you can set.
+you see this gradient in the background.
 
-For example, it provides a decoration argument
+And of course you can pick colors
 
-and this allows you to add various kinds of well, decoration
+with a greater contrast to see this gradient a bit better.
 
-to the container and therefore also to the child elements
+But here I have just that slight gradient
 
-inside of that container.
-
-Now, decoration wants a decoration argument, so a argument
-
-of type decoration and such a value can be created,
-
-for example, with the built-in
-
-BoxDecoration constructor function.
-
-There actually also is a decoration option here
-
-in this suggestions menu,
-
-but this is actually not the right thing to use here.
-
-Indeed, you can't use it if you try to use it
-
-because it's a so-called abstract class.
-
-And we'll learn more about classes later.
-
-For the moment, it's enough to know that you can't use that
-
-but you can use this BoxDecoration constructor function
-
-and this will then also give you such a decoration object.
-
-Of course, it will give you a BoxDecoration object
-
-but as you learned, values can be of multiple types
-
-and BoxDecoration objects are also of type decoration,
-
-just as material app is not just of type material app
-
-but also of type widget.
-
-This might all sound confusing
-
-but you're just learning it here.
-
-You're just getting started with it.
-
-You will get a lot of experience
-
-with that over time as you're using all these features.
-
-Now, this BoxDecoration Constructor function,
-
-which we're calling here
-
-to build such a BoxDecoration object,
-
-then also supports various arguments that can be set.
-
-For example, the gradient argument,
-
-which sounds just about right for what we're planning to do
-
-because our goal is to add a gradient here.
-
-So the gradient argument can be set here
-
-and that then wants a value of type gradient.
-
-Now, there are different ways of creating gradients.
-
-For example, a radial gradient
-
-or what I wanna do here, a linear gradient.
-
-This is another constructor function
-
-that creates a linear gradient, which is also
-
-of type gradient and which therefore is a value we can set
-
-for this gradient argument.
-
-And this linear gradient constructor function
-
-wants even more arguments.
-
-And what we're doing here is quite typical
-
-for Flutter development.
-
-You often end up nesting widgets
-
-and/or configuration objects into each other
-
-so that they can work together
-
-and give you the overall desired user interface.
-
-Don't forget to add those commas
-
-after all the closing parentheses to make sure
-
-that your code is styled in a readable way
-
-so that you never lose track
-
-of how these things are related.
-
-And here for a linear gradient, there are again,
-
-more things we can set.
-
-Most importantly, this colors thing here,
-
-this colors argument
-
-and this colors argument now wants a special kind of value.
-
+which is exactly what I want.

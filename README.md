@@ -2,126 +2,172 @@
 
 A new Flutter project.
 
-## 07- Combining Multiple Widgets
+## 08 - Understanding "Constant" Value
 
-Now the Text widget, if you hover over it,
+So we got our first screen output,
 
-also actually takes some named parameters.
+our first basic UI
 
-You find a curly brace and a long list of parameters
+even though it's of course never helpful nor pretty,
 
-between those curly braces here as well.
+but it's a start.
 
-But there also is one positional parameter
+We achieved this by combining the MaterialApp
 
-and that's possible as well.
+and text widgets and passing that widget combination
 
-You can mix and match those different parameter types
+in the end to MaterialApp.
 
-as needed when defining functions.
+Now, you might notice
 
-That is totally up to you, the developer.
+that there are some blue squiggly lines below that code.
 
-And here this positional parameter
+Now in Visual Studio Code, blue squiggly lines
 
-is indeed what we must set when using Text.
+as we have them here, mean that there isn't an error
 
-Otherwise, we get an error,
+but there is some improvement potential.
 
-that one positional argument is expected
+The code is not optimal or it does something
 
-but zero arguments are found.
+that should be changed.
 
-And here the one piece of data that we must pass in
+And you can hover over the code
 
-is some human readable text,
+that has these squiggly lines
 
-which should be wrapped between single or double quotes,
+to learn more about the problem.
 
-and single quotes are more common.
+And if you scroll down in that infobox
 
-And here you could write Hello World for example.
+because the messages are always at the bottom,
 
-Now these single or double quotes are required
+you see that here, the recommendation
 
-because without them, Dart would think that Hello
+is that we should use const with the constructor
 
-or World exclamation mark should be keywords or identifiers.
+to improve performance, whatever const is.
 
-Now Hello and World are definitely not keywords
+While, we can get rid of these blue squiggly lines
 
-built into Dart.
+by adding const in front of MaterialApp.
 
-So identifying these words as such fails
+But what is this const thing?
 
-and they're also not valid identifiers
+Well, const is a keyword.
 
-because neither in the Material Dart package,
+As you can also tell by its color.
 
-which we're importing,
+It has the same color as void and import.
 
-nor in your file is there a Hello or World function
+So it's a keyword provided by Dart
 
-or anything else you could be referring to here.
+built into the Dart language.
 
-Referring to runApp, MaterialApp, and Text worked
+And const is a keyword and a feature that exists
 
-because those things are indeed
+to help Dart optimize the runtime performance
 
-defined here in Material Dart.
+of your application.
 
-Hello and World are not defined here and they shouldn't be
+And how does it do that?
 
-because here we're not trying to execute some commands
+Well, if you mark something as const,
 
-or run some code.
+let's say a text widget that you're using in your app
 
-Instead, this should be human readable text.
+then this text widget will be stored internally
 
-And whenever you have text
+in the memory of the device on which the app runs.
 
-that should not be interpreted as commands,
+And that will always be the case no matter
 
-you must wrap it with those quotes
+if you use const or not.
 
-so that this is marked as text
+Once your code executes the things
 
-that is, for example, meant to be read by humans
+that are created by your code,
 
-and not executed as code.
+the widgets, for example,
 
-And with all those things,
+will be stored in the device memory,
 
-we now have our first basic combination of widgets,
+but with const when you then use that same widget,
 
-where we create the Text widget
+that same widget with the same text,
 
-and pass that to the MaterialApp widget,
+a second time in the app
 
-which then in turn is passed to runApp.
+that existing memory thing will be reused
 
-And with that, if you now make sure
+instead of a second memory object being created.
 
-that you have an emulator up and running
+So therefore, using const allows start to reuse values
 
-and you start your application on that emulator,
+that are indeed equal and avoids the duplication of data
 
-either by going to Run, Run without debugging,
+in memory, hence, making your app more memory efficient
 
-or by clicking this Run button here,
+and improving overall performance.
 
-which is provided as a convenience by the code editor,
+Of course, behind the scenes things are a bit more complex
 
-by Visual Studio Code,
+but that is in a nutshell what's happening,
 
-you will see this Hello World text on this virtual device.
+and that's why you should always add const
 
-It looks ugly. It's definitely not a good looking app.
+when prompted for it.
 
-Also not a useful app, but it is a first step
+Now, the good thing is you don't need to learn by heart
 
-and it's our first user interface built
+in front of which widgets,
 
-with Flutter and widgets that's shown on the screen.
+you should add const, for example,
 
-Now we can dive in deeper.
+instead, your code editor will simply tell you
+
+by adding these blue squiggly lines here
+
+and then you should indeed add const.
+
+Of course, for this basic app,
+
+it doesn't really make a difference.
+
+We're not reusing this combination of widgets anywhere.
+
+So, marking it as constant won't give us
+
+any big advantages here but it also doesn't hurt
+
+and it's simply a best practice to use constant front
+
+of all the values where you can use it.
+
+And as you saw, using it in the right places is very simple
+
+because your code editor simply tells you.
+
+For example, also tells you, if you're using it
+
+in a place where you should remove it.
+
+For example here, if I add it in front of MaterialApp
+
+and in front of text, then I get a message here
+
+that I'm using const unnecessarily in this place
+
+because I'm already using it in front of MaterialApp,
+
+which then contains text.
+
+So using it in front of text in addition to that
+
+is simply redundant and therefore should be removed.
+
+But that's in the end what const does,
+
+it allows start to run your application
+
+in a more efficient way.

@@ -6,7 +6,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: Text('This is testing app'),
+          child: Text('Hello World!'),
         ),
       ),
     ),

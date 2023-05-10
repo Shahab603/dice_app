@@ -2,340 +2,288 @@
 
 A new Flutter project.
 
-## 09 - Building More Complex Widget Tree
+## 10 - Understanding Value Types
 
-Now, of course this is ugly as mentioned.
+So we built our first basic widget app
 
-So how could we make it more beautiful?
+that leads to this user interface.
 
-Well, to make it more beautiful,
+And before we'll dive deeper into that
 
-we have to add more widgets.
+and make it a bit more pretty
 
-At the moment we only have a very basic
+and of course work towards our final application goal.
 
-combination of widgets.
+For this section, I wanna dive
 
-One widget that will help us a lot
+into another crucial Dart feature
 
-with making this look better is another built in widget
+which is extremely important in which you must understand
 
-the Scaffold widget.
+in order to work with Flutter and Dart.
 
-Now you can always of course read about widgets
+Because of course this section is not
 
-in the official documentation
+about building the final app as quickly as possible,
 
-and there you also learn how to use a widget,
+but about learning all these important Flutter
 
-but you're watching this course
+and Dart fundamentals.
 
-so that you don't have to do that,
+And one important fundamental Dart concept
 
-though that of course is always a great backup resource.
+that you must understand is the concept of types.
 
-But the Scaffold widget is a widget
+Because Dart is a so-called type-safe language,
 
-that in the end helps us with setting up
+which in the end means
 
-a good looking screen in our app.
+that all values you are working with are of certain types.
 
-The material app widget is the root widget
+For example, this hello world text is a so-called string.
 
-which is important for setting up the overall app.
+If we had a number like 29 in our code,
 
-But many apps of course consist of multiple screens
+it would be of type int.
 
-and those screens also must be set up.
+MaterialApp is of type MaterialApp.
 
-And even if you have just one screen in the app,
+And actually there's not just one type per value
 
-as we have it here
+but instead, values are typically of multiple types.
 
-this screen must be set up to have,
+For example, this hello world text is not just
 
-for example, a nice background color
+of type string, but also of type object.
 
-to enforce some basic styling
+The number is not just of type int
 
-onto its child widgets and so on.
+but also of type num int of type object.
 
-So therefore here we wanna wrap text
+And MaterialApp for example, would be of type MaterialApp,
 
-with the Scaffold widget
+but also widget and also object.
 
-because Scaffold must be inside of material app,
+So values can be of multiple types.
 
-but should be wrapped around the widgets
+As you see, for example
 
-that belong to a screen.
+all values are at least of type object,
 
-Now to wrap text with Scaffold,
+and then they also have more specific types
 
-we can of course type Scaffold here and execute this
+and I'll get back to objects
 
-and then grab text here, this text widget,
+and what's that all about a little bit later.
 
-with its text content and then pass it to Scaffold,
+And those types are either built into Dart,
 
-though Scaffold now again wants a named argument.
+or provided by a third party package,
 
-In case you're wondering how I know
+or provided by you when creating your own types,
 
-which widget wants which kind of arguments,
+which you typically do implicitly.
 
-you can hover over a widget
+And in our application here, we're also working
 
-to learn about the accepted arguments here
+with types in a lot of different places.
 
-in this info window that opens up.
+But why does this type feature even exist?
 
-You can also learn about supported arguments here
+Why does it matter that this text is technically
 
-in the official documentation, but of course for the moment
+of type string?
 
-I will simply tell you which arguments can be passed where
+Which you by the way can also see if you hover over it
 
-and you will then automatically memorize these things
+because then the code editor shows you some information
 
-as you gain more experience with Flutter.
+about the thing you hovered over,
 
-So for Scaffold,
+and that always also includes the type of that value.
 
-it's actually a body argument which we should set here.
+For example, here string for a MaterialApp
 
-And I'm also getting some auto completion here
+it's a bit harder to see
 
-whilst typing this, which of course helps a lot.
+but here the type annotation would be this thing
 
-And the value for body then is the widget
+in front of this MaterialApp function argument information.
 
-that should be shown inside of this Scaffold widget.
+But why does this type feature exist?
 
-So with that, if I save this,
+It exists and it's enforced by Dart to make sure
 
-this should reload automatically.
+that you're never accidentally using the wrong type
 
-If it doesn't, you can press this refresh button here
+in the wrong place.
 
-in this panel, which opened up when you started the app
+For example, you might want to display a number
 
-and now it should update.
+on the screen and therefore you could replace hello world
 
-And you see it looks much better.
+with that number.
 
-We got the white background
+But you would see that here in my code editor
 
-the Hello World text looks nicer,
+I'm now getting an error.
 
-even though it's still of course hidden
+And when I hover over this, I learn that here in the end
 
-in the top left corner,
+I can't provide a value of type int
 
-but we already gained a lot by adding this widget.
+which is that number type
 
-It's of course not enough though.
+which you just saw a couple of seconds ago on the slide
 
-Instead it would be nice if Hello World
+to a parameter that actually wants a string
 
-would be kind of in the middle here,
+so that wants some text.
 
-if it would be centered on the screen.
+Put in other terms, the text widget internally
 
-And that can be achieved with help of another widget
+as it was defined by the Flutter team only knows how to work
 
-which of course also can be found in the widget catalog
+with string input values, with text input values.
 
-in the layout category, since I wanna center my text here
+It does not know how to work with numbers.
 
-so it's a lay outing action I wanna perform.
+Of course, you could argue that displaying a number
 
-And there, it's the Center widget that can help us with,
+on the screen should be possible, and it is
 
-well, centering widgets.
+if you convert this to a string by wrapping it with quotes
 
-For that, we need to wrap text with yet another widget.
+which in the end is what those quotes really do,
 
-And that is something you'll do a lot
+they create a so-called string text.
 
-when writing flutter code.
+But of course numbers are a special case.
 
-You'll build these complex widget trees
+What if it would pass a MaterialApp widget here?
 
-as I called them before,
+Now, it might make more sense that text can't output this
 
-where you have widgets inside of widgets, inside of widgets.
+because how should this MaterialApp widget,
 
-So here we wanna wrap text with yet another widget
+which is all about creating the frame
 
-and for that we could manually add it as before,
+for an application user interface,
 
-but you can also right click on code,
+how should that be output on the screen, right?
 
-here on this text widget,
+How should that be treated as text?
 
-and then choose this refactor action
+And to make sure that the text widget doesn't have to guess
 
-that's suggested by Visual Studio Code.
+what it should do with its input values
 
-You can of course also use the shortcut
+and how it should output those values as text,
 
-that's suggested for that.
+the Flutter team built the text widget
 
-And if you click that, you get some refactoring suggestions.
+simply such that it only accepts text,
 
-And refactoring in programming,
+that it only accepts strings to be precise.
 
-simply is the process of changing your existing code.
+And you can also see that if you hover over it
 
-And here you get some smart actions suggested.
+to get more information about it,
 
-For example, you can choose wrap with widget
+here you see that first argument
 
-to get some help with wrapping this with a widget,
+the only positional argument,
 
-but you even get a wrap with center suggestion here,
+positional parameter wanted by the text widget
 
-which you can pick by clicking on it
+which is the parameter we're setting with that first value.
 
-or by selecting it and hitting enter.
+We're passing between those parentheses.
 
-And this will automatically create the Center widget
+And here you see this annotation in front of data.
 
-and pass the text widget to center
+Data is simply the parameter name, but the annotation
 
-to be precise to the named child argument
+in front of it is the type that's expected
 
-of the Center widget.
+for this parameter.
 
-Now, of course, things are getting quite unreadable here.
+And if you would create a custom function
 
-This is becoming a super long line here
+which you wanna use somewhere else in your application,
 
-and this is still a simple widget tree.
+you could also add such type annotations
 
-And therefore, of course
+to make sure that you for example, only accept numbers
 
-you typically wanna structure this code a bit differently
+so-called integers if you use the int value here.
 
-to make it easier to read and to maintain,
+So that for example, if you would pass some text here
 
-because even this basic widget combination
+to this function, you would get an error
 
-is already getting too long here.
+because your function might not know what to do with text.
 
-Now, to make this easier to read and more structured,
+It wants numbers, to add them as numbers,
 
-Dart offers a nice trick
+not to combine them as text.
 
-or actually recommended pattern or approach
+That's why this type feature exists.
 
-to help with formatting widget trees.
+It's there to ensure that you as a developer can be clear
 
-For that, you should add a comma
+about which kind of values you wanna accept,
 
-after every closing parenthesis here,
+and which kind of values you don't want to accept.
 
-except for the last one where you need a semicolon.
+For example, the runApp function,
 
-And if you do that, you can run the format document command
+which we're using in our code,
 
-in visual studio code, or use the shortcut for that
+wants a widget as its first and only argument.
 
-to auto format your code,
+So a value of type widget.
 
-which is something I do a lot when writing code in general.
+And it turns out that MaterialApp, which is in the end,
 
-And if you hit this shortcut, you see the code changes,
+the value we are passing to runApp is such a widget.
 
-it's formatted differently,
+And here for the text widget
 
-and now it's way easier to understand this widget tree
+we should of course go back to a real text.
 
-because now you have some nice indentation
+So that's the idea behind types.
 
-that shows you which widget is inside of which other widget.
+And in Dart types are everywhere,
 
-And this widget tree, this code is now way easier to read
+not just in the parameter lists of functions.
 
-and understand.
+For example, this thing in front of main,
 
-And this is something you can do
+this white thing is also type.
 
-in many programming languages, definitely in Dart.
+It's the so-called return value type of the main function.
 
-As you can see, you can split code across multiple lines
+But that is something we'll get back to later
 
-and you then don't have semicolons at the end of those lines
+in the course once we actually have functions
 
-because this in the end here is still one single instruction
+that do return something.
 
-just split across multiple lines.
+Now, as mentioned, you can build your own types,
 
-Now, you can't split it at arbitrary points,
+and you also get many types by third party packages,
 
-for example, not in the middle of a word,
+but Dart also ships with many built-in core types.
 
-in the middle of material app, that would fail,
+Of course, you might not understand all of them just yet.
 
-but you can split it here
+You will see all of those
 
-after these opening parenthesis, for example,
+and many more inaction throughout this course though.
 
-and also after such a closing parenthesis
+For the moment, the most important takeaway
 
-and such a comma here,
+is that this types feature exists so that you can't work
 
-or even in front of the comma if you wanted to.
-
-But this auto formatting shortcut
-
-will basically do that for you.
-
-And by simply adding these commas
-
-after all these closing parentheses,
-
-you are giving the code editor in the end
-
-a signal where to best split this code
-
-when using this auto formatting shortcut
-
-because it will then simply do this after every comma here.
-
-And since you will build
-
-a lot of widget trees when building Flutter apps,
-
-and of course also way more complex widget trees
-
-with way more widgets than we have it here,
-
-it is absolutely a recommended pattern
-
-to always add these commas after your closing parenthesis
-
-and then use this auto formatting shortcut
-
-to make sure your code is structured
-
-and easy to read and understand.
-
-And if you save this now,
-
-it again should update automatically, or if it doesn't,
-
-as it's the case for me, update it manually.
-
-And now you see that Hello World
-
-is centered in the middle of this screen.
-
-So by adding these two built-in widgets,
-
-Scaffold and Center, we again improved the app
-
-and we're making good progress
-
-towards our goal of building our first custom Flutter app.
+with the wrong types in the wrong places.

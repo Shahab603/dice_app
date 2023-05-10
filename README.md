@@ -2,145 +2,204 @@
 
 A new Flutter project.
 
-## 16 - Onwards to Custom: Why Do you need them?
-So now that we get started
+## 17 - Understanding Class 
+As you learned, widgets are objects
 
-with some styling options,
+and objects are simply these data structures in memory.
 
-I also wanna style this text.
+And of course, not just widgets are objects.
 
-And to be precise, I wanna make sure that this text is white
+As you learned before,
 
-and maybe has a slightly bigger font size.
+all value types in the end are also objects.
 
-Of course, we're soon going to get rid of the text anyways,
+So all value types are such data structures in memory
 
-but as a practice, let's see how we could style it.
+and that's why this objects concept
 
-And even though it will be a challenging practice
+is a key concept in Dart.
 
-you also might wanna try this on your own.
+Now, classes are closely related to this objects concept.
 
-See if you can find out how to change the text color
+For that, it's important to understand
 
-and font size of this text on your own.
+that Dart is in the end an object oriented language
 
-Just as a hint, you won't need to wrap any widget around it.
+because as mentioned, every value is an object.
 
-Now here's a short pause for you to pause the video
+And of course you have such primitive values
 
-and see if you can do this on your own.
+like text or numbers, which are created by, for example,
 
-If not, no problem.
+wrapping text with single or double quotes
 
-After a few seconds, we'll implement it together.
+or simply writing down a number in your code.
 
-So did you find a way of changing the color and font size?
+But you also have more complex values in your code,
 
-If not, no problem.
+like for example, these widgets
 
-This was challenging and we're just getting started here.
+but also these configuration objects which you saw.
 
-If you wanna style this text as mentioned
+For example, the object that allowed us
 
-you don't need to wrap any extra widget.
+to configure our gradient or the individual color objects.
 
-Instead you just have to add some extra configuration
+And those more complex values are created
 
-via some arguments.
+with help of classes, because classes in Dart
 
-So by adding a comma and then adding more arguments
+and in many other programming languages as well
 
-to this text widget constructor function here.
+are simply the blueprints for objects.
 
-And that's by the way, always a good way to start.
+Now, why do we need such blueprints though?
 
-If you wanna style something or change some configuration
+Well, as mentioned,
 
-of some widget, the first step should always be to see
+objects are these data structures in memory.
 
-if there are some arguments
+And here a good question would be,
 
-that you can set, that might help you.
+what's inside these data structures?
 
-For example, here, if I open this suggestion menu
+And the answer is data, so-called variables or properties.
 
-after typing this comma and hitting control space,
+For example, the username of a logged in user
 
-I see that there is this style argument I can set,
+or the color you chose for a gradient,
 
-which sounds like exactly what we need here.
+but also logic, functions,
 
-And then as a next step
+or as it's typically called in the context of objects,
 
-I get the suggestion here to add such a text style object
+so-called methods.
 
-as it turns out, with help of the text style
+So objects in the end are really all about organizing data
 
-constructor function.
+and separating logic.
 
-And this also sounds like a good idea, so I'll take this
+So that logic that works with certain data
 
-add a comma for formatting
+is typically in the same object as that data
 
-and then text style takes more arguments.
+and not in some other object
 
-For example, a color argument
+or some other place in your code.
 
-which seems to set the text color since there also
+For example, this color object here
 
-would be a separate background color option.
+will contain the different color values
 
-So I'll choose color here.
+for its red, green, and blue colors.
 
-And color then wants a color object again.
+And if you add a dot thereafter,
 
-And we of course already learned about that.
+which is the Dart syntax for accessing data
 
-We can create a color manually, for example
+or functions that are grouped into an object.
 
-with this from A R G B function, or we use a built-in one
+If you type such a dot,
 
-via the colors object here and the dot notation.
+you get a list of different variables,
 
-And here it's white, which I want.
+properties that you can access.
 
-So that should set the text color to white.
+So the data I just mentioned
 
-And regarding the text size, the font size there
+that would be stored in the object.
 
-conveniently is a font size argument I can set.
+The red, green and blue color values
 
-And this wants a value of type double.
+and some other pieces of data as well.
 
-And you learned a bit earlier
+But you for example, also get some functions down there
 
-that this is in the end a number with a decimal place.
+with blue, with green that, for example,
 
-So here I can set this to 28, for example.
+would allow you to create a never color based on this color.
 
-And you can even omit the decimal place, though
+And which functions are provided by which object
 
-you can also set it, for example, also to set this to 28.5.
+simply depends on the definition of this object.
 
-But here I'll set it to just 28.
+And that's now where these classes become important
 
-Add another comma for formatting.
+because with those classes you define exactly that.
 
-And if I now save this and reload,
+You define which kind of data will be stored in an object,
 
-I should have a white text that is a little bit bigger
+when it is then created at runtime,
 
-and that indeed is the case.
+and you define which extra functions, so-called methods,
 
-And that's the practice solved.
+might be stored in such a object.
 
-That's how you can style text.
+So color here like Container, and Scaffold,
 
-Something we'll do again and again throughout the course,
+and BoxDecoration, all these things are in the end classes.
 
-because text often needs to be styled in a certain way
+Or when executed like this
 
-but that stay afraid for the moment.
+or when using this fromARGB function here,
 
-Now it's time to dive into building custom widgets.
+you are in the end
+
+using so-called class constructor functions
+
+which simply are functions that are used to create objects
+
+based on those classes.
+
+But all these things have classes as blueprints,
+
+as you can also see in the official documentation.
+
+This is the linear gradient class after all
+
+as you can see here.
+
+And you see more classes that are related on the left.
+
+So these are all the blueprints that are built into Flutter
+
+that you can use in your code
+
+to create objects based on those blueprints.
+
+So in your code, you in the end work with the classes
+
+and their constructor functions.
+
+And when your application then runs on a device
+
+and your code executes from top to bottom
+
+then the actual objects are created and stored in memory.
+
+That's how you can think about that.
+
+So all these built in widgets
+
+like these configuration objects here in the end are classes
+
+which you then turn into objects
+
+by executing them like functions.
+
+So by calling their constructive functions.
+
+This process is also called class instantiation
+
+or object instantiation.
+
+You are instantiating a class.
+
+You are creating an object based on a class.
+
+And that's why your custom widgets are also classes.
+
+The built-in widgets are defined as classes.
+
+You define your custom widgets also as classes.
+

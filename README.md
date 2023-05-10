@@ -2,112 +2,139 @@
 
 A new Flutter project.
 
-## 13 - Generics, Lists & Adding Gradient Colors
+## 14 - How to configure Widgets & Objects
 
-So therefore, here we now can pass such a list
+So we added this gradient.
 
-of colors and a list value is created
+I'm not totally happy with it yet though.
 
-in Dart by using square brackets, opening and closing.
+I'm quite content with the colors.
 
-And between those square brackets
+But by default, that gradient goes from left to right.
 
-you can now add all your values.
+Now I'd like to have it go
 
-Now, for example, your strings, but
+from the top left to the bottom right,
 
-of course here we don't want strings, we want colors.
+and this is something that can be changed
 
-So we can create them with the color function
+by adding more arguments to linear gradient.
 
-or with color from ARGB or with the colors object,
+Besides setting the colors here,
 
-which simply give us some redefined colors to choose from.
+you can also set the begin
 
-So for example, again, deep purple here.
+and end settings amongst other settings
 
-Though here, I actually don't want that.
+with which you can, of course, also play around.
 
-Instead, I'll use the color picker again to
+Now, begin wants a value of type AlignmentGeometry,
 
-select a nice dark purple, and you can of course
+which can conveniently be set
 
-choose any color of your choice.
+with help of the Alignment object here.
 
-And then in this list, we can add a comma to
+Now, you can set this to X and Y coordinates
 
-add a second value to that list because in lists
+or you don't use the parenthesis here
 
-values must be comma separated.
+but instead the dot notation here
 
-And we can copy the first color as a second value
+to access some predefined values again.
 
-in that list and then pick a slightly
+And here you have many predefined values,
 
-slightly different color, maybe more purple ish,
+like center, centerLeft and so on.
 
-a little bit lighter, whatever you want.
+And you, for example, also have topLeft,
 
-I'll pick this color and also add a comma
+which is where I want my gradient to begin.
 
-after the closing square brackets.
+And I'll set the end argument to Alignment.bottomRight.
 
-That's another place where you should add commas
+Also add a comma here for proper code formatting.
 
-for proper code formatting.
+With that, if we save this and make sure this is applied,
 
-And if I now auto-format this
+the gradient now indeed goes from top left to bottom right.
 
-that's a bit more readable, though it would also be
+And in case you're wondering how I always know
 
-nice to get rid of these blue squiggly lines.
+how to create the values that are wanted
 
-And here, if you hover over them
+by end and begin, for example.
 
-and you scroll down from that color picker
+So how I, for example, know about this alignment thing here
 
-you again see that it's about const again.
+with those predefined values,
 
-And we want to add const at the highest possible place
+there are a couple of ways of finding out.
 
-which in this case is in front of box decoration.
+For one, of course, you learn it in this course
 
-So in the end, these are all, again
+and you will learn
 
-objects that support being set to const so
+about many common super important widgets
 
-that Dart can possibly cache store these values
+and configuration objects
 
-and reuse them if we would use them somewhere else
+and options throughout this course.
 
-in our code to take advantage
+So that's a great start.
 
-of this memory usage optimization
+But in addition, if you must provide a value
 
-and potentially improve our application performance.
+and you have no value yet,
 
-And with all of that
+you can also always press Control + space
 
-we're using a bunch of objects in conjunction.
+to get some suggestions.
 
-And we learned about this special new list value type
+And typically the first or second
 
-which is a generic type that is able to work together
+or third suggestion is already a suggestion that helps you
 
-with other value types.
+because this suggestion menu here is pretty smart.
 
-Though here it's really a list of colors that's needed.
+And here for setting the alignment,
 
-And with all that, if you save that
+it even shows me these predefined alignments I could choose,
 
-and make sure that these changes get applied
+like for example, bottom right.
 
-you see this gradient in the background.
+So that's pretty good.
 
-And of course you can pick colors
+But of course, you can also always dive
 
-with a greater contrast to see this gradient a bit better.
+into the official documentation.
 
-But here I have just that slight gradient
+For example, for a searching for Flutter
 
-which is exactly what I want.
+and then the name of the widget you're using.
+
+This will lead you
+
+to an article in the official documentation.
+
+And there you can also learn more about using this widget
+
+or this configuration object or whatever you have here.
+
+And you also often find some examples here
+
+or a more detailed description
+
+of the constructor and the AlignmentGeometry object.
+
+And then here, for example, you would get some hint
+
+about using the alignment thing, which we did actually use.
+
+So that's how you can learn more about this.
+
+But again, you will see many common widgets
+
+and configuration objects
+
+and options throughout this course.
+

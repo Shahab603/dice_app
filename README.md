@@ -2,226 +2,99 @@
 
 A new Flutter project.
 
-## 21- Introducing Variables
-So we learned about custom widgets,
+## 22- Variable Type - Combining Two Key Concepts
+Now variables actually also have types.
 
-a super important feature you're going to use
+Here I'm creating two variables,
 
-all the time when working with Flutter.
+and in this case here, Dart is able to infer their types.
 
-Now there's one thing you can do
+If you hover over your variable names, you see the type here
 
-with custom widgets that makes them even more powerful.
+and Dart knows which type will be stored in this variable
 
-But before we can explore that thing
+because it simply takes a look
 
-and before we then thereafter can come back
+at the value you are initially assigning to the variable
 
-to this app and add more features to that,
+and uses that value's type, in this case here Alignment,
 
-we have to dive into variables.
+as a type for the variable.
 
-So what are variables?
+If you would not assign a value initially here
 
-Variables are data containers.
+and you instead would only set one at a later point of time,
 
-And this feature exists
+like this, for example, the inferred type would be dynamic,
 
-in basically all programming languages.
+which is a special type in Dart
 
-Because it turns out that in all programming languages,
+that in the end just means that Dart knows nothing
 
-you're working a lot with values.
+about the type of this variable
 
-Like also here, where in our styled text,
+and it will indeed accept all value types.
 
-we have some text or basically everywhere else,
+Typically, you want to avoid this
 
-we have a bunch of widgets and configuration objects
+because that can lead to bugs in your application
 
-which are of course also all values.
+because without type information,
 
-Now to understand variables,
+Dart can't ensure that you're not accidentally using
 
-let me go back to the gradient container here.
+the wrong type in the wrong place.
 
-And here, we could say that maybe these alignments,
+And therefore, in such cases,
 
-which of course also are values,
+where you don't assign a value initially,
 
-should not be stored here in this part of the code
+you should replace the var keyword with the name of the type
 
-which is hidden quite a bit inside of the widget tree.
+that will be stored in that variable.
 
-But maybe we wanna define them
+Here, for example, Alignment.
 
-up here at the beginning of the file
+With that, Dart would have more type information.
 
-so that if we ever want to change these alignments,
+Though of course here we would still get an error
 
-we can do it right here at the top of the file
+because we tell Dart that we want to store a value
 
-without having to dive into our widget tree.
+of type Alignment in this variable
 
-This is of course just a convenience thing in the end,
+but initially we store no value in here.
 
-but the more complex your code and project gets,
+We would have to add a question mark after Alignment
 
-the more little tweaks like this could help.
+to make it clear that startAlignment
 
-To do this, we could cut the value from down there
+is either of type Alignment or Null,
 
-and instead store it in such a variable,
+so that it's basically optional, whether it's set or not.
 
-because variables, as you learned, are data containers.
+So a Null value would be allowed here.
 
-In Dart, they are created with help of the var keyword,
+Now this would lead to more errors down here
 
-then the equal sign operator,
+because begin actually doesn't want a Null value
 
-the so-called assignment operator,
+and therefore I'll get rid of that
 
-and then the value that should be stored,
+and just initialize it as I did it before, all in one step.
 
-for example, a string.
+But it is important to know about this alternative syntax
 
-So here, if I wanna store this alignment value,
+where you do explicitly set a type
 
-I could create a variable here outside of my class.
+and not rely on type inference
 
-We can also create it inside of the class,
+if you're not initializing the variable with a value.
 
-but for the moment, let's do it outside.
+If you do that, as we're doing it here,
 
-Then give it any name of your choice.
+using the var keyword is recommended,
 
-Like for example, startAlignment.
+because here you should indeed rely
 
-The name is up to you, but just as before with other names,
-
-it should not be separated into multiple words.
-
-Instead, words inside of words
-
-should start with an uppercase character.
-
-But unlike class names, the overall variable name
-
-should start with a lowercase character.
-
-So it should follow this naming pattern,
-
-and the name should describe which kind of value
-
-will be stored in that data container in that variable.
-
-And then we assign the value with an equal sign,
-
-in this case, alignment top left, for example.
-
-So that's how we could define a variable.
-
-We could then add a second variable,
-
-and that is this end variable.
-
-So therefore, I'll name this one endAlignment
-
-and store alignment bottom right in there.
-
-And with those two variables added,
-
-we could use them down there
-
-to assign startAlignment as a value to begin.
-
-And here, endAlignment as a value to end.
-
-Though here, you will notice that I'm now getting an error
-
-that a value of type Null can't be assigned
-
-to a parameter of type AlignmentGeometry.
-
-This is a bit cryptic to understand though.
-
-What does it mean?
-
-Well, variables, when created with the var keyword,
-
-which we're doing here, can actually be reassigned.
-
-Here, I'm assigning an initial value,
-
-but I could then change that value.
-
-For example, here in the build method.
-
-Here, I could set startAlignment to Alignment.center.
-
-That's a core mechanism of variables created with var,
-
-you can reassign them.
-
-Now that's, in the end, where this error is coming from.
-
-This Null part can be confusing,
-
-but it actually also tells us that the const keyword
-
-seems to be the problem,
-
-that we might wanna remove this const keyword.
-
-And here, it's referring to this const keyword
-
-in front of BoxDecoration.
-
-Since if we add const here,
-
-it's also implicitly added to LinearGradient,
-
-and that is the object that takes begin and end.
-
-Since the values of these variables could be changed,
-
-it's not guaranteed to be stable.
-
-It's not guaranteed to be constant.
-
-And that's exactly the kind of problem we're facing here
-
-if we do have const in front of
-
-LinearGradient or BoxDecoration.
-
-We can't tell Dart that it can cache and reuse that value
-
-because actually these variables are not locked in.
-
-They could change potentially,
-
-and therefore reusing this value would be unsafe
-
-because Dart might accidentally reuse an outdated value,
-
-which is why you can't use const here then.
-
-You could add it in front of this list still
-
-since these colors are indeed locked
-
-in place here and hard coded here.
-
-But that's the idea behind variables.
-
-We simply have data containers that store values,
-
-and we can define them once and then use them
-
-multiple times wherever we want later in our code.
-
-As long as that code has access to the variable,
-
-which here in this case is the case.
-
+on Dart's type inference.

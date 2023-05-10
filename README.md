@@ -2,139 +2,205 @@
 
 A new Flutter project.
 
-## Understanding Widgets
+## 05-Using a first widget and passing value to a function 
 
-So what are arguments?
+Now when it comes to the question
 
-Well, functions can be defined
+which widget should be used,
 
-like the main function to take no input values,
+you can also search for Flutter widget catalog
 
-but as you can see in the Flutter source code,
+and you'll find an official documentation page
 
-they can also be defined such
+which gives you various widget categories,
 
-that they do expect some input values,
+which you can browse to learn
 
-and that's the part between those parentheses.
+about some of the most important widgets offered by Flutter.
 
-Here you can specify a list of input values that are needed
+So the different building blocks you can use in your code.
 
-by the function to work correctly.
+For example, to display images, to display text,
 
-Some functions don't need any input, like main,
+and do many other things as well.
 
-other functions do.
+Now, please don't go to this page
 
-And these input values are called parameters or arguments.
+and learn all these widgets by heart now.
 
-Technically, they're called parameters
+That's not how you will learn how to build Flutter apps.
 
-when we talk about them
+Instead, you will learn about all the important widgets
 
-when defining a function
+step-by-step throughout the course, and you will see that
 
-and arguments when we talk about them
+in the end you will always end up using
 
-when calling a function,
+the same 10 or 20 core widgets
 
-but I will simply use these terms interchangeably
+with some occasional niche widgets used
 
-in this course.
+for specific use cases.
 
-So runApp needs one argument, one input value,
+But you will learn how to use them,
 
-to display something on the screen.
+and you will learn which widgets are important
 
-And this should make a lot of sense
+simply by building apps,
 
-because like this, at the moment,
+and simply by following along with this course.
 
-how would runApp know what to display on the screen?
+Nonetheless, it's good to know that this page exists.
 
-Well, the input value it needs
+And here from this page, from the Flutter widget catalog,
 
-is the content that should be shown on the screen.
+we have to use at least two core widgets offered by Flutter
 
-So the user interface,
+to have a basic user interface.
 
-it should show on the screen.
+And the first widget which we want to use for that
 
-And for that, runApp needs a so-called widget
+which we therefore passed to run app
 
-or widget tree as a value
+is the material app widget written like this.
 
-because Flutter user interfaces are built with widgets.
+Capital M at the beginning,
 
-When building a Flutter app,
+and then capital A inside of the word.
 
-you don't use some visual drag-and-drop editor.
+This is one of the widgets provided by Flutter,
 
-Instead, you build your user interface in code
+and we have access to it here because of this import.
 
-by using so-called widgets.
+So the same package that in the end gave us access
 
-You typically combine many widgets with each other.
+to runApp also gives us access
 
-You nest those widgets into each other,
+to all these core widgets like MaterialApp.
 
-as you will see over the next lectures,
+Now you then use a widget in code,
 
-to build a user interface.
+you create a widget, so to say,
 
-And since you end up nesting widgets into each other,
+by adding opening and closing parentheses
 
-you will actually end up with a so-called widget tree
+after the widget name.
 
-where you have some root widget at the top,
+So MaterialApp is the widget name
 
-then maybe a child widget with another child widget,
+and this now creates the widget.
 
-which then may hold multiple child widgets simply depending
+Now this of course looks a bit like calling a function.
 
-on which kind of user interface you're building.
+It looks like what we did with runApp before, right?
 
-And of course, all these words here,
+We also called that like this initially.
 
-all these widgets on this slide
+Now here we're calling MaterialApp.
 
-don't tell you anything just yet,
+And to some extent it is like a function,
 
-but that will of course change
+but it's actually a so-called clause,
 
-over the next lectures and sections.
+or constructor function of a class to be precise.
 
-So Flutter user interfaces are created
+And I'll get back to classes
 
-by combining and nesting widgets.
+and constructor functions later.
 
-For example, by adding a text widget,
+For the moment, it's just important to realize
 
-which is something Flutter gives you
+that we can create a widget like this in our code.
 
-to display text on the screen
+In this case, a built-in widget provided by Flutter.
 
-inside of a button widget to have a button with some text.
+And MaterialApp is a core widget, which you will use
 
-And Flutter provides many built-in widgets,
+in almost all Flutter apps you're going to build,
 
-which you can use in your code,
+because this is the main widget which you use
 
-like buttons, form inputs, layout widgets,
+as a starting point,
 
-but you can also build custom widgets.
+so which you pass to runApp in the end,
 
-And of course, we will also do that actually quite a lot
+because this main widget does a lot of behind the scenes
 
-throughout this course as well.
+set up work for your user interface.
 
-So runApp needs a widget
+So it ensures that the interface can be shown correctly
 
-or a combination of widget,
+on the screen.
 
-a widget tree, as I mentioned.
+It does a lot of important
 
-So of course, the question is which widget,
+behind the scenes configuration stuff.
 
-and how do we add a widget in code?
+On its own it doesn't show anything on the screen, though.
+
+Instead you need to pass another argument
+
+to MaterialApp to show something on the screen.
+
+And that's now really important to understand.
+
+When calling MaterialApp like this,
+
+we are creating such a app widget.
+
+So we're in the end telling Flutter
+
+to display this MaterialApp widget on the screen.
+
+This part of the ui.
+
+So the material app widget thing,
+
+whatever it may be that is being created here,
+
+is the value that's passed to runApp.
+
+So widget is passed as a value to this parameter thing,
+
+this input value that is expected by runApp.
+
+And by the way, I will get back
+
+to what this widget thing here in front
+
+of this app parameter means in the near future.
+
+And that is something you'll see a lot in this course
+
+and you'll do a lot in programming in general.
+
+When you define functions, so custom commands,
+
+or you are using functions defined by other people,
+
+like here where runApp is defined by the Flutter team,
+
+many of those functions will take input values
+
+to work correctly internally.
+
+Here, this app input value is used inside
+
+of that run app function thereafter.
+
+It's not important to understand what exactly happens
+
+with it here, but it is used internally.
+
+So being able to pass input values to functions
+
+so that those functions can then do something
+
+with those input values is a crucial part
+
+of programming in general.
+
+And here it's this MaterialApp widget thing
+
+that's passed as an input value to runApp.
 

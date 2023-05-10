@@ -2,154 +2,226 @@
 
 A new Flutter project.
 
-## 20-Creating Custom Widget
-Now, when working with Flutter,
+## 21- Introducing Variables
+So we learned about custom widgets,
 
-you will create custom widgets all the time.
+a super important feature you're going to use
 
-So it's important that you're able to do this on your own.
+all the time when working with Flutter.
 
-Hence, here's your opportunity to practice this.
+Now there's one thing you can do
 
-I want you to create a separate new widget
+with custom widgets that makes them even more powerful.
 
-for this text part here.
+But before we can explore that thing
 
-This should be outsourced into a separate widget,
+and before we then thereafter can come back
 
-which you could, for example, name StyledText
+to this app and add more features to that,
 
-which you then use
+we have to dive into variables.
 
-in this widget here in the GradientContainer again.
+So what are variables?
 
-Create that custom widget for this StyledText
+Variables are data containers.
 
-as explained in the last lectures and after a short pause,
+And this feature exists
 
-which I give you to pause this video
+in basically all programming languages.
 
-and try this on your own,
+Because it turns out that in all programming languages,
 
-we'll outsource this into a custom widget together.
+you're working a lot with values.
 
-Did you succeed?
+Like also here, where in our styled text,
 
-Let's now do this together.
+we have some text or basically everywhere else,
 
-For that I'll first of all trade a new file
+we have a bunch of widgets and configuration objects
 
-because you learned that you should put your own widgets
+which are of course also all values.
 
-into separate files in that lib folder.
+Now to understand variables,
 
-And I'll name it styled_text
+let me go back to the gradient container here.
 
-because I will add a StyledText widget in there.
+And here, we could say that maybe these alignments,
 
-Styled_text.dart it is therefore.
+which of course also are values,
 
-And then in there, we create a class
+should not be stored here in this part of the code
 
-and I'll name it StyledText.
+which is hidden quite a bit inside of the widget tree.
 
-The name is up to you
+But maybe we wanna define them
 
-but it should follow these conventions
+up here at the beginning of the file
 
-about which you learned.
+so that if we ever want to change these alignments,
 
-And we, of course, extend stateless widget here.
+we can do it right here at the top of the file
 
-Though for this to work, you also must add the import
+without having to dive into our widget tree.
 
-to package:flutter/material.dart as you learned.
+This is of course just a convenience thing in the end,
 
-Now with that set up, we must add that build method
+but the more complex your code and project gets,
 
-by adding override and then Widget build,
+the more little tweaks like this could help.
 
-accepting this context parameter
+To do this, we could cut the value from down there
 
-and returning a widget as you learned.
+and instead store it in such a variable,
 
-And the widget that should be returned here should,
+because variables, as you learned, are data containers.
 
-of course, be this text here.
+In Dart, they are created with help of the var keyword,
 
-So we can cut this from GradientContainer
+then the equal sign operator,
 
-and return this here inside of StyledText.
+the so-called assignment operator,
 
-Now, here I got a bunch of blue squiggly lines
+and then the value that should be stored,
 
-because indeed here we can now add const again
+for example, a string.
 
-as you learned if you hover
+So here, if I wanna store this alignment value,
 
-over these blue squiggly lines, since this can be cached.
+I could create a variable here outside of my class.
 
-This is, by the way, independent from the fact
+We can also create it inside of the class,
 
-whether we add a cons constructor to this widget or not.
+but for the moment, let's do it outside.
 
-This optimization in this widget tree is detached
+Then give it any name of your choice.
 
-from the fact
+Like for example, startAlignment.
 
-if we unlock this widget for being optimized itself.
+The name is up to you, but just as before with other names,
 
-But of course here, we should add a constructor
+it should not be separated into multiple words.
 
-for the same reason as before
+Instead, words inside of words
 
-to forward that key argument about which you learned.
+should start with an uppercase character.
 
-Hence, I create a constructor
+But unlike class names, the overall variable name
 
-by repeating that name of the class.
+should start with a lowercase character.
 
-And then here, opening and closing curly braces
+So it should follow this naming pattern,
 
-to accept a argument named key.
+and the name should describe which kind of value
 
-And with super.key,
+will be stored in that data container in that variable.
 
-we then forward this to StatelessWidget.
+And then we assign the value with an equal sign,
 
-And here we should now also add const
+in this case, alignment top left, for example.
 
-since this is suggested
+So that's how we could define a variable.
 
-to us here to unlock various optimizations by Dart.
+We could then add a second variable,
 
-And with that we have our StyledText widget defined.
+and that is this end variable.
 
-We can now use it in GradientContainer.
+So therefore, I'll name this one endAlignment
 
-There we can type StyledText and use it like this.
+and store alignment bottom right in there.
 
-But of course to unlock it here, we also must add an import
+And with those two variables added,
 
-in the gradient_container.dart file.
+we could use them down there
 
-Here we must import from our own package, in my case,
+to assign startAlignment as a value to begin.
 
-named basics, in your case maybe named first_app
+And here, endAlignment as a value to end.
 
-or anything else, whatever you named your project.
+Though here, you will notice that I'm now getting an error
 
-And then here, I wanna import
+that a value of type Null can't be assigned
 
-from the styled_text.dart file.
+to a parameter of type AlignmentGeometry.
 
-With that, with this import added,
+This is a bit cryptic to understand though.
 
-this StyledText widget down here is found.
+What does it mean?
 
-So this here works and if I save everything
+Well, variables, when created with the var keyword,
 
-and force a reload, my application still works.
+which we're doing here, can actually be reassigned.
 
-And this was a nice practice for creating your own widgets.
+Here, I'm assigning an initial value,
+
+but I could then change that value.
+
+For example, here in the build method.
+
+Here, I could set startAlignment to Alignment.center.
+
+That's a core mechanism of variables created with var,
+
+you can reassign them.
+
+Now that's, in the end, where this error is coming from.
+
+This Null part can be confusing,
+
+but it actually also tells us that the const keyword
+
+seems to be the problem,
+
+that we might wanna remove this const keyword.
+
+And here, it's referring to this const keyword
+
+in front of BoxDecoration.
+
+Since if we add const here,
+
+it's also implicitly added to LinearGradient,
+
+and that is the object that takes begin and end.
+
+Since the values of these variables could be changed,
+
+it's not guaranteed to be stable.
+
+It's not guaranteed to be constant.
+
+And that's exactly the kind of problem we're facing here
+
+if we do have const in front of
+
+LinearGradient or BoxDecoration.
+
+We can't tell Dart that it can cache and reuse that value
+
+because actually these variables are not locked in.
+
+They could change potentially,
+
+and therefore reusing this value would be unsafe
+
+because Dart might accidentally reuse an outdated value,
+
+which is why you can't use const here then.
+
+You could add it in front of this list still
+
+since these colors are indeed locked
+
+in place here and hard coded here.
+
+But that's the idea behind variables.
+
+We simply have data containers that store values,
+
+and we can define them once and then use them
+
+multiple times wherever we want later in our code.
+
+As long as that code has access to the variable,
+
+which here in this case is the case.
 

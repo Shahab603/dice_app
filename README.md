@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-## 15 - Practice Styling Text
+## 16 - Onwards to Custom: Why Do you need them?
 So now that we get started
 
 with some styling options,
@@ -144,4 +144,3 @@ because text often needs to be styled in a certain way
 but that stay afraid for the moment.
 
 Now it's time to dive into building custom widgets.
-

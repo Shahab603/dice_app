@@ -2,205 +2,193 @@
 
 A new Flutter project.
 
-## 05-Using a first widget and passing value to a function 
+## 06-Positional and Named Arguments
 
-Now when it comes to the question
+Now as mentioned,
 
-which widget should be used,
+MaterialApp then also needs a input value though,
 
-you can also search for Flutter widget catalog
+because like this,
 
-and you'll find an official documentation page
+this MaterialApp thing
 
-which gives you various widget categories,
+doesn't provide too much information to Flutter
 
-which you can browse to learn
+and to runApp
 
-about some of the most important widgets offered by Flutter.
+regarding what should be displayed on the screen.
 
-So the different building blocks you can use in your code.
+Instead, you must pass more information to MaterialApp
 
-For example, to display images, to display text,
+so that that information
 
-and do many other things as well.
+will then indirectly also be picked up by Flutter.
 
-Now, please don't go to this page
+And for that, between those parentheses here,
 
-and learn all these widgets by heart now.
+which belong to MaterialApp,
 
-That's not how you will learn how to build Flutter apps.
+you must provide some input value to MaterialApp.
 
-Instead, you will learn about all the important widgets
+And that input value is now all about defining
 
-step-by-step throughout the course, and you will see that
+what should be shown inside of that app UI
 
-in the end you will always end up using
+that will be displayed on the screen.
 
-the same 10 or 20 core widgets
+And for this, MaterialApp also takes a input value,
 
-with some occasional niche widgets used
+a parameter, though not a parameter
 
-for specific use cases.
+that would be defined like this
 
-But you will learn how to use them,
+as it's the case for runApp,
 
-and you will learn which widgets are important
+a so-called positional parameter or positional argument.
 
-simply by building apps,
+Because here for runApp,
 
-and simply by following along with this course.
+the first value you pass to runApp
 
-Nonetheless, it's good to know that this page exists.
+is used as a value
 
-And here from this page, from the Flutter widget catalog,
+for the first parameter in this parameter list.
 
-we have to use at least two core widgets offered by Flutter
+And, of course, runApp only takes one parameter,
 
-to have a basic user interface.
+but other functions
 
-And the first widget which we want to use for that
+could also take multiple comma-separated parameters
 
-which we therefore passed to run app
+and then values would be passed in and matched by position.
 
-is the material app widget written like this.
+So the first value provided to a function
 
-Capital M at the beginning,
+when calling that function
 
-and then capital A inside of the word.
+would be mapped to the first parameter,
 
-This is one of the widgets provided by Flutter,
+the second value to the second parameter, and so on.
 
-and we have access to it here because of this import.
+That's one way of accepting
 
-So the same package that in the end gave us access
+and receiving parameters in Dart.
 
-to runApp also gives us access
+But an alternative way,
 
-to all these core widgets like MaterialApp.
+which you will also learn in greater detail later,
 
-Now you then use a widget in code,
+is to define functions that take so-called named parameters
 
-you create a widget, so to say,
+or named arguments.
 
-by adding opening and closing parentheses
+When defining the function,
 
-after the widget name.
+you wrap those parameters between curly braces.
 
-So MaterialApp is the widget name
+And, again, that is also something you will learn about
 
-and this now creates the widget.
+later in the course in greater detail
 
-Now this of course looks a bit like calling a function.
+and which you will do a lot throughout the course.
 
-It looks like what we did with runApp before, right?
+But in the code where you define a function,
 
-We also called that like this initially.
+you would wrap those named parameters between curly braces.
 
-Now here we're calling MaterialApp.
+And the difference
 
-And to some extent it is like a function,
+compared to positional parameters or arguments
 
-but it's actually a so-called clause,
+is that now it's not important
 
-or constructor function of a class to be precise.
+in which order you pass values to the function
 
-And I'll get back to classes
+when you call it,
 
-and constructor functions later.
+instead you identify those parameters by their name.
 
-For the moment, it's just important to realize
+And that's exactly how MaterialApp
 
-that we can create a widget like this in our code.
+is implemented internally.
 
-In this case, a built-in widget provided by Flutter.
+In the end there, you have a long list of named parameters,
 
-And MaterialApp is a core widget, which you will use
+as you can tell by this opening curly brace
 
-in almost all Flutter apps you're going to build,
+and that closing curly brace thereafter
 
-because this is the main widget which you use
+that wrap all those parameters
 
-as a starting point,
+and those parameters are then simply identified by name.
 
-so which you pass to runApp in the end,
+Now regarding super and this,
 
-because this main widget does a lot of behind the scenes
+these are all things we'll learn about
 
-set up work for your user interface.
+throughout the course.
 
-So it ensures that the interface can be shown correctly
+But this MaterialApp thing
 
-on the screen.
+which you can execute,
 
-It does a lot of important
+in the end, is defined by using named arguments internally.
 
-behind the scenes configuration stuff.
+And as a developer, it's up to you
 
-On its own it doesn't show anything on the screen, though.
+whether you want to use positional or named arguments
 
-Instead you need to pass another argument
+when defining a function.
 
-to MaterialApp to show something on the screen.
+When using it, you of course have to use
 
-And that's now really important to understand.
+what has been defined in there.
 
-When calling MaterialApp like this,
+And here for MaterialApp,
 
-we are creating such a app widget.
+it's this home named argument
 
-So we're in the end telling Flutter
+that has to be set to display something on the screen.
 
-to display this MaterialApp widget on the screen.
+And if you type here,
 
-This part of the ui.
+you, of course, also get suggestions.
 
-So the material app widget thing,
+Even without typing, if you press Control + Space,
 
-whatever it may be that is being created here,
+you'll get a list of suggestions.
 
-is the value that's passed to runApp.
+And here you in the end see all these named arguments
 
-So widget is passed as a value to this parameter thing,
+that you could possibly set,
 
-this input value that is expected by runApp.
+though many of them are, of course,
 
-And by the way, I will get back
+for niche settings or configurations.
 
-to what this widget thing here in front
+The home named argument is important though,
 
-of this app parameter means in the near future.
+because that's the main argument you must set
 
-And that is something you'll see a lot in this course
+for MaterialApp to define which kind of widget,
 
-and you'll do a lot in programming in general.
+which kind of UI element
 
-When you define functions, so custom commands,
+should be displayed inside of that app UI
 
-or you are using functions defined by other people,
+that's passed to runApp.
 
-like here where runApp is defined by the Flutter team,
+And here I wanna display some text
 
-many of those functions will take input values
+by using the built-in Text widget,
 
-to work correctly internally.
+which is written like this,
 
-Here, this app input value is used inside
+and which is also executed like a function.
 
-of that run app function thereafter.
+Just like MaterialApp,
 
-It's not important to understand what exactly happens
+Text is coming from Flutter
 
-with it here, but it is used internally.
-
-So being able to pass input values to functions
-
-so that those functions can then do something
-
-with those input values is a crucial part
-
-of programming in general.
-
-And here it's this MaterialApp widget thing
-
-that's passed as an input value to runApp.
+and provided by the Flutter team.
 

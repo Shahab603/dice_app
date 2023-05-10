@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp());
+  runApp(const MaterialApp(
+    home: Text('This is testing app'),
+  ));
 }

@@ -2,99 +2,255 @@
 
 A new Flutter project.
 
-## 22- Variable Type - Combining Two Key Concepts
-Now variables actually also have types.
+## 23 - Final & Const - Special Kinds of Variables
+Now there is more
 
-Here I'm creating two variables,
+you should know about variables.
 
-and in this case here, Dart is able to infer their types.
+For example, you sometimes have variables
 
-If you hover over your variable names, you see the type here
+that never change.
 
-and Dart knows which type will be stored in this variable
+Of course, technically it's called variables
 
-because it simply takes a look
+because the value is variable,
 
-at the value you are initially assigning to the variable
+but in the end it's all about
 
-and uses that value's type, in this case here Alignment,
+having data containers,
 
-as a type for the variable.
+and those data containers
 
-If you would not assign a value initially here
+could also be set once
 
-and you instead would only set one at a later point of time,
+and never change after.
 
-like this, for example, the inferred type would be dynamic,
+For example here,
 
-which is a special type in Dart
+I never assigned new values
 
-that in the end just means that Dart knows nothing
+to start and end alignment.
 
-about the type of this variable
+And if you know that this is the case,
 
-and it will indeed accept all value types.
+it's recommended that you use
 
-Typically, you want to avoid this
+final instead of var.
 
-because that can lead to bugs in your application
+Final is another built-in keyword,
 
-because without type information,
+which simply means that this data container
 
-Dart can't ensure that you're not accidentally using
+will never receive a new value.
 
-the wrong type in the wrong place.
+And whilst you could of course stick to var,
 
-And therefore, in such cases,
+it's always a good practice to be as restrictive
 
-where you don't assign a value initially,
+as possible so that you never
 
-you should replace the var keyword with the name of the type
+accidentally reassign a value here.
 
-that will be stored in that variable.
+Of course, you are the only one working
 
-Here, for example, Alignment.
+on this project here probably,
 
-With that, Dart would have more type information.
+but in bigger teams
 
-Though of course here we would still get an error
+with multiple developers working on the code,
 
-because we tell Dart that we want to store a value
+you want to be as restrictive as possible
 
-of type Alignment in this variable
+to make sure that some colleague of you
 
-but initially we store no value in here.
+is not accidentally overriding
 
-We would have to add a question mark after Alignment
+one of your variable values
 
-to make it clear that startAlignment
+somewhere else in the overall project code.
 
-is either of type Alignment or Null,
+That's why the final keyword exists.
 
-so that it's basically optional, whether it's set or not.
+Now here, I'm of course getting some
 
-So a Null value would be allowed here.
+blue squiggly lines
 
-Now this would lead to more errors down here
+that I should use const
 
-because begin actually doesn't want a Null value
+instead of final in the end.
 
-and therefore I'll get rid of that
+And indeed that's another usage
 
-and just initialize it as I did it before, all in one step.
+of cons which we haven't seen up to this point.
 
-But it is important to know about this alternative syntax
+You can create so-called constant variables
 
-where you do explicitly set a type
+or constant data containers.
 
-and not rely on type inference
+You could say.
 
-if you're not initializing the variable with a value.
+It's almost the same as final
 
-If you do that, as we're doing it here,
+because const also makes sure
 
-using the var keyword is recommended,
+that you can't reassign those variables.
 
-because here you should indeed rely
+But unlike final, it provides
 
-on Dart's type inference.
+some extra information to Dart.
+
+When using const
+
+here in front of a variable name.
+
+So on the left side of the equal sign
+
+in the end,
+
+you are telling Dart that the value that's stored
+
+in here is a so-called compiled time constant,
+
+which means it's simply locked in
+
+at the point of time this code is compiled.
+
+Now that's not necessarily always the case.
+
+You could for example, also have some code
+
+where you are maybe calling a function,
+
+getAlignment which doesn't exist in this project,
+
+but which could exist and which then
+
+behind the scenes could dynamically
+
+calculate the desired alignment.
+
+You could definitely have something
+
+like this in your application,
+
+and if that's the case,
+
+that of course means that dysfunction
+
+must be executed when the app runs
+
+to get the actual alignment value.
+
+In that case, it might still be final,
+
+you don't reassign the variable thereafter,
+
+but it's not compiled time constant
+
+because the value that might be returned
+
+by getAlignment is not known
+
+at the point of time
+
+when this code is compiled yet.
+
+Instead, it's only known once the code executed.
+
+And here that's different for alignment top-left.
+
+This indeed is locked in at the point of time
+
+this code is compiled.
+
+Top-left is clearly defined
+
+to the top-left corner of the device,
+
+so to certain X and Y coordinate values,
+
+and therefore you can use const to tell Dart
+
+that this is not dynamically derived at runtime,
+
+but can be locked in and set at compilation time,
+
+and this is another potential
+
+performance improvement
+
+because if some value can be locked in
+
+at the point of time the code is compiled,
+
+this code doesn't have to execute
+
+when the app executes.
+
+Instead, this locked in,
+
+and internally saved value can be used
+
+by Dart when this code is about to execute.
+
+So it's some internal performance optimization,
+
+and therefore here when defining variables,
+
+you should also use const instead of final
+
+whenever it makes sense.
+
+So whenever you have such a compiled time
+
+constant value.
+
+And just as before, the code editor will simply
+
+tell you when you have such an opportunity.
+
+By the way, with that set to const,
+
+you can also re-add cons down there
+
+in front of box decoration,
+
+because now that this is const instead of var,
+
+you are guarantee that it will
+
+never be reassigned and therefore
+
+you can use cons here
+
+because this code is now no longer
+
+potentially variable
+
+because it can't be set in any other place.
+
+It can only be set once,
+
+and therefore here we can unlock
+
+this potential optimization
+
+of the box decoration object again.
+
+And in case this is all not 100% clear
+
+just yet,
+
+you will see variables and final values,
+
+and constants over and over again
+
+throughout this course.
+
+But it is important to be aware
+
+of these concepts right now already,
+
+because we'll use more variables
+
+in the next lectures.

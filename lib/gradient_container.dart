@@ -1,8 +1,8 @@
 import './styled_text.dart';
 import 'package:flutter/material.dart';
 
-var startAlignment = Alignment.topLeft;
-var endAlignment = Alignment.bottomRight;
+const startAlignment = Alignment.topLeft;
+const endAlignment = Alignment.bottomRight;
 
 class GradientContainer extends StatelessWidget {
   //the first line is the procedure or the second line for constructing key for an inherited class in this case the GradientContainer inherits StatlessWidget
@@ -13,9 +13,9 @@ class GradientContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: const [
+          colors: [
             Color.fromARGB(255, 26, 2, 80),
             Color.fromARGB(255, 45, 7, 98)
           ],

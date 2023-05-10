@@ -2,383 +2,271 @@
 
 A new Flutter project.
 
-## 18 - Building Custom Widgets
-So now that we know
+## 18 - Working with Constructor Functions
+So we added our own custom widget.
 
-that it's all about objects
+Now, before we continue
 
-and that those objects are built based on classes,
+there are two things I want to do with that.
 
-the question is which code do we have to write here
+For one, we got these blue squiggly lines
 
-to create our own widget class?
+and the question's,
 
-And the answer to that
+where's that coming from?
 
-is that you use the class keywords to tell Dart
+Well, if we hover over it,
 
-that you are about to create a class.
+we see that constructors for public widgets
 
-And then any name of your choice, like GradientContainer,
+should have unnamed key parameter.
 
-the name is up to you, but it should follow certain rules.
+So what's that about?
 
-For example, it should start with an uppercase character.
+In the end, your own widget classes,
 
-And if it consists of multiple words as this name here does
+so classes that extend StatelessWidget
 
-these words must not be separated by a white space or a dash
+or some other class which you'll see later
 
-but instead you should separate them with an underscore,
+should have a constructive function added to them.
 
-or way better and actually recommended, like this.
+I mentioned that typically you don't need to add one,
 
-It's all one long word, but the words inside of the word
+you get one automatically.
 
-start with another capital character.
+But if you want to add some extra settings
 
-So that's then the name of your class.
+or some extra configuration
 
-And as mentioned, it is up to you.
+at the point of time is widget it is created
 
-It should just follow some general rules
+you have to add your own constructor function.
 
-regarding how the name is written
+And adding a constructor function is quite straightforward.
 
-and it should also describe what the class is about.
+You simply repeat the name of your class.
 
-So which kind of optic will be created.
+So in my case, gradient container
 
-And here my idea is to create a container widget
+and add opening and closing parentheses thereafter.
 
-that will come with a gradient already applied to it.
+Now you could add opening and closing curly braces.
 
-So that name sounds quite fitting.
+So you add this like a method just without a return value.
 
-Now you could create a class like this
+But other than that, you added like a method.
 
-because in Dart you can also create classes
+And then here you could do some initialization work.
 
-that are not widgets.
+This, by the way is a comment
 
-And in that case you would probably be done at that case.
+which can be added with two forward slashes
 
-You could add curly braces and add your class logic
+and which allows you to add some comment text,
 
-between those curly braces, just as you add function logic
+which will not be interpreted as code,
 
-between the curly braces of a custom function.
+but which will be ignored,
 
-But since this should become a widget
+but which can help our developers understand your code.
 
-you actually have to add more in front of these curly braces
+So this is how you could add a constructor
 
-because classes can extend our classes,
+and do some initialization work.
 
-they can inherit features
+Though often you won't even need to add these curly braces.
 
-and data and logic from our classes.
+Instead here to get rid of these blue squiggly lines
 
-And that's done by adding the extends keyword,
+you just have to accept a special named parameter
 
-another keyword built into Dart.
+as part of your gradient container.
 
-And then the name of the class
+And you do that by adding opening and closing curly braces.
 
-from which you want to inherit.
+This is how in any function you can accept named arguments.
 
-And here that's StatelessWidget written like this,
+Positional arguments are accepted
 
-which is a class that comes from the Flutter framework.
+by simply adding a comma separated list of parameters.
 
-And that is available here because of this import
+Named arguments or parameters are accepted
 
-which we added at the top at the beginning of this section.
+by using curly braces around that list.
 
-So StatelessWidget is the class
+And then here, for example,
 
-from which you want to inherit.
+A and B would be the names
 
-And inheriting from that widget does a couple of things.
+of the arguments you want to accept.
 
-Most importantly, it automatically behind the scenes
+But here it's a special argument named key,
 
-adds a lot of logic and data to this class here
+which you should accept.
 
-without you writing anything between these curly braces.
+And this key argument in the end needs to be forwarded
 
-It adds a lot of data and logic that is required by Flutter
+to StatelessWidget.
 
-in order to use this as a widget and add this to a UI.
+So this widget from which we are inheriting,
 
-But in addition to adding things behind the scenes,
+which we are extending,
 
-extending from StatelessWidget
+wants a key argument and that's why your class
 
-actually also forces you to add something to your class.
+should accept such a key argument as well
 
-And that's why I'm getting an error here at the moment.
+and forward it to StatelessWidget.
 
-Because at the moment I'm not implementing everything
+Now two forwarded, you have two main options.
 
-in my own class that I should implement.
+You can add a colon after your constructor function name
 
-Most importantly, I'm missing a method called build.
+and the parenthesis,
 
-So therefore, to correctly extend this widget
+and then thereafter you can do
 
-you should add a new method here called build
+some variable initialization work,
 
-with parentheses and opening and closing curly braces.
+which sounds strange also
 
-So just as you would define a function,
+because we haven't learned a lot about variables yet.
 
-but now inside of a class.
+But here you can reach out to the parent class
 
-And you can add functions to classes.
+from which you are inheriting
 
-We then call these functions typically methods,
+by using another special keyword built into Dart,
 
-but it's in the end just a function added to a class.
+the super keyword executed like a function effectively.
 
-So in the end, bound to that class.
+This is calling the constructor function
 
-And this build method here must return a widget.
+of the parent class then
 
-Therefore, you have to add widget in front of build
+and here you must set the named key argument
 
-because as I mentioned earlier already,
+to your key here,
 
-the thing in front of your function name
+which is why I'm repeating key.
 
-is the return value type of your function.
+This key here is referring to my named argument called Key.
 
-Now thus far, we haven't created any functions yet
+The first key in front of the colon is referring
 
-that would return anything, but that's going to change soon.
+to a named argument called Key in the super class
 
-Now you also should add an annotation
+in the StatelessWidget class.
 
-in front of your build method, and that's @override.
+This would be one way of forwarding this key argument,
 
-This is technically not required
+which is what you should do here.
 
-but you should indeed add it because this makes it clear
+But since you need to do this quite often,
 
-that you are in the end overriding a method
+basically for all your widget classes,
 
-that is expected by StatelessWidget.
+and this is a bit verbose if you write it like this,
 
-It's simply some extra metadata
+Dart also gives you a shortcut.
 
-or annotation added to this method.
+You can simply write super dot key here
 
-The more important adjustment that also must be made
+and this will accept a named argument called Key
 
-in addition to adding the type and @override
+and automatically forward it to the superclass,
 
-is that build also must accept a parameter.
+so to StatelessWidget under that same name,
 
-A parameter, which you should call context or a ctx,
+so also under the name key.
 
-though the exact name is up to you.
+And that is something you should do here.
 
-But this is required because indeed this build method
+Now, I also got some more blue squiggly lines here
 
-will be executed for you by Flutter.
+where in the end I learned
 
-Flutter will call this build method
+that I should turn this into a const constructor
 
-once it finds your widget inside of some other widget
+by adding const in front of it.
 
-or passed to the runApp function.
+And this is a place where we have used const before.
 
-So basically, whenever Flutter detects your widget
+We only used it in front of values,
 
-in a widget tree, it will call this build method.
+but in the end when we used it in front of values,
 
-And this build method will then automatically receive
+we took advantage of constructor functions
 
-by Flutter a value for this context parameter.
+that had this const annotation internally.
 
-Now, for the moment, this context parameter doesn't matter.
+When defining your own classes
 
-You will see it an action later in this course instead.
+with your own constructor functions
 
-For the moment, you can simply think of context
+you often can add const in front of them
 
-as a metadata object that contains some useful information
+to tell Dart that this in the end
 
-about this widget in the overall widget tree.
+is a class that can be optimized
 
-For example, some information
+that can be stored in memory,
 
-about where this widget is positioned
+such that it is reused
 
-in the overall widget tree.
+as I explained a couple of lectures ago
 
-Now between those build method curly braces
+in this section already.
 
-you now have to add the body of this function.
+So with const in front of your constructor function
 
-And here you have to do one important thing.
+you basically unlock,
 
-You must return a widget
+that const is then used
 
-because widget is the return type of build.
+in front of your class when it's used as a value.
 
-Now up to this point, in all the examples I just showed you
+So because of const at adhere,
 
-from time to time, you always saw void.
+we can also add const here.
 
-That's of course also what we have
+Or since scaffold and material app actually also
 
-in front of the main function.
+are defined to be optimizable with const
 
-And void is also the return value of a function.
+you can even add const here
 
-But void is a special value built into Dart
+in front of material app,
 
-which simply means there is nothing to be returned.
+using that optimization technique
 
-So the function should not return any value.
+I mentioned before in the course.
 
-And for build that's different.
+Now here, just also with your class unlock
 
-Build should return a widget.
+to be optimizable.
 
-Now, how do you return a value in Dart?
+And as always,
 
-Well, inside of the function
+the code editor will simply tell you
 
-or method that should return a value,
+when you have an opportunity to unlock such optimizations,
 
-you use the return keyword
+in this case by telling us that we should add const here,
 
-and then thereafter the value you want to return.
+which is why I'm doing that.
 
-And when a function or method returns a value
+So that was one thing I wanted to take a look at,
 
-with that return keyword, that value will be available
+constructor functions,
 
-in the place where the function was called
+which is a feature we'll later also use for other purposes,
 
-and it can then be used there.
+but which we here needed to add
 
-Now in case of the build method, as mentioned before,
+to make sure that this value,
 
-it will be Flutter that calls this method for you
+which is wanted by the parent class is forwarded correctly
 
-behind the scenes when it renders the user interface.
-
-And Flutter will then take the widget returned by build
-
-and make sure that it's reflected on the user interface.
-
-So by using return here in this build method
-
-you ensure that flatter gets access to the widget
-
-or to the combination of widgets you wanna store
-
-in your own custom widget here,
-
-because custom widgets in the end
-
-are all about storing combinations
-
-of other widgets and configurations.
-
-So here in this build method
-
-you return the value that will be used by Flutter.
-
-For example, some text.
-
-Though of course here,
-
-it's not some text that's wanted but a widget.
-
-And therefore here, instead of returning text
-
-we now go to our main widget tree
-
-and select the part of that tree that we wanna outsource.
-
-In my case, the container widget
-
-with all its configuration and child widget.
-
-And we cut that from here
-
-and return that in our own widget instead
-
-in the build method, after the return keyword, like this.
-
-Container in the end is of type widget.
-
-And therefore, now here Dart is happy
-
-because build does return a widget.
-
-So that's the first step.
-
-I got some blue squiggly lines here.
-
-For the moment, we'll ignore them.
-
-I'll get back to that soon. But that's the first step.
-
-As the next step, we can now use our own custom widget here
-
-in our main widget tree, which we pass to runApp.
-
-And for that we simply use our widget with its name,
-
-in my case, GradientContainer,
-
-and add parenthesis thereafter.
-
-And this calls the structor function of this class,
-
-which in this case is not a function we added explicitly.
-
-I'll come back to constructor functions in just a second.
-
-But instead, for the moment
-
-we just call a constructor function
-
-that's automatically added to all classes.
-
-So even if you don't add
-
-your own constructor function explicitly,
-
-which you can do but which we're not doing here,
-
-you get one automatically by Dart.
-
-And with that, if we save everything and force a reload,
-
-this app looks the way it did before
-
-because of course we haven't added any new UI elements
-
-but the fact that it looks like before
-
-and we don't have an error here shows us
-
-that outsourcing this code into a custom widget worked.
-
-And this was a crucial step
-
-because you will work with custom widgets all the time
-
-when working with Dart and Flutter.
-
-You will see it all the time in this course
-
-and you will need this feature all the time
-
-in your own projects.
+and to unlock this potential optimization.

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 
 class GradientContainer extends StatelessWidget {
+  //the first line is the procedure or the second line for constructing key for an inherited class in this case the GradientContainer inherits StatlessWidget
+
+  // const GradientContainer({key}): super(key:key);
+  const GradientContainer({super.key});
+
   
 
   @override
@@ -32,7 +37,7 @@ class GradientContainer extends StatelessWidget {
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: GradientContainer(),

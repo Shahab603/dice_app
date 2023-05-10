@@ -2,255 +2,431 @@
 
 A new Flutter project.
 
-## 23 - Final & Const - Special Kinds of Variables
-Now there is more
+## 24 - Instance Variables (Propoerties) & Configurable Widgets
+So now that we learned about variables
 
-you should know about variables.
+let's use this variables feature to make some
 
-For example, you sometimes have variables
+of our code more reusable.
 
-that never change.
+Like for example, the StyledText widget.
 
-Of course, technically it's called variables
+We created a custom widget here,
 
-because the value is variable,
+so that we have this reusable StyledText.
 
-but in the end it's all about
+But at the moment,
 
-having data containers,
+this is only partially reusable if we're honest,
 
-and those data containers
+because Hello World! is hard-coded
 
-could also be set once
+in this code snippet here.
 
-and never change after.
+So whenever we use StyledText anywhere in our application,
 
-For example here,
+it will always output Hello World!.
 
-I never assigned new values
+Now the idea behind this custom widget,
 
-to start and end alignment.
+is probably that we want to be able to reuse
 
-And if you know that this is the case,
+this configuration for this text,
 
-it's recommended that you use
+so the color and the fontSize,
 
-final instead of var.
+but the text itself should be dynamic.
 
-Final is another built-in keyword,
+Put in other words, it would be better
 
-which simply means that this data container
+if in gradient_container where we use StyledText,
 
-will never receive a new value.
+we could pass the text to StyledText
 
-And whilst you could of course stick to var,
+so that this can still be set
 
-it's always a good practice to be as restrictive
+in the place where we want to use our custom widget,
 
-as possible so that you never
+instead of having it locked into our custom widget.
 
-accidentally reassign a value here.
+And that's of course a super common use case,
 
-Of course, you are the only one working
+because most of your widgets should be reusable,
 
-on this project here probably,
+and should be flexible, and should be able to receive data
 
-but in bigger teams
+from outside like here, where we pass data
 
-with multiple developers working on the code,
+into StyledText from inside the gradient_container widget.
 
-you want to be as restrictive as possible
+So how can we make our own custom widget reusable then?
 
-to make sure that some colleague of you
+With help of the constructor function.
 
-is not accidentally overriding
+Because I mentioned before that here when you use a class,
 
-one of your variable values
+your own one or one provided by Flutter doesn't matter,
 
-somewhere else in the overall project code.
+with parenthesis like this, which is how you have to use it
 
-That's why the final keyword exists.
+in order to turn it into an object,
 
-Now here, I'm of course getting some
+you're calling the constructor function of that class.
 
-blue squiggly lines
+You get one automatically if your class doesn't have one.
 
-that I should use const
+Otherwise, your own constructor function is called.
 
-instead of final in the end.
+And since this is just a constructor function
 
-And indeed that's another usage
+being called here, if we want to be able to pass input
 
-of cons which we haven't seen up to this point.
+values to that constructor function,
 
-You can create so-called constant variables
+we have to accept them here.
 
-or constant data containers.
+We are actually already accepting this named key argument
 
-You could say.
+because we had to, to forward it to StatelessWidget,
 
-It's almost the same as final
+but we can accept more than just that key.
 
-because const also makes sure
+Either more named arguments by adding commas here,
 
-that you can't reassign those variables.
+and adding all the named arguments that we want to accept
 
-But unlike final, it provides
+between these curly braces,
 
-some extra information to Dart.
+or, in addition to these named arguments,
 
-When using const
+all the positional arguments before those curly braces.
 
-here in front of a variable name.
+So for example, here we could accept the text.
 
-So on the left side of the equal sign
+We then should also add a type annotation here,
 
-in the end,
+to make it clear which type of value this should be.
 
-you are telling Dart that the value that's stored
+Otherwise, it's dynamic,
 
-in here is a so-called compiled time constant,
+and we typically wanna avoid that as you learned.
 
-which means it's simply locked in
+And here it would be some string, which we want some text.
 
-at the point of time this code is compiled.
+And with that, we now are able to pass
 
-Now that's not necessarily always the case.
+some text to StyledText.
 
-You could for example, also have some code
+This works.
 
-where you are maybe calling a function,
+However, with that, we are not using this text in here.
 
-getAlignment which doesn't exist in this project,
+We are accepting the text here, we're passing some text
 
-but which could exist and which then
+to StyledText, but this text argument
 
-behind the scenes could dynamically
+which we are accepting in our constructor function,
 
-calculate the desired alignment.
+is now not being used here.
 
-You could definitely have something
+Instead, we still have the hard-coded
 
-like this in your application,
+Hello World! down there.
 
-and if that's the case,
+So how can we use this argument?
 
-that of course means that dysfunction
+Not by using its name here.
 
-must be executed when the app runs
+If we try to do that, and we use the name text down here,
 
-to get the actual alignment value.
+we get an error.
 
-In that case, it might still be final,
+We get an error because this argument,
 
-you don't reassign the variable thereafter,
+which we accept in the constructor function,
 
-but it's not compiled time constant
+is not magically available in some other method
 
-because the value that might be returned
+of the class.
 
-by getAlignment is not known
+These two things are detached from each other,
 
-at the point of time
+even though they're in the same class.
 
-when this code is compiled yet.
+This is just how that works.
 
-Instead, it's only known once the code executed.
+Instead, what we have to do,
 
-And here that's different for alignment top-left.
+is we have to add a so-called class variable,
 
-This indeed is locked in at the point of time
+a so-called property to this class.
 
-this code is compiled.
+So a variable just like the variables we added before,
 
-Top-left is clearly defined
+but now not outside of a class,
 
-to the top-left corner of the device,
+but instead inside of the class to which they should belong.
 
-so to certain X and Y coordinate values,
+So here for example, a variable called outputText,
 
-and therefore you can use const to tell Dart
+or just text, it can be the same name as this argument.
 
-that this is not dynamically derived at runtime,
+That's no problem.
 
-but can be locked in and set at compilation time,
+So we can add this and if we don't set it to a value,
 
-and this is another potential
+as you learned, you should instead define
 
-performance improvement
+the value type here instead of using var.
 
-because if some value can be locked in
+So here, I'm just writing String text.
 
-at the point of time the code is compiled,
+And with that we added a variable to this class,
 
-this code doesn't have to execute
+and this variable is now available in all the methods.
 
-when the app executes.
+Of course, I'm still getting an error down here,
 
-Instead, this locked in,
+but here, the error is now actually
 
-and internally saved value can be used
+a different one than before.
 
-by Dart when this code is about to execute.
+If I remove this text variable,
 
-So it's some internal performance optimization,
+and we take a look at this error,
 
-and therefore here when defining variables,
+we see that now it doesn't even find anything called text,
 
-you should also use const instead of final
+which makes sense because as mentioned,
 
-whenever it makes sense.
+there is nothing named text.
 
-So whenever you have such a compiled time
+This argument here doesn't count,
 
-constant value.
+because the constructor function,
 
-And just as before, the code editor will simply
+and this method is not connected.
 
-tell you when you have such an opportunity.
+If I add this variable here,
 
-By the way, with that set to const,
+I get a different error.
 
-you can also re-add cons down there
+It's no longer saying that "Text is not known."
 
-in front of box decoration,
+Instead it's complaining about some other things here.
 
-because now that this is const instead of var,
+The reason for that is that now we do have this variable,
 
-you are guarantee that it will
+but in the end, this variable is still not set
 
-never be reassigned and therefore
+to the value we receive as a argument here.
 
-you can use cons here
+To do this, we got two main ways.
 
-because this code is now no longer
+We can again add this colon here,
 
-potentially variable
+after our argument list,
 
-because it can't be set in any other place.
+and then, here, we could refer
 
-It can only be set once,
+to this text variable by its name,
 
-and therefore here we can unlock
+and set it equal to this text argument we're getting here.
 
-this potential optimization
+So text = text might look a bit strange,
 
-of the box decoration object again.
+but the first text here refers to the text variable.
 
-And in case this is all not 100% clear
+The second text here refers to the text argument.
 
-just yet,
+So if I use different names here,
 
-you will see variables and final values,
+like outputText here and here, this becomes clearer,
 
-and constants over and over again
+and I would also have to use it down here.
 
-throughout this course.
+So now we would be setting our text
 
-But it is important to be aware
+to this argument which we receive.
 
-of these concepts right now already,
+However, just as before with super,
 
-because we'll use more variables
+this is unnecessarily verbose,
 
-in the next lectures.
+and therefore Dart gives us a shortcut,
+
+because this is a very common pattern
+
+that you receive a value on an argument,
+
+and you wanna store that in a variable
+
+that belongs to the class,
+
+you can replace this string part here
+
+with this dot, so that this says this.text.
+
+Now, you just must make sure that your variable
+
+is also called text.
+
+And also down here of course.
+
+This is simply a shortcut,
+
+which looks for a variable called text.
+
+So this variable here, and sets it equal
+
+to the argument value that is received here.
+
+So in this case, the first argument that's received
+
+by this constructor function.
+
+This keyword is another keyword provided by Dart,
+
+and this is a keyword that's used inside of classes,
+
+to refer to the class itself or to refer to the object
+
+that will be built based on the class.
+
+And we can use it here to basically tell Dart,
+
+"That we want to access the text variable
+
+that is defined in this class", so to say.
+
+Now, typically in Dart, you don't need to use this.
+
+If you just use the name of a class variable,
+
+as we're doing it down here in build,
+
+Dart automatically looks for a class variable
+
+with that name, but here for this shortcut
+
+in the constructor function, it is required
+
+because if this would not be added here,
+
+you would just be telling Dart,
+
+"That you want to accept some positional argument,
+
+which you name text here in this constructor function,
+
+but it wouldn't automatically look for an equally named
+
+variable in the class.
+
+And by adding this dot in front of it,
+
+you instead tell Dart,
+
+"That you don't just wanna accept this positional argument,
+
+but that instead, it should also automatically be mapped
+
+to a class variable with the same name."
+
+Now, I'm just getting an error
+
+because we have to remove const,
+
+because now that we received some text here
+
+which is stored in a variable called text,
+
+this can no longer be marked
+
+as a potentially constant object,
+
+because the text might be changed thereafter,
+
+because this is a variable,
+
+and we also have to get rid of const down there,
+
+for that same reason.
+
+We could still turn this configuration object here
+
+into a constant though,
+
+because this is still all hard-coded.
+
+But that is how we could accept such a argument,
+
+store it and then use it.
+
+However, here we also have a great example for using final,
+
+instead of setting this to be a variable,
+
+because this variable here only exists
+
+to store that value which we receive on this argument.
+
+We never plan to reassigning it inside of this class then.
+
+And, therefore, you can actually also add final
+
+in front of the type here,
+
+not instead of the type,
+
+because we still wanna be clear
+
+about which type of value will be stored here.
+
+But, you can add it in front of the type
+
+to make it clear that this will only be set once
+
+by this argument that is received,
+
+and will not be changed thereafter.
+
+And with this done, you can readd const here,
+
+because now this class can be optimized again,
+
+because since this will never change internally,
+
+this is guaranteed to always be the same object
+
+once it has been initialized.
+
+Hence, it can be cached and reused by Dart.
+
+But that's how you can accept arguments,
+
+and store them in instance variables.
+
+So in variables that belong to these classes,
+
+and the objects that are based on these classes,
+
+and that allows you to reuse StyledText
+
+with potentially different text values,
+
+so that the text itself is no longer hard-coded
+
+inside of this class.
+
+And again, that were a lot of new concepts,
+
+lot of talking about that,
+
+but it is never a crucial feature,
+
+because being able to accept, and store, and use values
+
+in your own classes, no matter if they are widgets or not,
+
+allows you to build highly reusable classes and widgets.

@@ -2,139 +2,146 @@
 
 A new Flutter project.
 
-## 14 - How to configure Widgets & Objects
+## 15 - Practice Styling Text
+So now that we get started
 
-So we added this gradient.
+with some styling options,
 
-I'm not totally happy with it yet though.
+I also wanna style this text.
 
-I'm quite content with the colors.
+And to be precise, I wanna make sure that this text is white
 
-But by default, that gradient goes from left to right.
+and maybe has a slightly bigger font size.
 
-Now I'd like to have it go
+Of course, we're soon going to get rid of the text anyways,
 
-from the top left to the bottom right,
+but as a practice, let's see how we could style it.
 
-and this is something that can be changed
+And even though it will be a challenging practice
 
-by adding more arguments to linear gradient.
+you also might wanna try this on your own.
 
-Besides setting the colors here,
+See if you can find out how to change the text color
 
-you can also set the begin
+and font size of this text on your own.
 
-and end settings amongst other settings
+Just as a hint, you won't need to wrap any widget around it.
 
-with which you can, of course, also play around.
+Now here's a short pause for you to pause the video
 
-Now, begin wants a value of type AlignmentGeometry,
+and see if you can do this on your own.
 
-which can conveniently be set
+If not, no problem.
 
-with help of the Alignment object here.
+After a few seconds, we'll implement it together.
 
-Now, you can set this to X and Y coordinates
+So did you find a way of changing the color and font size?
 
-or you don't use the parenthesis here
+If not, no problem.
 
-but instead the dot notation here
+This was challenging and we're just getting started here.
 
-to access some predefined values again.
+If you wanna style this text as mentioned
 
-And here you have many predefined values,
+you don't need to wrap any extra widget.
 
-like center, centerLeft and so on.
+Instead you just have to add some extra configuration
 
-And you, for example, also have topLeft,
+via some arguments.
 
-which is where I want my gradient to begin.
+So by adding a comma and then adding more arguments
 
-And I'll set the end argument to Alignment.bottomRight.
+to this text widget constructor function here.
 
-Also add a comma here for proper code formatting.
+And that's by the way, always a good way to start.
 
-With that, if we save this and make sure this is applied,
+If you wanna style something or change some configuration
 
-the gradient now indeed goes from top left to bottom right.
+of some widget, the first step should always be to see
 
-And in case you're wondering how I always know
+if there are some arguments
 
-how to create the values that are wanted
+that you can set, that might help you.
 
-by end and begin, for example.
+For example, here, if I open this suggestion menu
 
-So how I, for example, know about this alignment thing here
+after typing this comma and hitting control space,
 
-with those predefined values,
+I see that there is this style argument I can set,
 
-there are a couple of ways of finding out.
+which sounds like exactly what we need here.
 
-For one, of course, you learn it in this course
+And then as a next step
 
-and you will learn
+I get the suggestion here to add such a text style object
 
-about many common super important widgets
+as it turns out, with help of the text style
 
-and configuration objects
+constructor function.
 
-and options throughout this course.
+And this also sounds like a good idea, so I'll take this
 
-So that's a great start.
+add a comma for formatting
 
-But in addition, if you must provide a value
+and then text style takes more arguments.
 
-and you have no value yet,
+For example, a color argument
 
-you can also always press Control + space
+which seems to set the text color since there also
 
-to get some suggestions.
+would be a separate background color option.
 
-And typically the first or second
+So I'll choose color here.
 
-or third suggestion is already a suggestion that helps you
+And color then wants a color object again.
 
-because this suggestion menu here is pretty smart.
+And we of course already learned about that.
 
-And here for setting the alignment,
+We can create a color manually, for example
 
-it even shows me these predefined alignments I could choose,
+with this from A R G B function, or we use a built-in one
 
-like for example, bottom right.
+via the colors object here and the dot notation.
 
-So that's pretty good.
+And here it's white, which I want.
 
-But of course, you can also always dive
+So that should set the text color to white.
 
-into the official documentation.
+And regarding the text size, the font size there
 
-For example, for a searching for Flutter
+conveniently is a font size argument I can set.
 
-and then the name of the widget you're using.
+And this wants a value of type double.
 
-This will lead you
+And you learned a bit earlier
 
-to an article in the official documentation.
+that this is in the end a number with a decimal place.
 
-And there you can also learn more about using this widget
+So here I can set this to 28, for example.
 
-or this configuration object or whatever you have here.
+And you can even omit the decimal place, though
 
-And you also often find some examples here
+you can also set it, for example, also to set this to 28.5.
 
-or a more detailed description
+But here I'll set it to just 28.
 
-of the constructor and the AlignmentGeometry object.
+Add another comma for formatting.
 
-And then here, for example, you would get some hint
+And if I now save this and reload,
 
-about using the alignment thing, which we did actually use.
+I should have a white text that is a little bit bigger
 
-So that's how you can learn more about this.
+and that indeed is the case.
 
-But again, you will see many common widgets
+And that's the practice solved.
 
-and configuration objects
+That's how you can style text.
 
-and options throughout this course.
+Something we'll do again and again throughout the course,
+
+because text often needs to be styled in a certain way
+
+but that stay afraid for the moment.
+
+Now it's time to dive into building custom widgets.
 

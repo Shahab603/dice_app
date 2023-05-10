@@ -2,193 +2,126 @@
 
 A new Flutter project.
 
-## 06-Positional and Named Arguments
+## 07- Combining Multiple Widgets
 
-Now as mentioned,
+Now the Text widget, if you hover over it,
 
-MaterialApp then also needs a input value though,
+also actually takes some named parameters.
 
-because like this,
+You find a curly brace and a long list of parameters
 
-this MaterialApp thing
+between those curly braces here as well.
 
-doesn't provide too much information to Flutter
+But there also is one positional parameter
 
-and to runApp
+and that's possible as well.
 
-regarding what should be displayed on the screen.
+You can mix and match those different parameter types
 
-Instead, you must pass more information to MaterialApp
+as needed when defining functions.
 
-so that that information
+That is totally up to you, the developer.
 
-will then indirectly also be picked up by Flutter.
+And here this positional parameter
 
-And for that, between those parentheses here,
+is indeed what we must set when using Text.
 
-which belong to MaterialApp,
+Otherwise, we get an error,
 
-you must provide some input value to MaterialApp.
+that one positional argument is expected
 
-And that input value is now all about defining
+but zero arguments are found.
 
-what should be shown inside of that app UI
+And here the one piece of data that we must pass in
 
-that will be displayed on the screen.
+is some human readable text,
 
-And for this, MaterialApp also takes a input value,
+which should be wrapped between single or double quotes,
 
-a parameter, though not a parameter
+and single quotes are more common.
 
-that would be defined like this
+And here you could write Hello World for example.
 
-as it's the case for runApp,
+Now these single or double quotes are required
 
-a so-called positional parameter or positional argument.
+because without them, Dart would think that Hello
 
-Because here for runApp,
+or World exclamation mark should be keywords or identifiers.
 
-the first value you pass to runApp
+Now Hello and World are definitely not keywords
 
-is used as a value
+built into Dart.
 
-for the first parameter in this parameter list.
+So identifying these words as such fails
 
-And, of course, runApp only takes one parameter,
+and they're also not valid identifiers
 
-but other functions
+because neither in the Material Dart package,
 
-could also take multiple comma-separated parameters
+which we're importing,
 
-and then values would be passed in and matched by position.
+nor in your file is there a Hello or World function
 
-So the first value provided to a function
+or anything else you could be referring to here.
 
-when calling that function
+Referring to runApp, MaterialApp, and Text worked
 
-would be mapped to the first parameter,
+because those things are indeed
 
-the second value to the second parameter, and so on.
+defined here in Material Dart.
 
-That's one way of accepting
+Hello and World are not defined here and they shouldn't be
 
-and receiving parameters in Dart.
+because here we're not trying to execute some commands
 
-But an alternative way,
+or run some code.
 
-which you will also learn in greater detail later,
+Instead, this should be human readable text.
 
-is to define functions that take so-called named parameters
+And whenever you have text
 
-or named arguments.
+that should not be interpreted as commands,
 
-When defining the function,
+you must wrap it with those quotes
 
-you wrap those parameters between curly braces.
+so that this is marked as text
 
-And, again, that is also something you will learn about
+that is, for example, meant to be read by humans
 
-later in the course in greater detail
+and not executed as code.
 
-and which you will do a lot throughout the course.
+And with all those things,
 
-But in the code where you define a function,
+we now have our first basic combination of widgets,
 
-you would wrap those named parameters between curly braces.
+where we create the Text widget
 
-And the difference
+and pass that to the MaterialApp widget,
 
-compared to positional parameters or arguments
+which then in turn is passed to runApp.
 
-is that now it's not important
+And with that, if you now make sure
 
-in which order you pass values to the function
+that you have an emulator up and running
 
-when you call it,
+and you start your application on that emulator,
 
-instead you identify those parameters by their name.
+either by going to Run, Run without debugging,
 
-And that's exactly how MaterialApp
+or by clicking this Run button here,
 
-is implemented internally.
+which is provided as a convenience by the code editor,
 
-In the end there, you have a long list of named parameters,
+by Visual Studio Code,
 
-as you can tell by this opening curly brace
+you will see this Hello World text on this virtual device.
 
-and that closing curly brace thereafter
+It looks ugly. It's definitely not a good looking app.
 
-that wrap all those parameters
+Also not a useful app, but it is a first step
 
-and those parameters are then simply identified by name.
+and it's our first user interface built
 
-Now regarding super and this,
+with Flutter and widgets that's shown on the screen.
 
-these are all things we'll learn about
-
-throughout the course.
-
-But this MaterialApp thing
-
-which you can execute,
-
-in the end, is defined by using named arguments internally.
-
-And as a developer, it's up to you
-
-whether you want to use positional or named arguments
-
-when defining a function.
-
-When using it, you of course have to use
-
-what has been defined in there.
-
-And here for MaterialApp,
-
-it's this home named argument
-
-that has to be set to display something on the screen.
-
-And if you type here,
-
-you, of course, also get suggestions.
-
-Even without typing, if you press Control + Space,
-
-you'll get a list of suggestions.
-
-And here you in the end see all these named arguments
-
-that you could possibly set,
-
-though many of them are, of course,
-
-for niche settings or configurations.
-
-The home named argument is important though,
-
-because that's the main argument you must set
-
-for MaterialApp to define which kind of widget,
-
-which kind of UI element
-
-should be displayed inside of that app UI
-
-that's passed to runApp.
-
-And here I wanna display some text
-
-by using the built-in Text widget,
-
-which is written like this,
-
-and which is also executed like a function.
-
-Just like MaterialApp,
-
-Text is coming from Flutter
-
-and provided by the Flutter team.
-
+Now we can dive in deeper.

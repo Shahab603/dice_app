@@ -2,137 +2,154 @@
 
 A new Flutter project.
 
-## 19 - Splitting Code Across Files
-Now besides constructive functions
+## 20-Creating Custom Widget
+Now, when working with Flutter,
 
-the other thing you should be aware of
+you will create custom widgets all the time.
 
-when working with classes is
+So it's important that you're able to do this on your own.
 
-that it's considered a good practice to put them
+Hence, here's your opportunity to practice this.
 
-into a separate file.
+I want you to create a separate new widget
 
-So here we can select this entire class and cut it.
+for this text part here.
 
-And then in the lip folder add a new file
+This should be outsourced into a separate widget,
 
-which I'll name gradient_container.dart.
+which you could, for example, name StyledText
 
-And the name is generally up to you
+which you then use
 
-but it should follow this naming pattern.
+in this widget here in the GradientContainer again.
 
-All lowercase, multiple words separated by underscores.
+Create that custom widget for this StyledText
 
-Dashes are technically allowed but will actually not work
+as explained in the last lectures and after a short pause,
 
-and this would be quite unreadable.
+which I give you to pause this video
 
-So underscores it is.
+and try this on your own,
 
-And then in this file you can store your class.
+we'll outsource this into a custom widget together.
 
-And we do this, we split the code
+Did you succeed?
 
-across multiple files to keep every file readable
+Let's now do this together.
 
-and maintainable so that all these files are relatively lean
+For that I'll first of all trade a new file
 
-and don't contain endless amounts of code.
+because you learned that you should put your own widgets
 
-But you instead just have one main thing per file
+into separate files in that lib folder.
 
-one main function or collection
+And I'll name it styled_text
 
-of functions or one main class profile.
+because I will add a StyledText widget in there.
 
-Now of course with that added to a separate file
+Styled_text.dart it is therefore.
 
-we got a bunch of errors in here
+And then in there, we create a class
 
-because all these flutter specific types
+and I'll name it StyledText.
 
-and widgets are now unknown.
+The name is up to you
 
-They are unknown because the import
+but it should follow these conventions
 
-to the flutter package is only here
+about which you learned.
 
-in the main dot dart file.
+And we, of course, extend stateless widget here.
 
-But this must be added
+Though for this to work, you also must add the import
 
-to every file where you are using features
+to package:flutter/material.dart as you learned.
 
-from that package, which is why you should copy it
+Now with that set up, we must add that build method
 
-and add that same import here
+by adding override and then Widget build,
 
-in the gradient container dot dart file.
+accepting this context parameter
 
-And with that, all these errors go away.
+and returning a widget as you learned.
 
-We still have an error in the main dot dart file though
+And the widget that should be returned here should,
 
-because gradient container is unknown here.
+of course, be this text here.
 
-This is not defined here because it is now defined
+So we can cut this from GradientContainer
 
-in a different file and dart does not automatically scan
+and return this here inside of StyledText.
 
-and connect all your files in your project.
+Now, here I got a bunch of blue squiggly lines
 
-Instead, you have to explicitly define any connections
+because indeed here we can now add const again
 
-between files that you want to consider.
+as you learned if you hover
 
-And you do this with the import keyword.
+over these blue squiggly lines, since this can be cached.
 
-So here in main dot dart, besides importing something
+This is, by the way, independent from the fact
 
-from the flutter material dart file, we also
+whether we add a cons constructor to this widget or not.
 
-must add another import where we also import from a package.
+This optimization in this widget tree is detached
 
-But this package is now our own project
+from the fact
 
-and therefore after package colon we use our project name
+if we unlock this widget for being optimized itself.
 
-in my case basics.
+But of course here, we should add a constructor
 
-So here I'll use basics.
+for the same reason as before
 
-This is basically whichever name you gave your
+to forward that key argument about which you learned.
 
-project when you created it with flutter create.
+Hence, I create a constructor
 
-So it might also be first app
+by repeating that name of the class.
 
-if you're still working in that project.
+And then here, opening and closing curly braces
 
-Here for me it's basics.
+to accept a argument named key.
 
-And then here it's the gradient container dot dart file
+And with super.key,
 
-from which I want to import.
+we then forward this to StatelessWidget.
 
-And you should of course, again, get some suggestions here.
+And here we should now also add const
 
-Also regarding your project name.
+since this is suggested
 
-You can always open those suggestions with control space.
+to us here to unlock various optimizations by Dart.
 
-And then here,
+And with that we have our StyledText widget defined.
 
-if I import from gradient container dot dart
+We can now use it in GradientContainer.
 
-and add my semicolon gradient container is found again.
+There we can type StyledText and use it like this.
 
-And hence, if I save everything and reload, it still works.
+But of course to unlock it here, we also must add an import
 
-There is no error
+in the gradient_container.dart file.
 
-because we again have some valid code here.
+Here we must import from our own package, in my case,
 
-Now following common best practices and conventions.
+named basics, in your case maybe named first_app
+
+or anything else, whatever you named your project.
+
+And then here, I wanna import
+
+from the styled_text.dart file.
+
+With that, with this import added,
+
+this StyledText widget down here is found.
+
+So this here works and if I save everything
+
+and force a reload, my application still works.
+
+And this was a nice practice for creating your own widgets.
+

@@ -2,172 +2,340 @@
 
 A new Flutter project.
 
-## 08 - Understanding "Constant" Value
+## 09 - Building More Complex Widget Tree
 
-So we got our first screen output,
+Now, of course this is ugly as mentioned.
 
-our first basic UI
+So how could we make it more beautiful?
 
-even though it's of course never helpful nor pretty,
+Well, to make it more beautiful,
 
-but it's a start.
+we have to add more widgets.
 
-We achieved this by combining the MaterialApp
+At the moment we only have a very basic
 
-and text widgets and passing that widget combination
+combination of widgets.
 
-in the end to MaterialApp.
+One widget that will help us a lot
 
-Now, you might notice
+with making this look better is another built in widget
 
-that there are some blue squiggly lines below that code.
+the Scaffold widget.
 
-Now in Visual Studio Code, blue squiggly lines
+Now you can always of course read about widgets
 
-as we have them here, mean that there isn't an error
+in the official documentation
 
-but there is some improvement potential.
+and there you also learn how to use a widget,
 
-The code is not optimal or it does something
+but you're watching this course
 
-that should be changed.
+so that you don't have to do that,
 
-And you can hover over the code
+though that of course is always a great backup resource.
 
-that has these squiggly lines
+But the Scaffold widget is a widget
 
-to learn more about the problem.
+that in the end helps us with setting up
 
-And if you scroll down in that infobox
+a good looking screen in our app.
 
-because the messages are always at the bottom,
+The material app widget is the root widget
 
-you see that here, the recommendation
+which is important for setting up the overall app.
 
-is that we should use const with the constructor
+But many apps of course consist of multiple screens
 
-to improve performance, whatever const is.
+and those screens also must be set up.
 
-While, we can get rid of these blue squiggly lines
+And even if you have just one screen in the app,
 
-by adding const in front of MaterialApp.
+as we have it here
 
-But what is this const thing?
+this screen must be set up to have,
 
-Well, const is a keyword.
+for example, a nice background color
 
-As you can also tell by its color.
+to enforce some basic styling
 
-It has the same color as void and import.
+onto its child widgets and so on.
 
-So it's a keyword provided by Dart
+So therefore here we wanna wrap text
 
-built into the Dart language.
+with the Scaffold widget
 
-And const is a keyword and a feature that exists
+because Scaffold must be inside of material app,
 
-to help Dart optimize the runtime performance
+but should be wrapped around the widgets
 
-of your application.
+that belong to a screen.
 
-And how does it do that?
+Now to wrap text with Scaffold,
 
-Well, if you mark something as const,
+we can of course type Scaffold here and execute this
 
-let's say a text widget that you're using in your app
+and then grab text here, this text widget,
 
-then this text widget will be stored internally
+with its text content and then pass it to Scaffold,
 
-in the memory of the device on which the app runs.
+though Scaffold now again wants a named argument.
 
-And that will always be the case no matter
+In case you're wondering how I know
 
-if you use const or not.
+which widget wants which kind of arguments,
 
-Once your code executes the things
+you can hover over a widget
 
-that are created by your code,
+to learn about the accepted arguments here
 
-the widgets, for example,
+in this info window that opens up.
 
-will be stored in the device memory,
+You can also learn about supported arguments here
 
-but with const when you then use that same widget,
+in the official documentation, but of course for the moment
 
-that same widget with the same text,
+I will simply tell you which arguments can be passed where
 
-a second time in the app
+and you will then automatically memorize these things
 
-that existing memory thing will be reused
+as you gain more experience with Flutter.
 
-instead of a second memory object being created.
+So for Scaffold,
 
-So therefore, using const allows start to reuse values
+it's actually a body argument which we should set here.
 
-that are indeed equal and avoids the duplication of data
+And I'm also getting some auto completion here
 
-in memory, hence, making your app more memory efficient
+whilst typing this, which of course helps a lot.
 
-and improving overall performance.
+And the value for body then is the widget
 
-Of course, behind the scenes things are a bit more complex
+that should be shown inside of this Scaffold widget.
 
-but that is in a nutshell what's happening,
+So with that, if I save this,
 
-and that's why you should always add const
+this should reload automatically.
 
-when prompted for it.
+If it doesn't, you can press this refresh button here
 
-Now, the good thing is you don't need to learn by heart
+in this panel, which opened up when you started the app
 
-in front of which widgets,
+and now it should update.
 
-you should add const, for example,
+And you see it looks much better.
 
-instead, your code editor will simply tell you
+We got the white background
 
-by adding these blue squiggly lines here
+the Hello World text looks nicer,
 
-and then you should indeed add const.
+even though it's still of course hidden
 
-Of course, for this basic app,
+in the top left corner,
 
-it doesn't really make a difference.
+but we already gained a lot by adding this widget.
 
-We're not reusing this combination of widgets anywhere.
+It's of course not enough though.
 
-So, marking it as constant won't give us
+Instead it would be nice if Hello World
 
-any big advantages here but it also doesn't hurt
+would be kind of in the middle here,
 
-and it's simply a best practice to use constant front
+if it would be centered on the screen.
 
-of all the values where you can use it.
+And that can be achieved with help of another widget
 
-And as you saw, using it in the right places is very simple
+which of course also can be found in the widget catalog
 
-because your code editor simply tells you.
+in the layout category, since I wanna center my text here
 
-For example, also tells you, if you're using it
+so it's a lay outing action I wanna perform.
 
-in a place where you should remove it.
+And there, it's the Center widget that can help us with,
 
-For example here, if I add it in front of MaterialApp
+well, centering widgets.
 
-and in front of text, then I get a message here
+For that, we need to wrap text with yet another widget.
 
-that I'm using const unnecessarily in this place
+And that is something you'll do a lot
 
-because I'm already using it in front of MaterialApp,
+when writing flutter code.
 
-which then contains text.
+You'll build these complex widget trees
 
-So using it in front of text in addition to that
+as I called them before,
 
-is simply redundant and therefore should be removed.
+where you have widgets inside of widgets, inside of widgets.
 
-But that's in the end what const does,
+So here we wanna wrap text with yet another widget
 
-it allows start to run your application
+and for that we could manually add it as before,
 
-in a more efficient way.
+but you can also right click on code,
+
+here on this text widget,
+
+and then choose this refactor action
+
+that's suggested by Visual Studio Code.
+
+You can of course also use the shortcut
+
+that's suggested for that.
+
+And if you click that, you get some refactoring suggestions.
+
+And refactoring in programming,
+
+simply is the process of changing your existing code.
+
+And here you get some smart actions suggested.
+
+For example, you can choose wrap with widget
+
+to get some help with wrapping this with a widget,
+
+but you even get a wrap with center suggestion here,
+
+which you can pick by clicking on it
+
+or by selecting it and hitting enter.
+
+And this will automatically create the Center widget
+
+and pass the text widget to center
+
+to be precise to the named child argument
+
+of the Center widget.
+
+Now, of course, things are getting quite unreadable here.
+
+This is becoming a super long line here
+
+and this is still a simple widget tree.
+
+And therefore, of course
+
+you typically wanna structure this code a bit differently
+
+to make it easier to read and to maintain,
+
+because even this basic widget combination
+
+is already getting too long here.
+
+Now, to make this easier to read and more structured,
+
+Dart offers a nice trick
+
+or actually recommended pattern or approach
+
+to help with formatting widget trees.
+
+For that, you should add a comma
+
+after every closing parenthesis here,
+
+except for the last one where you need a semicolon.
+
+And if you do that, you can run the format document command
+
+in visual studio code, or use the shortcut for that
+
+to auto format your code,
+
+which is something I do a lot when writing code in general.
+
+And if you hit this shortcut, you see the code changes,
+
+it's formatted differently,
+
+and now it's way easier to understand this widget tree
+
+because now you have some nice indentation
+
+that shows you which widget is inside of which other widget.
+
+And this widget tree, this code is now way easier to read
+
+and understand.
+
+And this is something you can do
+
+in many programming languages, definitely in Dart.
+
+As you can see, you can split code across multiple lines
+
+and you then don't have semicolons at the end of those lines
+
+because this in the end here is still one single instruction
+
+just split across multiple lines.
+
+Now, you can't split it at arbitrary points,
+
+for example, not in the middle of a word,
+
+in the middle of material app, that would fail,
+
+but you can split it here
+
+after these opening parenthesis, for example,
+
+and also after such a closing parenthesis
+
+and such a comma here,
+
+or even in front of the comma if you wanted to.
+
+But this auto formatting shortcut
+
+will basically do that for you.
+
+And by simply adding these commas
+
+after all these closing parentheses,
+
+you are giving the code editor in the end
+
+a signal where to best split this code
+
+when using this auto formatting shortcut
+
+because it will then simply do this after every comma here.
+
+And since you will build
+
+a lot of widget trees when building Flutter apps,
+
+and of course also way more complex widget trees
+
+with way more widgets than we have it here,
+
+it is absolutely a recommended pattern
+
+to always add these commas after your closing parenthesis
+
+and then use this auto formatting shortcut
+
+to make sure your code is structured
+
+and easy to read and understand.
+
+And if you save this now,
+
+it again should update automatically, or if it doesn't,
+
+as it's the case for me, update it manually.
+
+And now you see that Hello World
+
+is centered in the middle of this screen.
+
+So by adding these two built-in widgets,
+
+Scaffold and Center, we again improved the app
+
+and we're making good progress
+
+towards our goal of building our first custom Flutter app.

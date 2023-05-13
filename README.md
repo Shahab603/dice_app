@@ -2,169 +2,611 @@
 
 A new Flutter project.
 
-## 29 - How Not to Build Interactive Widget 
-So now that we got the styling right,
+## 30 - Introducing Stateful Widgets
+Now the image here did not change
 
-it's time to make sure that something happens
+despite the roll dice function being executed
 
-when this button is pressed.
+because we're in a "statelesswidget".
 
-For that, of course, we have this rollDice function,
+And this is just one of two main ways
 
-which we connected, but in there, we're not doing anything.
+of creating widgets and it's the wrong approach
 
-Now, for a start, let's simply say that in there,
+for widgets that should have internally changing data.
 
-we want to switch this image from dice-2,
+It is absolutely the kind of widget you should use
 
-or whatever you used as a default image here,
+if you just have a widget that takes some input values
 
-to, let's say, dice-4.
+and then outputs some widgets.
 
-So this should switch as we click this button.
+But if you have a widget that has some data,
 
-To achieve this, we could add a variable to this class,
+that can change internally
 
-a real variable that can be changed
+and where such data changes then should affect
 
-because now we do want to change things.
+the rendered UI, as it's the case here,
 
-We could add a variable with the var keyword,
+where the image we wanna display on the screen
 
-and name this our activeDiceImage,
+in our own widget here depends
 
-anything like that.
+on this "activeDiceImage" variable.
 
-That could be our name here.
+If we have a scenario like this,
 
-Now, of course, this also should have some initial value.
+"statelesswidget" is the wrong choice.
 
-So we can set an initial value here.
+We should instead create this as a "statefulWidget".
 
-We don't have to do this in a uninitialized way.
+So what's the difference?
 
-We can instead initialize this here.
+StatefulWidgets, as the name implies,
 
-And for example, set this to this image path here.
+allow us to manage state inside of them.
 
-That could be what we want to do as a start.
+And state simply is data that may change over time
 
-Now, with that, I can no longer add const here
+and that should impact the rendered UI.
 
-because I brought back a variable,
+So if the data changes, the user interface should change.
 
-and if we have a variable in there,
+We simply have different states
 
-this is not a const class anymore,
+of our user interface, you could say.
 
-we can't create const and objects with it anymore,
+So therefore here indeed the first step is
 
-that could be stored and reused from memory,
+to convert this to a "statefulWidget"
 
-because now the object can change internally
+to make sure that in here the data may change
 
-because we have that variable, which could change,
+though to be precise it would be a bit overkill
 
-and which we indeed intend to change.
+to change the entire gradient container
 
-And we can ignore these blue squiggly lines
+to a "statefulwidget", since the majority of this widget
 
-and this message here, for the moment.
+actually does not depend on that changing data,
 
-So we have this variable, and here in rollDice,
+it's really just this part here, this image and the button.
 
-I then want to set activeDiceImage
+Only these things work together to change the image.
 
-to, let's say, the same path but with dice-4.png.
+The rest of the widget is pretty stable.
 
-So that's not the goal.
+Therefore here it would actually be preferable
 
-We have this variable.
+to break this widget up into two separate widgets.
 
-We're changing this variable here then.
+One "statelessWidget", this one,
 
-And we can then use this variable down here
+and one "statefulWidget"
 
-instead of having this hard-coded path.
+which contains the image and the button.
 
-And this, of course, also is a great example,
+And that is what I'll do here
 
-showing us why we might want to use variables
+to keep the overall code organized.
 
-in some situations.
+For that I'll add a new file here,
 
-Because, now, we really do want to have
+which I'll name, "dice_roller.dart"
 
-one of the same data container, which we can reference here,
+because in there I want to create a widget
 
-which will hold different values based on the circumstances.
+called "DiceRoller",
 
-This value here initially, and this value after clicking.
+which will be that "statefulwidget" we're about to create.
 
-And if we save that and, in main.dart,
+Therefore "DiceRoller" should extend "StatefulWidget"
 
-actually remove const here,
+and in order to do that we here also must
 
-because we had to remove const from GradientContainer,
+import package Flutter and then material Dart.
 
-we can add it in front of these colors, though.
+So it's still the same import as before,
 
-But if we do that and make these changes,
+but now we extend "StatefulWidget" here.
 
-which we just discussed, to GradientContainer,
+Now this class here "DiceRoller",
 
-save this and reload,
+which extends "StatefulWidget"
 
-we got this.
+now is defined in a different way than we did it before
 
-But if I click this,
+for the "statelessWidget".
 
-nothing happens.
+Here we don't add a build method,
 
-So maybe this function isn't executing right.
+we do not do that if we have a "StatefulWidget".
 
-To find out if it is,
+Instead in here we must add a "createState" method.
 
-we can add print here.
+So a method called "Createstate".
 
-A built-in command provided by Dart,
+But just as with build,
 
-which we can use for outputting some information
+we should add the "@override" annotation here.
 
-in the Debug Console,
+Because that's basically another method
 
-which is a console we, as a developer, can have a look at
+we're forced to implement because we're extending
 
-whilst we're testing this app.
+"statefulWidget" here.
 
-So here we could output some text,
+Now "createState"
 
-"Changing image," something like this.
+Does not take a value here
 
-If we add this, we just have to go to View,
+but it actually returns a value.
 
-Appearance, Panel.
+It returns a State object.
 
-And here in this panel, we find the Debug Console,
+Now that's a type built into Flutter, provided by Flutter.
 
-which would print anything print outputs here,
+And state like list earlier, is a generic value type.
 
-and some additional statistics,
+Hence we have to add these angle brackets
 
-which are not important for us right now.
+to basically inform Dart,
 
-If I now restart this,
+which kind of state will be managed here.
 
-and we go back and I click Roll Dice once,
+And here it should be the state
 
-I can see that Changing image was locked
+for the "DiceRoller" class
 
-in the Debug Console.
+for the Dice roller widget.
 
-So, clearly, that code in the rollDice executed.
+Therefore the value passed between those angle brackets
 
-Nonetheless,
+should be your class name,
 
-the image here didn't change.
+"DiceRoller" in my case.
 
-Why?
+And in the body of this "createstate" method,
+
+you then have to return such a state value.
+
+So a value that has this type.
+
+And this value is created with yet a never class.
+
+When using "statefulWidget"
+
+you will always work with two classes.
+
+This is the first class here
+
+and then you must add a second class
+
+which typically should start with an underscore
+
+and I'll get back to that in a second.
+
+And then "DiceRollerstate".
+
+So the convention is to pick up your widget class name
+
+and append state at the end
+
+and start with that underscore that leading underscore.
+
+This underscore has a special meaning in Dart.
+
+It means that this class will be private,
+
+it will only be usable in this file.
+
+Even if you import this file into another file
+
+that other file will not be able to access
+
+this state class here.
+
+And the reason for that is that
+
+this state class is really only meant to be used
+
+internally by this "DiceRollerwidget" class here.
+
+Now this state class here,
+
+also must extend something
+
+and that something is state again.
+
+So this state value, though here again,
+
+we have to embrace the fact
+
+that this is a generic type
+
+and add the angle brackets.
+
+And here in between again,
+
+we add our widget class name, "DiceRoller".
+
+So we extend this state class,
+
+adjusted for our widget class name here
+
+and inside of this state class we now have to
+
+add that good old build method again.
+
+So "statefulWidgets" are in the end
+
+split across two classes.
+
+And the reason for that is simply that they're
+
+managed in a special way internally by Flutter.
+
+Flutter essentially requires these two classes
+
+to be detached from each other.
+
+Now the build method works
+
+just as the build method in the "statefulwidget" though,
+
+you add at override you return a widget,
+
+so a value of type widget,
+
+you will get this context parameter
+
+and then here you return your widget
+
+or widget combination, your widget tree.
+
+In my case here, that means
+
+that I want to return this column here.
+
+So I'll select this column,
+
+taking advantage of these nice annotations
+
+which are shown in my code editor here
+
+because of the flatter extension that we installed,
+
+telling me where the column which it ends.
+
+And I cut this from gradient container
+
+and instead returned this here
+
+in "DiceRollerstate" adding a semicolon at the end.
+
+And with that we have this separate state object.
+
+Some things are missing here,
+
+we'll take care about them in a second.
+
+But now here in "DiceRoller",
+
+in this create state function,
+
+we now call "DiceRollerstate"
+
+with that leading underscore as a function.
+
+So we basically execute the constructive function
+
+of "DiceRollerstate".
+
+We haven't added a constructive function here
+
+but as you learned, Dart automatically adds one by default
+
+in case you don't add one yourself.
+
+Speaking of constructor functions, we should add one here
+
+to our widget class, to set that key parameter again.
+
+So to accept this named key parameter
+
+and forward it to the super class, to "StatefulWidget".
+
+That's the same as for "StatelessWidget".
+
+And then we can also add const here.
+
+We can do this even though
+
+a "statefulwidget" by definition
+
+is able to change internally,
+
+because we have this class separation.
+
+And internally Flutter in the end,
+
+make sure that the state object can change
+
+which is why we don't add a cons construct to that.
+
+But the widget will be kept constant by Flutter,
+
+it will take care of that for us.
+
+So now we just need to make sure
+
+that this variable and this "RollDice" function are there
+
+and therefore we can go back to gradient container
+
+and in there take this variable
+
+and dysfunction and cut it from there.
+
+Which then also allows us to bring back const here,
+
+because we removed that variable.
+
+Which also allows us in main Dart to bring back const here
+
+and remove it in front of the colors.
+
+But more importantly, we can go to "DiceRoller"
+
+to the "dicerollerstate" here,
+
+and there add both the variable and the "rolldice" function.
+
+And we can get rid of the print statement here now.
+
+With that we have the variable here
+
+and this function and therefore now
+
+we just have to make sure that we use the "dicerollerwidget"
+
+which then is connected to that state,
+
+inside of gradient container.
+
+So there I'll now use "DiceRoller"
+
+and instantiate this like this.
+
+And of course to make sure that it is available here
+
+we have to add an import,
+
+because you always have to import what you use in a file.
+
+So here I import from package, basics,
+
+and then here Dice roller dot Dart.
+
+If you save this and force a reload,
+
+you should now be able to click this button
+
+and change from a dice with two on it at the beginning,
+
+two four, except for that it doesn't work.
+
+So what's missing?
+
+I mean we are using a "statefulWidget" after all.
+
+And indeed you must use "Statefulwidget",
+
+but that alone is not enough.
+
+Of course here we have a variable which we changed,
+
+but even that is not enough.
+
+Instead by default, Flutter will simply
+
+ignore that you change your variable,
+
+that's good but that does not lead Flutter
+
+to re-execute this build method
+
+and reevaluate the UI that it should output.
+
+And it must re-execute the build method
+
+to pick up any changes to "activediceimage"
+
+because in here we have the code for displaying the image
+
+and if "activediceimage" changed,
+
+the image on the screen will only be updated
+
+if the build method executes again
+
+so that all this code is reevaluated.
+
+Because otherwise if build never executes again,
+
+it's still this initial UI snapshot that will be output
+
+that was based on the previous value of "activediceimage".
+
+And that's a really important concept in programming,
+
+in general actually, that you should understand.
+
+If you are using a variable,
+
+like "activediceimage" here in your code,
+
+the code in which you use it,
+
+so in this case the build method in which we use it,
+
+does not magically re-execute just
+
+because you changed the variable value
+
+anywhere else in your code.
+
+This is not happening here and this is not happening
+
+in other programming languages either.
+
+Instead, the value stored
+
+in this "activediceimage" variable
+
+is only considered unused if the code
+
+where this variable is being used executes.
+
+So for example, when this build method
+
+executes for the first time
+
+and the build method will execute for the first time
+
+when this widget, this "Dicerollerwidget"
+
+is rendered to the UI for the first time.
+
+And that in turn will be the case
+
+when the widget in which "Diceroller" is used
+
+is being rendered, which ultimately all comes down
+
+to the run app function in the main Dart file
+
+because that's where the entire UI widget tree
+
+starts being created.
+
+So that's when the build method here
+
+in "Diceroller" executes in the end,
+
+and that's when Dart takes a look at "activediceimage"
+
+and takes the currently stored path into account
+
+for in this case, rendering an image on the screen.
+
+And initially when this build method runs for the first time
+
+because this widget is rendered for the first time
+
+Dart therefore uses this "Dice-2" image
+
+which is the initial value for "activediceimage".
+
+So if you then change that variable value
+
+and you want Dart and Flutter to update the UI
+
+and take this latest variable value into account,
+
+you must find some way of getting Flutter
+
+to re-execute this build method of this widget
+
+or of this widget's state in this case here.
+
+So how do we get Flutter to re-execute build?
+
+Well we have to call a special function,
+
+in the place where we update a value
+
+that is used inside of build
+
+and that will lead to some different UI output.
+
+We have to call the special "setstate" function
+
+which is available inside of state-based classes.
+
+So inside of "Dicerollerstate",
+
+since we extend flutters state class here,
+
+we have a set state function which we can call
+
+that is provided by this state class provided by Flutter.
+
+We have to call set state here inside of "rolldice"
+
+and two "setstate", you must pass a function.
+
+And here you typically pass an anonymous function
+
+as I mentioned it earlier, related to the button.
+
+Inside of this anonymous function,
+
+you should now perform any updates to class variables,
+
+to object variables, that should be reflected in the UI.
+
+Because "setstate",
+
+this function which is provided by Flutter,
+
+in the end tells Flutter
+
+that it should re-execute the build function
+
+of this state in which you call "setstate".
+
+And if after executing build,
+
+Flutter determines that you now expect a different UI
+
+than what you had before,
+
+it'll go to the actual app UI
+
+and updated in all the places where updates are needed.
+
+So for example here
+
+after setting active dice image to a different path,
+
+when calling "setState", Flutter will re-execute build.
+
+And indeed here where we use "activediceimage"
+
+it will now see that a different kind of image
+
+should be displayed on the screen.
+
+Hence it will go to the real UI
+
+that is active on the screen and update the image in there.
+
+And with that, with set state added,
+
+if you now save this and force a reload,
+
+you will finally be able to click "rolldice",
+
+and you see the image changed to a dice that shows us four,
+
+and that's how you build "statefulwidgets"
+
+and how you make sure that you can update the state
+
+and such state changes are then also reflected
+
+in the user interface.
+
+

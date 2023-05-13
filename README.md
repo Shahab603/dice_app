@@ -2,264 +2,253 @@
 
 A new Flutter project.
 
-## 27 - Adding Buttons & using Functions As Values 
-Now having this dice image here is nice,
+## 28 - Styling Buttons & Working with Padding
+So let's fix the styling of this here.
 
-but we of course also want to have a button below that
+For that, I'd like to make sure that it's back
 
-which can be pressed to roll the dice.
+in the center, and this button also should look differently.
 
-And therefore we should of course add such a button.
+Now, regarding the center part,
 
-To do that, it's no longer enough
+it's of course strange that it's not in the center,
 
-to just have a single child in this center widget,
+because it's still inside of that center widget.
 
-but instead we need multiple widgets here.
+But here it's important to understand
 
-Now, center only has this child argument, though.
+that this column widget, by default
 
-I mean it has other arguments as well
+takes all the available vertical space.
 
-but those don't take any widgets at all.
+It is indeed centered horizontally, as you can see.
 
-So it only takes one single widget.
+It's in the center regarding that.
 
-So what can we do now
+But vertically, column simply takes the entire
 
-if we actually wanna provide multiple widgets
+available space, and therefore, there of course
 
-as child widgets here?
+is simply no way of centering it vertically.
 
-Well, we need another widget in between, the column widget.
+So in order to make sure that this is centered vertically,
 
-Which is another key widget
+we must make sure that column does not take
 
-that you will be using a lot when working with Flutter.
+the entire vertical space.
 
-The column widget exists to allow you
+And this can be done with help
 
-to render multiple widgets,
+of another argument that can be set on column.
 
-multiple children above each other.
+And that's the main axis size.
 
-There also is a row widget,
+The main axis for a column is simply the vertical axis,
 
-which would do the same,
+and here you got two main options, main axis size dot min,
 
-but next to each other horizontally.
+and main exercise dot max.
 
-Here I want to have widgets above each other vertically
+These are two predefined values, which you can use
 
-and therefore column is the right choice.
+and the default is max, to take as much space as possible
 
-Now the children argument,
+here we therefore want min.
 
-which can be set here, then takes a list.
+And with that, if you save this,
 
-So we need opening and closing square brackets,
+this is centered vertically.
 
-and it takes a list of widgets.
+Now for the styling of the button,
 
-So therefore here we can now take our image
+we of course also want to change this, and that can be done,
 
-and move that into that list here.
+by adding the style argument to the text button.
 
-And then below that image we can display our button.
+And actually you should move that in front of child,
 
-Now of course, buttons are a very common type of widget
+not because you technically need to,
 
-and indeed Flutter supports three different main buttons.
+but because that is one of the patterns recommended,
 
-It has the elevated button here
+by Flutter to always keep your widget arguments last.
 
-for displaying a button that has a background color
+Now style here wants a button style value.
 
-and a slight shadow.
+And the easiest way of creating this for a text button,
 
-It has the outlined button
+is to use text, button, style from.
 
-for displaying a button that has no background color
+That's the end of function, to find on this text button
 
-but a border.
+which returns a button style object.
 
-And it has the text button
+And style from now takes various arguments,
 
-for displaying a button that is only some pressable text.
+which you can use to override the default styling.
 
-And that's the kind of button I want to display here,
+For example, you can set the foreground color,
 
-though of course you can play around with that
+to change the default text color,
 
-and also give other buttons a try.
+because the foreground color of a text button
 
-Now, when I use auto completion here,
+is the text color in the end.
 
-so when I hit tap after selecting text button,
+And here you could set this to colors dot white,
 
-I automatically get two named arguments added here,
+using this predefined color.
 
-child and onPressed.
+You can also add a separate text style,
 
-Now, child is the simpler one.
+which then wants a text style object,
 
-Child simply wants another widget,
+using this text style constructor function,
 
-which is wrapped inside of that button.
+which we already before used for styling the text widget,
 
-And typically that's a text widget which holds the text
+so this constructor function.
 
-that should be shown on the button.
+And there we could also set the text color,
 
-Because, of course, this text button should show some text.
+but I'll just use it for setting the font size to 28 here.
 
-Otherwise you wouldn't see anything.
+And this cannot also be constant here.
 
-So here, this could, for example, be roll dice.
+And with that, this text is a bit bigger and white.
 
-Now I get some blue squiggly lines here,
+Now I'd just like to have more spacing,
 
-because here we can add const
+between the image and this button.
 
-to allow for some optional caching.
+And for that we have two main ways of doing that.
 
-But what is this onPressed argument all about now?
+The first option is to add some padding on this text button,
 
-Well, onPressed actually wants a function,
+which you can do in this style from function
 
-or null as a value, and that is something new.
+by setting padding.
 
-Up to this point,
+Padding simply is some spacing inside of the widget,
 
-we worked with a lot of different values.
+between the widget content and the widget boundaries.
 
-With text, with numbers but also of course
+And this padding can be set here for this text button,
 
-with many objects and widgets.
+with the padding argument in the style from function.
 
-But we never used functions as values
+And it wants a edge insets geometry object type.
 
-but you can do that in Dart.
+Such an object can be created with the
 
-Functions in Dart are also just objects.
+edge insets, constructor functions,
 
-So if you define a function, you can pass a function
+which are suggested to me here.
 
-as a value to arguments that want a function.
+For example, edge insets all,
 
-And here for onPressed, you have two main options.
+adds a certain amount of padding into all directions.
 
-Option one is that you define a function just in place.
+You can also add padding to just the top,
 
-This is done like this by adding
+by using the only constructor function instead,
 
-opening and closing parentheses
+and there passing the top argument, the named top argument,
 
-and then opening and closing curly braces.
+which then must be set to a number,
 
-This is a so-called anonymous function.
+like for example 20 pixels.
 
-It doesn't have a name like clickHandler
+This can also be turned into a constant value,
 
-or anything like that, and it doesn't want a name.
+by using const here.
 
-Instead, this function is defined here
+And if you do this,
 
-in this place where a function is needed
+there is more spacing around this button.
 
-so that it's provided as a value to onPressed.
+Now the alternative approach,
 
-This function is then executed,
+to using this padding setting here,
 
-called, internally by TextButton
+which is absolutely fine, I just wanna show you options,
 
-when it registers a click on the button.
+is to comment this out and instead add an extra widget,
 
-So this function is only used here,
+between the image and the button.
 
-can't be used anywhere else,
+And that would be the sized box widget,
 
-and that's why it doesn't have a name.
+which kind of does what its name implies.
 
-But between those curly braces
+It simply creates a box of a certain size.
 
-you can define any code you want
+And you can add a child widget in there if you want to,
 
-that should be executed when this function is called.
+but most importantly you can also set a height
 
-So when this button is pressed.
+and a width here.
 
-That's option one.
+And here we could set this to a height of 20,
 
-Option two is that you define a method,
+and then also add const,
 
-for example, here,
+since this can be added for this widget.
 
-after all our constructors and these variables,
+And that would also add a widget of this size,
 
-and that could be a method called rollDice.
+between the image and the button,
 
-As you always did, by providing a name
+hence adding this extra spacing here.
 
-and then also a return value,
+Now we don't see any widget here in between,
 
-which in this case should be void
+because this sized box doesn't have any content.
 
-because onPressed wants a function that returns nothing.
+It's really just a widget of that size,
 
-So therefore here you should have void,
+of that height, that just takes up that space,
 
-then your function name,
+without showing anything on the screen.
 
-and then here whatever code you want to execute.
+And that's also an important difference between sized box,
 
-And now you can use that function name
+and other widgets, like for example, container.
 
-and use that as a argument value here.
+Container, and most other widgets simply take the width
 
-So you don't execute the function here,
+and height they need to take,
 
-you don't add parenthesis,
+to fit their content into themselves.
 
-you just use the function name to basically pass a pointer
+For example, a text widget is just as high
 
-to that function as a value to onPressed.
+and wide, as needed, to show the text on the screen,
 
-With that onPressed knows where to find this function.
+so that it's not cut off.
 
-And internally, textButton will execute
+On the other hand with sized box,
 
-that function here when the button is pressed.
+you explicitly set a certain height, or width,
 
-Now, I personally typically prefer this approach
+and that height, or width is then set in stone.
 
-of having a separate function
+If you would have some child widget inside of sized box,
 
-that's then passed as a pointer,
+that child widget and the content of it,
 
-so to say, by using the function name.
+would not lead to sized box becoming wider, or taller.
 
-But you could also use this anonymous function instead.
+Sized box has a fixed width and height,
 
-But here I'll go for the separate function.
+and if it would have some content
 
-And now here inside of rollDice,
+that doesn't fit into there,
 
-we can do whatever we want to do,
+because it for example, needs more width,
 
-when this button is pressed.
+that content would be cut off.
 
-If we save everything and reload,
+And that's an alternative to adding padding.
 
-we now see this button here.
-
-It looks a bit strange.
-
-It's at the top and the button styling isn't final,
-
-but as you can see, it can be clicked.
-
-Now it's time to fix the styling
-
-and then do something when the buttons clicked.
-
+You can use whichever approach you prefer.

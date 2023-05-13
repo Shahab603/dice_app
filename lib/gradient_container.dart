@@ -10,7 +10,7 @@ class GradientContainer extends StatelessWidget {
 
   const GradientContainer(this.color1, this.color2, {super.key});
 
-  void rollDice (){
+  void rollDice() {
     //whatever
   }
 
@@ -26,14 +26,21 @@ class GradientContainer extends StatelessWidget {
       ),
       child: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
               'assets/images/dice-1.png',
               width: 200,
             ),
-             TextButton(
+            TextButton(
               onPressed: rollDice,
-              child: const Text('Roll Dice'),
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.only(top: 20),
+              ),
+              child: const Text(
+                'Roll Dice',
+                style: TextStyle(fontSize: 28, color: Colors.white),
+              ),
             )
           ],
         ),

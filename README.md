@@ -2,611 +2,317 @@
 
 A new Flutter project.
 
-## 30 - Introducing Stateful Widgets
-Now the image here did not change
+## 31 - Generating Random Numbers
+So we now added our Stateful widget.
 
-despite the roll dice function being executed
+And with that, we can click this button
 
-because we're in a "statelesswidget".
+to change this dice here, the dice image.
 
-And this is just one of two main ways
+But of course at the moment, we can only click it once.
 
-of creating widgets and it's the wrong approach
+I mean we can click it more often, but we always set it
 
-for widgets that should have internally changing data.
+to this image that shows us a dice roll of four.
 
-It is absolutely the kind of widget you should use
+And that's ultimately not the goal here.
 
-if you just have a widget that takes some input values
+Instead, we wanna generate a random value
 
-and then outputs some widgets.
+between one and six, and update the image appropriately.
 
-But if you have a widget that has some data,
+Now, to get there,
 
-that can change internally
+we'll have to do a couple of things, and most importantly,
 
-and where such data changes then should affect
+we have to generate that random number.
 
-the rendered UI, as it's the case here,
+Now that can be achieved with help of a feature
 
-where the image we wanna display on the screen
+provided by Dart, which we have to import though.
 
-in our own widget here depends
+We have to add a import where we import something
 
-on this "activeDiceImage" variable.
+directly from Dart and there from the math sub package.
 
-If we have a scenario like this,
+So this is now not a third party package that would have to
 
-"statelesswidget" is the wrong choice.
+be registered in the pubspec.yaml file.
 
-We should instead create this as a "statefulWidget".
+Instead, this is really from Dart itself.
 
-So what's the difference?
+But a Dart feature that is not available
 
-StatefulWidgets, as the name implies,
+in all Dart files automatically out of the box,
 
-allow us to manage state inside of them.
+but which instead has to be unlocked in a file
 
-And state simply is data that may change over time
+by adding this import.
 
-and that should impact the rendered UI.
+Here, we want to use a math feature provided by Dart.
 
-So if the data changes, the user interface should change.
+To be precise here in rollDice,
 
-We simply have different states
+I now want to use the random constructor function,
 
-of our user interface, you could say.
+which is provided by Dart's math package,
 
-So therefore here indeed the first step is
+to create an object that has various methods
 
-to convert this to a "statefulWidget"
+that help us with the generation
 
-to make sure that in here the data may change
+of random values, random numbers.
 
-though to be precise it would be a bit overkill
+Here, for example, the nextInt method.
 
-to change the entire gradient container
+NextInt can be called to generate a random integer.
 
-to a "statefulwidget", since the majority of this widget
+And for that, nextInt actually wants an input,
 
-actually does not depend on that changing data,
+an argument, which is the maximum,
 
-it's really just this part here, this image and the button.
+the highest possible integer that should be generated.
 
-Only these things work together to change the image.
+Though that value, as we can read here,
 
-The rest of the widget is pretty stable.
+will actually be excluded.
 
-Therefore here it would actually be preferable
+So if you pass in a value of 10, for example,
 
-to break this widget up into two separate widgets.
+we would generate a random number
 
-One "statelessWidget", this one,
+which is greater or equal to zero and smaller than 10.
 
-and one "statefulWidget"
+So here, if I wanna generate a number between one and six,
 
-which contains the image and the button.
+I can pass in six,
 
-And that is what I'll do here
+and that would give me a value between zero and five.
 
-to keep the overall code organized.
+So to make sure that it's between one and six instead,
 
-For that I'll add a new file here,
+I simply have to add one here,
 
-which I'll name, "dice_roller.dart"
+and that would then give me a number between one and six.
 
-because in there I want to create a widget
+So that generates such a random value,
 
-called "DiceRoller",
+and we could now use that random value
 
-which will be that "statefulwidget" we're about to create.
+and store it in a variable called diceRoll, for example,
 
-Therefore "DiceRoller" should extend "StatefulWidget"
+to then dynamically set this string here,
 
-and in order to do that we here also must
+this path to an image.
 
-import package Flutter and then material Dart.
+So in the end, what I wanna do here
 
-So it's still the same import as before,
+is I want to replace this number,
 
-but now we extend "StatefulWidget" here.
+because my images are all named
 
-Now this class here "DiceRoller",
+dice one, dice two, and so on.
 
-which extends "StatefulWidget"
+So I just need to replace this number here
 
-now is defined in a different way than we did it before
+with my number which is between one and six.
 
-for the "statelessWidget".
+And it must be between one and six
 
-Here we don't add a build method,
+because I only have images for one to six.
 
-we do not do that if we have a "StatefulWidget".
+Now, getting such a number here into a string
 
-Instead in here we must add a "createState" method.
+is pretty easy with Dart because it gives us a nice syntax,
 
-So a method called "Createstate".
+a nice feature that allows us
 
-But just as with build,
+to kind of inject values into strings.
 
-we should add the "@override" annotation here.
+We can add a dollar sign here,
 
-Because that's basically another method
+followed by the variable name that holds the value
 
-we're forced to implement because we're extending
+that we wanna inject into the string.
 
-"statefulWidget" here.
+So now this will dynamically construct a path
 
-Now "createState"
+which is assets/images/dice, dash,
 
-Does not take a value here
+and then whichever number is stored inside of diceRoll.
 
-but it actually returns a value.
+That's what this special syntax does.
 
-It returns a State object.
+It injects the diceRoll value into this string.
 
-Now that's a type built into Flutter, provided by Flutter.
+So when we set activeDiceImage to an image path,
 
-And state like list earlier, is a generic value type.
+this path will include the actual number
 
-Hence we have to add these angle brackets
+that was generated here.
 
-to basically inform Dart,
+That's one way of doing this.
 
-which kind of state will be managed here.
+However, we don't actually even have to store
 
-And here it should be the state
+the entire path as state here.
 
-for the "DiceRoller" class
+Instead, we could get rid
 
-for the Dice roller widget.
+of that activeDiceImage variable here,
 
-Therefore the value passed between those angle brackets
+and instead, just add a new variable that could be
 
-should be your class name,
+named currentDiceRoll, which initially maybe is two.
 
-"DiceRoller" in my case.
+And then that's the variable I wanna set here in setState.
 
-And in the body of this "createstate" method,
+And I wanna set currentDiceRoll here
 
-you then have to return such a state value.
+equal to my diceRoll variable here.
 
-So a value that has this type.
+Or actually make this a bit shorter,
 
-And this value is created with yet a never class.
+get rid of that extra variable,
 
-When using "statefulWidget"
+and just generate my random number here,
 
-you will always work with two classes.
+and use it here to then update currentDiceRoll
 
-This is the first class here
+inside of setState.
 
-and then you must add a second class
+So now I just manage the dice roll number as state,
 
-which typically should start with an underscore
+and that allows me to then grab this path
 
-and I'll get back to that in a second.
+which sets the dice roll dynamically,
 
-And then "DiceRollerstate".
+or which injects that dice roll and use that down here.
 
-So the convention is to pick up your widget class name
+And instead of using diceRoll here,
 
-and append state at the end
+I now want to use this currentDiceRoll variable,
 
-and start with that underscore that leading underscore.
+which we do update inside of setState.
 
-This underscore has a special meaning in Dart.
+It's up to you which approach you prefer,
 
-It means that this class will be private,
+but this keeps our state a bit leaner,
 
-it will only be usable in this file.
+a bit easier to understand
 
-Even if you import this file into another file
+since we're just managing a number here.
 
-that other file will not be able to access
+And then we dynamically derive the actual path
 
-this state class here.
+based on that state value.
 
-And the reason for that is that
+So based on that number, whenever build is executed.
 
-this state class is really only meant to be used
+And as you learned,
 
-internally by this "DiceRollerwidget" class here.
+build will execute when we call setState here.
 
-Now this state class here,
+With that, if we save everything and force a reload,
 
-also must extend something
+we should be able to click this
 
-and that something is state again.
+and generate different dice rolls.
 
-So this state value, though here again,
+Now of course,
 
-we have to embrace the fact
+you might sometimes roll the same number twice,
 
-that this is a generic type
+so simply click this a couple of times
 
-and add the angle brackets.
+to see some differences on the screen.
 
-And here in between again,
+So that's our different dice rolls
 
-we add our widget class name, "DiceRoller".
+showing up on the screen here as we click this button.
 
-So we extend this state class,
+But the current approach still isn't optimal
 
-adjusted for our widget class name here
+because at the moment, I'm always creating
 
-and inside of this state class we now have to
+a new random object here whenever rollDice is executed.
 
-add that good old build method again.
+And whilst this works,
 
-So "statefulWidgets" are in the end
+it's a bit redundant because technically this means
 
-split across two classes.
+that every time rollDice is executed,
 
-And the reason for that is simply that they're
+so every time we click the button here,
 
-managed in a special way internally by Flutter.
+a new random object is created and stored in memory.
 
-Flutter essentially requires these two classes
+So in the memory of the device that is running our app,
 
-to be detached from each other.
+and the old random object that was created there before
 
-Now the build method works
+will be thrown away.
 
-just as the build method in the "statefulwidget" though,
+Now thankfully it will be thrown away,
 
-you add at override you return a widget,
+so therefore at least we don't occupy
 
-so a value of type widget,
+the entire memory at some point.
 
-you will get this context parameter
+But still, that is some redundant object creation
 
-and then here you return your widget
+and deletion in memory, which is not a problem
 
-or widget combination, your widget tree.
+for this basic app, but something you might wanna avoid.
 
-In my case here, that means
+And of course, my goal with this course is not
 
-that I want to return this column here.
+to teach you any way, but if possible,
 
-So I'll select this column,
+the best possible way of solving a certain problem.
 
-taking advantage of these nice annotations
+And therefore here, it would be better
 
-which are shown in my code editor here
+to cut this random object,
 
-because of the flatter extension that we installed,
+and instead create a new final value here,
 
-telling me where the column which it ends.
+Randomizer could be the name,
 
-And I cut this from gradient container
+which stores this random object, which we then use here.
 
-and instead returned this here
+And actually, this doesn't even have to be
 
-in "DiceRollerstate" adding a semicolon at the end.
+inside of our state class here.
 
-And with that we have this separate state object.
+This could even be defined outside of it,
 
-Some things are missing here,
+maybe here right below the imports,
 
-we'll take care about them in a second.
+because it's totally fine if this is only created once
 
-But now here in "DiceRoller",
+when this code file executes for the first time,
 
-in this create state function,
+and doesn't have to be reexecuted
 
-we now call "DiceRollerstate"
+every time the state object is created.
 
-with that leading underscore as a function.
+Technically here, the state object shouldn't be recreated,
 
-So we basically execute the constructive function
+but still there is no need to keep the randomizer
 
-of "DiceRollerstate".
+inside of this class here in this application.
 
-We haven't added a constructive function here
+We can instead set it up
 
-but as you learned, Dart automatically adds one by default
+as a globally available final data container
 
-in case you don't add one yourself.
+here in this code file, by adding it right below the imports
 
-Speaking of constructor functions, we should add one here
+and then still referencing it by name down there.
 
-to our widget class, to set that key parameter again.
+And with that, we should have the same result as before,
 
-So to accept this named key parameter
+that we can click this button and change the image,
 
-and forward it to the super class, to "StatefulWidget".
-
-That's the same as for "StatelessWidget".
-
-And then we can also add const here.
-
-We can do this even though
-
-a "statefulwidget" by definition
-
-is able to change internally,
-
-because we have this class separation.
-
-And internally Flutter in the end,
-
-make sure that the state object can change
-
-which is why we don't add a cons construct to that.
-
-But the widget will be kept constant by Flutter,
-
-it will take care of that for us.
-
-So now we just need to make sure
-
-that this variable and this "RollDice" function are there
-
-and therefore we can go back to gradient container
-
-and in there take this variable
-
-and dysfunction and cut it from there.
-
-Which then also allows us to bring back const here,
-
-because we removed that variable.
-
-Which also allows us in main Dart to bring back const here
-
-and remove it in front of the colors.
-
-But more importantly, we can go to "DiceRoller"
-
-to the "dicerollerstate" here,
-
-and there add both the variable and the "rolldice" function.
-
-And we can get rid of the print statement here now.
-
-With that we have the variable here
-
-and this function and therefore now
-
-we just have to make sure that we use the "dicerollerwidget"
-
-which then is connected to that state,
-
-inside of gradient container.
-
-So there I'll now use "DiceRoller"
-
-and instantiate this like this.
-
-And of course to make sure that it is available here
-
-we have to add an import,
-
-because you always have to import what you use in a file.
-
-So here I import from package, basics,
-
-and then here Dice roller dot Dart.
-
-If you save this and force a reload,
-
-you should now be able to click this button
-
-and change from a dice with two on it at the beginning,
-
-two four, except for that it doesn't work.
-
-So what's missing?
-
-I mean we are using a "statefulWidget" after all.
-
-And indeed you must use "Statefulwidget",
-
-but that alone is not enough.
-
-Of course here we have a variable which we changed,
-
-but even that is not enough.
-
-Instead by default, Flutter will simply
-
-ignore that you change your variable,
-
-that's good but that does not lead Flutter
-
-to re-execute this build method
-
-and reevaluate the UI that it should output.
-
-And it must re-execute the build method
-
-to pick up any changes to "activediceimage"
-
-because in here we have the code for displaying the image
-
-and if "activediceimage" changed,
-
-the image on the screen will only be updated
-
-if the build method executes again
-
-so that all this code is reevaluated.
-
-Because otherwise if build never executes again,
-
-it's still this initial UI snapshot that will be output
-
-that was based on the previous value of "activediceimage".
-
-And that's a really important concept in programming,
-
-in general actually, that you should understand.
-
-If you are using a variable,
-
-like "activediceimage" here in your code,
-
-the code in which you use it,
-
-so in this case the build method in which we use it,
-
-does not magically re-execute just
-
-because you changed the variable value
-
-anywhere else in your code.
-
-This is not happening here and this is not happening
-
-in other programming languages either.
-
-Instead, the value stored
-
-in this "activediceimage" variable
-
-is only considered unused if the code
-
-where this variable is being used executes.
-
-So for example, when this build method
-
-executes for the first time
-
-and the build method will execute for the first time
-
-when this widget, this "Dicerollerwidget"
-
-is rendered to the UI for the first time.
-
-And that in turn will be the case
-
-when the widget in which "Diceroller" is used
-
-is being rendered, which ultimately all comes down
-
-to the run app function in the main Dart file
-
-because that's where the entire UI widget tree
-
-starts being created.
-
-So that's when the build method here
-
-in "Diceroller" executes in the end,
-
-and that's when Dart takes a look at "activediceimage"
-
-and takes the currently stored path into account
-
-for in this case, rendering an image on the screen.
-
-And initially when this build method runs for the first time
-
-because this widget is rendered for the first time
-
-Dart therefore uses this "Dice-2" image
-
-which is the initial value for "activediceimage".
-
-So if you then change that variable value
-
-and you want Dart and Flutter to update the UI
-
-and take this latest variable value into account,
-
-you must find some way of getting Flutter
-
-to re-execute this build method of this widget
-
-or of this widget's state in this case here.
-
-So how do we get Flutter to re-execute build?
-
-Well we have to call a special function,
-
-in the place where we update a value
-
-that is used inside of build
-
-and that will lead to some different UI output.
-
-We have to call the special "setstate" function
-
-which is available inside of state-based classes.
-
-So inside of "Dicerollerstate",
-
-since we extend flutters state class here,
-
-we have a set state function which we can call
-
-that is provided by this state class provided by Flutter.
-
-We have to call set state here inside of "rolldice"
-
-and two "setstate", you must pass a function.
-
-And here you typically pass an anonymous function
-
-as I mentioned it earlier, related to the button.
-
-Inside of this anonymous function,
-
-you should now perform any updates to class variables,
-
-to object variables, that should be reflected in the UI.
-
-Because "setstate",
-
-this function which is provided by Flutter,
-
-in the end tells Flutter
-
-that it should re-execute the build function
-
-of this state in which you call "setstate".
-
-And if after executing build,
-
-Flutter determines that you now expect a different UI
-
-than what you had before,
-
-it'll go to the actual app UI
-
-and updated in all the places where updates are needed.
-
-So for example here
-
-after setting active dice image to a different path,
-
-when calling "setState", Flutter will re-execute build.
-
-And indeed here where we use "activediceimage"
-
-it will now see that a different kind of image
-
-should be displayed on the screen.
-
-Hence it will go to the real UI
-
-that is active on the screen and update the image in there.
-
-And with that, with set state added,
-
-if you now save this and force a reload,
-
-you will finally be able to click "rolldice",
-
-and you see the image changed to a dice that shows us four,
-
-and that's how you build "statefulwidgets"
-
-and how you make sure that you can update the state
-
-and such state changes are then also reflected
-
-in the user interface.
-
-
+but now it's a bit more efficient.

@@ -2,253 +2,169 @@
 
 A new Flutter project.
 
-## 28 - Styling Buttons & Working with Padding
-So let's fix the styling of this here.
+## 29 - How Not to Build Interactive Widget 
+So now that we got the styling right,
 
-For that, I'd like to make sure that it's back
+it's time to make sure that something happens
 
-in the center, and this button also should look differently.
+when this button is pressed.
 
-Now, regarding the center part,
+For that, of course, we have this rollDice function,
 
-it's of course strange that it's not in the center,
+which we connected, but in there, we're not doing anything.
 
-because it's still inside of that center widget.
+Now, for a start, let's simply say that in there,
 
-But here it's important to understand
+we want to switch this image from dice-2,
 
-that this column widget, by default
+or whatever you used as a default image here,
 
-takes all the available vertical space.
+to, let's say, dice-4.
 
-It is indeed centered horizontally, as you can see.
+So this should switch as we click this button.
 
-It's in the center regarding that.
+To achieve this, we could add a variable to this class,
 
-But vertically, column simply takes the entire
+a real variable that can be changed
 
-available space, and therefore, there of course
+because now we do want to change things.
 
-is simply no way of centering it vertically.
+We could add a variable with the var keyword,
 
-So in order to make sure that this is centered vertically,
+and name this our activeDiceImage,
 
-we must make sure that column does not take
+anything like that.
 
-the entire vertical space.
+That could be our name here.
 
-And this can be done with help
+Now, of course, this also should have some initial value.
 
-of another argument that can be set on column.
+So we can set an initial value here.
 
-And that's the main axis size.
+We don't have to do this in a uninitialized way.
 
-The main axis for a column is simply the vertical axis,
+We can instead initialize this here.
 
-and here you got two main options, main axis size dot min,
+And for example, set this to this image path here.
 
-and main exercise dot max.
+That could be what we want to do as a start.
 
-These are two predefined values, which you can use
+Now, with that, I can no longer add const here
 
-and the default is max, to take as much space as possible
+because I brought back a variable,
 
-here we therefore want min.
+and if we have a variable in there,
 
-And with that, if you save this,
+this is not a const class anymore,
 
-this is centered vertically.
+we can't create const and objects with it anymore,
 
-Now for the styling of the button,
+that could be stored and reused from memory,
 
-we of course also want to change this, and that can be done,
+because now the object can change internally
 
-by adding the style argument to the text button.
+because we have that variable, which could change,
 
-And actually you should move that in front of child,
+and which we indeed intend to change.
 
-not because you technically need to,
+And we can ignore these blue squiggly lines
 
-but because that is one of the patterns recommended,
+and this message here, for the moment.
 
-by Flutter to always keep your widget arguments last.
+So we have this variable, and here in rollDice,
 
-Now style here wants a button style value.
+I then want to set activeDiceImage
 
-And the easiest way of creating this for a text button,
+to, let's say, the same path but with dice-4.png.
 
-is to use text, button, style from.
+So that's not the goal.
 
-That's the end of function, to find on this text button
+We have this variable.
 
-which returns a button style object.
+We're changing this variable here then.
 
-And style from now takes various arguments,
+And we can then use this variable down here
 
-which you can use to override the default styling.
+instead of having this hard-coded path.
 
-For example, you can set the foreground color,
+And this, of course, also is a great example,
 
-to change the default text color,
+showing us why we might want to use variables
 
-because the foreground color of a text button
+in some situations.
 
-is the text color in the end.
+Because, now, we really do want to have
 
-And here you could set this to colors dot white,
+one of the same data container, which we can reference here,
 
-using this predefined color.
+which will hold different values based on the circumstances.
 
-You can also add a separate text style,
+This value here initially, and this value after clicking.
 
-which then wants a text style object,
+And if we save that and, in main.dart,
 
-using this text style constructor function,
+actually remove const here,
 
-which we already before used for styling the text widget,
+because we had to remove const from GradientContainer,
 
-so this constructor function.
+we can add it in front of these colors, though.
 
-And there we could also set the text color,
+But if we do that and make these changes,
 
-but I'll just use it for setting the font size to 28 here.
+which we just discussed, to GradientContainer,
 
-And this cannot also be constant here.
+save this and reload,
 
-And with that, this text is a bit bigger and white.
+we got this.
 
-Now I'd just like to have more spacing,
+But if I click this,
 
-between the image and this button.
+nothing happens.
 
-And for that we have two main ways of doing that.
+So maybe this function isn't executing right.
 
-The first option is to add some padding on this text button,
+To find out if it is,
 
-which you can do in this style from function
+we can add print here.
 
-by setting padding.
+A built-in command provided by Dart,
 
-Padding simply is some spacing inside of the widget,
+which we can use for outputting some information
 
-between the widget content and the widget boundaries.
+in the Debug Console,
 
-And this padding can be set here for this text button,
+which is a console we, as a developer, can have a look at
 
-with the padding argument in the style from function.
+whilst we're testing this app.
 
-And it wants a edge insets geometry object type.
+So here we could output some text,
 
-Such an object can be created with the
+"Changing image," something like this.
 
-edge insets, constructor functions,
+If we add this, we just have to go to View,
 
-which are suggested to me here.
+Appearance, Panel.
 
-For example, edge insets all,
+And here in this panel, we find the Debug Console,
 
-adds a certain amount of padding into all directions.
+which would print anything print outputs here,
 
-You can also add padding to just the top,
+and some additional statistics,
 
-by using the only constructor function instead,
+which are not important for us right now.
 
-and there passing the top argument, the named top argument,
+If I now restart this,
 
-which then must be set to a number,
+and we go back and I click Roll Dice once,
 
-like for example 20 pixels.
+I can see that Changing image was locked
 
-This can also be turned into a constant value,
+in the Debug Console.
 
-by using const here.
+So, clearly, that code in the rollDice executed.
 
-And if you do this,
+Nonetheless,
 
-there is more spacing around this button.
+the image here didn't change.
 
-Now the alternative approach,
-
-to using this padding setting here,
-
-which is absolutely fine, I just wanna show you options,
-
-is to comment this out and instead add an extra widget,
-
-between the image and the button.
-
-And that would be the sized box widget,
-
-which kind of does what its name implies.
-
-It simply creates a box of a certain size.
-
-And you can add a child widget in there if you want to,
-
-but most importantly you can also set a height
-
-and a width here.
-
-And here we could set this to a height of 20,
-
-and then also add const,
-
-since this can be added for this widget.
-
-And that would also add a widget of this size,
-
-between the image and the button,
-
-hence adding this extra spacing here.
-
-Now we don't see any widget here in between,
-
-because this sized box doesn't have any content.
-
-It's really just a widget of that size,
-
-of that height, that just takes up that space,
-
-without showing anything on the screen.
-
-And that's also an important difference between sized box,
-
-and other widgets, like for example, container.
-
-Container, and most other widgets simply take the width
-
-and height they need to take,
-
-to fit their content into themselves.
-
-For example, a text widget is just as high
-
-and wide, as needed, to show the text on the screen,
-
-so that it's not cut off.
-
-On the other hand with sized box,
-
-you explicitly set a certain height, or width,
-
-and that height, or width is then set in stone.
-
-If you would have some child widget inside of sized box,
-
-that child widget and the content of it,
-
-would not lead to sized box becoming wider, or taller.
-
-Sized box has a fixed width and height,
-
-and if it would have some content
-
-that doesn't fit into there,
-
-because it for example, needs more width,
-
-that content would be cut off.
-
-And that's an alternative to adding padding.
-
-You can use whichever approach you prefer.
+Why?
